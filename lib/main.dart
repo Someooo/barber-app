@@ -1,21 +1,27 @@
-// Main entry point for the application. Initializes core dependencies and runs the app shell.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:my_template/app.dart';
-import 'package:my_template/di.dart';
 
-Future<void> main() async {
-  // Preserve the native splash screen during initialization
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const BarberSyncApp());
+}
 
-  // Initialize dependencies (DI, services, controllers, etc.)
-  await configureDependencies();
+class BarberSyncApp extends StatelessWidget {
+  const BarberSyncApp({super.key});
 
-  // Remove the native splash screen now that the app is ready
-  FlutterNativeSplash.remove();
-
-  // Launch the app
-  runApp(const AppEntrypoint());
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BarberSync',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        useMaterial3: true,
+      ),
+      home: const Scaffold(
+        body: Center(
+          child: Text('BarberSync'),
+        ),
+      ),
+    );
+  }
 }

@@ -1,4 +1,0 @@
-class ApiPaths {
-  ApiPaths._();
-
-}
