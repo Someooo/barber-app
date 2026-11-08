@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'core/theme/app_theme.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const BarberSyncApp());
@@ -13,10 +15,9 @@ class BarberSyncApp extends StatelessWidget {
     return MaterialApp(
       title: 'BarberSync',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: const Scaffold(
         body: Center(
           child: Text('BarberSync'),

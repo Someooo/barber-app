@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+abstract class AppTextStyles {
+  static TextStyle get headlineLarge => GoogleFonts.newsreader(
+        fontSize: 32,
+        height: 40 / 32,
+        fontWeight: FontWeight.w600,
+        letterSpacing: -0.25,
+      );
+
+  static TextStyle get headlineMedium => GoogleFonts.newsreader(
+        fontSize: 28,
+        height: 36 / 28,
+        fontWeight: FontWeight.w600,
+      );
+
+  static TextStyle get titleMedium => GoogleFonts.plusJakartaSans(
+        fontSize: 16,
+        height: 24 / 16,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.15,
+      );
+
+  static TextStyle get bodyLarge => GoogleFonts.plusJakartaSans(
+        fontSize: 16,
+        height: 24 / 16,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.15,
+      );
+
+  static TextStyle get bodyMedium => GoogleFonts.plusJakartaSans(
+        fontSize: 14,
+        height: 20 / 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+      );
+
+  static TextStyle get labelLarge => GoogleFonts.plusJakartaSans(
+        fontSize: 14,
+        height: 20 / 14,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+      );
+
+  static TextTheme get textTheme {
+    final base = GoogleFonts.plusJakartaSansTextTheme();
+    return base.copyWith(
+      displayLarge: GoogleFonts.newsreader(textStyle: base.displayLarge),
+      displayMedium: GoogleFonts.newsreader(textStyle: base.displayMedium),
+      displaySmall: GoogleFonts.newsreader(textStyle: base.displaySmall),
+      headlineLarge: headlineLarge,
+      headlineMedium: headlineMedium,
+      headlineSmall: GoogleFonts.newsreader(textStyle: base.headlineSmall),
+      titleMedium: titleMedium,
+      bodyLarge: bodyLarge,
+      bodyMedium: bodyMedium,
+      labelLarge: labelLarge,
+    );
+  }
+}

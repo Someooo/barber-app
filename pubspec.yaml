@@ -14,10 +14,36 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
 
+  # State Management & DI
+  flutter_bloc: ^8.1.6
+  get_it: ^7.7.0
+
+  # Routing
+  go_router: ^14.2.0
+
+  # Network & API
+  dio: ^5.4.3+1
+
+  # Local Persistence & Security
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.2.3
+
+  # Connectivity
+  connectivity_plus: ^6.0.3
+
+  # Functional & Utilities
+  equatable: ^2.0.5
+  intl: 0.20.2
+  google_fonts: ^8.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
