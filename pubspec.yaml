@@ -51,3 +51,28 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/fonts/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  adaptive_icon_background: "#f7ebdf"
+  adaptive_icon_foreground: "assets/icons/app_icon.png"
+
+flutter_native_splash:
+  color: "#f7ebdf"
+  image: "assets/images/nativeSplash.jpg"
+  color_dark: "#f7ebdf"
+  image_dark: "assets/images/nativeSplash.jpg"
+
+  android_12:
+    color: "#f7ebdf"
+    image: "assets/images/nativeSplash.jpg"
+    icon_background_color: "#f7ebdf"
+    color_dark: "#f7ebdf"
+    image_dark: "assets/images/nativeSplash.jpg"
+    icon_background_color_dark: "#f7ebdf"
+
+  web: false
+  fullscreen: false
+
