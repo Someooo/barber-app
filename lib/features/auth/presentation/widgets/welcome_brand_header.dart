@@ -5,6 +5,7 @@ import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
 import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
+import 'package:barber_app/l10n/app_localizations.dart';
 
 /// Brand identity block: logo tile, serif app title, and English tagline.
 class WelcomeBrandHeader extends StatelessWidget {
@@ -43,7 +44,7 @@ class WelcomeBrandHeader extends StatelessWidget {
         ),
         AppSpacing.verticalSm,
         Text(
-          "The Modern Gentleman's Grooming",
+          AppLocalizations.of(context)!.welcomeTagline,
           textAlign: TextAlign.center,
           style: AppTextStyles.bodyMedium.copyWith(
             color: AppColors.tertiary,

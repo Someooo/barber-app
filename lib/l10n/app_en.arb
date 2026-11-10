@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appName": "BarberSync",
+  "welcomeTagline": "The Modern Gentleman's Grooming",
+  "syncingSystems": "Syncing Salon Systems...",
+  "barberPortal": "Barber Portal",
+  "customerBooking": "Customer Booking",
+  "loginPlaceholderTitle": "Coming Soon",
+  "loginPlaceholderBody": "Login screen is currently under active development."
+}
+

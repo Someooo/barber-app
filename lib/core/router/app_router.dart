@@ -16,12 +16,12 @@ GoRouter createAppRouter() {
       GoRoute(
         path: AppRoutes.barberLogin,
         builder: (context, state) =>
-            const LoginPlaceholderScreen(roleLabel: 'Barber Portal'),
+            const LoginPlaceholderScreen(role: AuthRole.barber),
       ),
       GoRoute(
         path: AppRoutes.customerLogin,
         builder: (context, state) =>
-            const LoginPlaceholderScreen(roleLabel: 'Customer Booking'),
+            const LoginPlaceholderScreen(role: AuthRole.customer),
       ),
     ],
   );
