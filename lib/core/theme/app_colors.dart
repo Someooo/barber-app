@@ -6,6 +6,7 @@ abstract class AppColors {
   static const Color secondary = Color(0xFFA17653); // Warm Bronze Accent
   static const Color tertiary = Color(0xFF4A4643); // Muted Charcoal
   static const Color neutral = Color(0xFFF5EFED); // Warm Ivory / Cream
+  static const Color cream = Color(0xFFF7EBDF); // Warm Cream (welcome / splash surface)
 
   // Card surfaces
   static const Color cardLight = Color(0xFFFAF7F5);

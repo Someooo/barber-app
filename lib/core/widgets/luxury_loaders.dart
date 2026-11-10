@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_constants.dart';
 import '../constants/app_spacing.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
@@ -35,13 +34,18 @@ class ScheduleSyncProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              statusLabel,
-              style: AppTextStyles.labelSmall.copyWith(
-                color: scheme.onSurfaceVariant,
+            Expanded(
+              child: Text(
+                statusLabel,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
             ),
-            if (showPercentage)
+            if (showPercentage) ...[
+              AppSpacing.horizontalSm,
               Text(
                 percentageText,
                 style: AppTextStyles.labelSmall.copyWith(
@@ -49,6 +53,7 @@ class ScheduleSyncProgressBar extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+            ],
           ],
         ),
         AppSpacing.verticalSm,

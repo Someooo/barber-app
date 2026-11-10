@@ -24,7 +24,19 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.notificationCount,
     this.onNotificationTap,
     this.additionalActions,
+    this.backgroundColor,
+    this.showBottomBorder = true,
+    this.showBrand = true,
   });
+
+  /// Overrides the bar surface color (defaults to the theme surface).
+  final Color? backgroundColor;
+
+  /// Whether to draw the hairline divider under the bar.
+  final bool showBottomBorder;
+
+  /// When false, hides the monogram/title block so only actions are shown.
+  final bool showBrand;
 
   final String title;
   final String? subtitle;
@@ -162,46 +174,51 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
           horizontal: AppSpacing.md,
         ),
         decoration: BoxDecoration(
-          color: context.colors.surface,
-          border: Border(
-            bottom: BorderSide(
-              color: context.borderColor,
-              width: AppSizes.hairline,
-            ),
-          ),
+          color: backgroundColor ?? context.colors.surface,
+          border: showBottomBorder
+              ? Border(
+                  bottom: BorderSide(
+                    color: context.borderColor,
+                    width: AppSizes.hairline,
+                  ),
+                )
+              : null,
         ),
         child: Row(
           children: [
-            _buildMonogram(context),
-            AppSpacing.horizontalSm,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.titleLarge.copyWith(
-                      color: scheme.onSurface,
-                    ),
-                  ),
-                  if (subtitle != null) ...[
-                    AppSpacing.verticalXs,
+            if (showBrand) ...[
+              _buildMonogram(context),
+              AppSpacing.horizontalSm,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      subtitle!.toUpperCase(),
+                      title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: scheme.onSurfaceVariant,
-                        letterSpacing: 1.2,
+                      style: AppTextStyles.titleLarge.copyWith(
+                        color: scheme.onSurface,
                       ),
                     ),
+                    if (subtitle != null) ...[
+                      AppSpacing.verticalXs,
+                      Text(
+                        subtitle!.toUpperCase(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: scheme.onSurfaceVariant,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
-            ),
+            ] else
+              const Spacer(),
             AppSpacing.horizontalSm,
             if (onLanguageToggle != null) ...[
               _buildLanguageChip(context),
