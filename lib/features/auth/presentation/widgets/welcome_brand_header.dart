@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
-import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
+import 'package:barber_app/core/theme/theme_context_x.dart';
 import 'package:barber_app/l10n/app_localizations.dart';
 
 class WelcomeBrandHeader extends StatelessWidget {
@@ -15,6 +15,8 @@ class WelcomeBrandHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = context.colors;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -37,7 +39,7 @@ class WelcomeBrandHeader extends StatelessWidget {
             fontSize: 38,
             height: 1.15,
             fontWeight: FontWeight.bold,
-            color: AppColors.primary,
+            color: scheme.onSurface,
             letterSpacing: -0.5,
           ),
         ),
@@ -46,7 +48,7 @@ class WelcomeBrandHeader extends StatelessWidget {
           AppLocalizations.of(context)!.welcomeTagline,
           textAlign: TextAlign.center,
           style: AppTextStyles.bodyMedium.copyWith(
-            color: AppColors.tertiary,
+            color: scheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.5,
           ),

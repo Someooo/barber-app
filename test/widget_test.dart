@@ -21,12 +21,21 @@ void main() {
     expect(materialApp.theme?.colorScheme.primary, AppColors.primary);
     expect(materialApp.theme?.scaffoldBackgroundColor, AppColors.cream);
 
+    final initialScaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+    expect(initialScaffold.backgroundColor, AppColors.cream);
+    expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.light_mode_outlined), findsNothing);
+
     await tester.tap(find.byIcon(Icons.dark_mode_outlined));
     await tester.pumpAndSettle();
 
     final darkMaterialApp =
         tester.widget<MaterialApp>(find.byType(MaterialApp));
     expect(darkMaterialApp.themeMode, ThemeMode.dark);
+    final darkScaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+    expect(darkScaffold.backgroundColor, AppColors.primary);
+    expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.dark_mode_outlined), findsNothing);
 
     await tester.tap(find.byIcon(Icons.light_mode_outlined));
     await tester.pumpAndSettle();
@@ -34,6 +43,9 @@ void main() {
     final lightMaterialApp =
         tester.widget<MaterialApp>(find.byType(MaterialApp));
     expect(lightMaterialApp.themeMode, ThemeMode.light);
+    final restoredScaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+    expect(restoredScaffold.backgroundColor, AppColors.cream);
+    expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
   });
 
   testWidgets('Welcome screen renders English strings and single Login button',

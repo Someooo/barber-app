@@ -20,7 +20,7 @@ class AppSettingsController extends ChangeNotifier {
     }
   }
 
-  void toggleTheme(Brightness platformBrightness) {
+  void toggleTheme([Brightness platformBrightness = Brightness.light]) {
     _themeMode =
         isDarkMode(platformBrightness) ? ThemeMode.light : ThemeMode.dark;
     notifyListeners();

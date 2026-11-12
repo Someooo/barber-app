@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:barber_app/core/constants/app_spacing.dart';
 import 'package:barber_app/core/router/app_routes.dart';
-import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/l10n/app_localizations.dart';
 
@@ -20,8 +19,6 @@ class RoleSelectionActions extends StatelessWidget {
       ),
       child: LuxuryPrimaryButton(
         text: l10n.loginButton,
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.neutral,
         onPressed: () => context.push(AppRoutes.login),
       ),
     );
