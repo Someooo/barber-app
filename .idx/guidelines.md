@@ -52,6 +52,7 @@ Every task, file creation, refactor, and bug fix MUST strictly comply with these
 
 ## 5. UI Layout, Spacing & Theming Rules
 - Default Theme Rule: The application MUST always initialize and default to `ThemeMode.light` (Warm Cream `#f7ebdf` surface, Obsidian Black `#121212` ink/accents). Never default to `ThemeMode.dark` or `ThemeMode.system`.
+- Theme-Aware Brand Logo Rule: Never render a static logo asset directly. Always use the centralized `BrandLogo` widget, which strictly renders the Light Mode logo in `Brightness.light` and `assets/images/darkMode_logo.jpg` in `Brightness.dark`.
 - Design Tokens Exclusivity:
   - Spacing: Strictly use `AppSpacing.*` (8-point spatial grid system: xs=4, sm=8, md=16, lg=24, xl=32, xxl=48). Hardcoded magic numbers for padding, margins, and gaps are disallowed.
   - Colors: Warm Cream background (`#f7ebdf` / `AppColors.cream`), Obsidian Black (`#121212` / `AppColors.primary`), and designated secondary tokens. Never use raw hex codes directly in widget trees.

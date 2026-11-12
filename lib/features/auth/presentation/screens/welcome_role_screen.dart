@@ -37,8 +37,7 @@ class WelcomeRoleScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(AppSpacing.lg),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        minHeight:
-                            constraints.maxHeight - (AppSpacing.lg * 2),
+                        minHeight: constraints.maxHeight - (AppSpacing.lg * 2),
                       ),
                       child: IntrinsicHeight(
                         child: Column(

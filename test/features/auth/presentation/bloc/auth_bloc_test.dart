@@ -285,6 +285,13 @@ void main() {
         ),
         AppRoutes.customerHome,
       );
+      expect(
+        evaluateAuthRedirect(
+          authState: const Authenticated(customerUser),
+          matchedLocation: AppRoutes.register,
+        ),
+        AppRoutes.customerHome,
+      );
     });
 
     test('blocks cross-role navigation between /barber/* and /customer/*', () {

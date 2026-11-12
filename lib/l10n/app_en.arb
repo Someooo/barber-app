@@ -30,6 +30,10 @@
   "networkError": "No internet connection. Please check your network and try again.",
   "unknownAuthError": "Authentication failed. Please try again later.",
   "signOutButton": "Sign Out",
+  "registerButton": "Create Account",
+  "registerScreenTitle": "Create Account",
+  "registerWelcomeTitle": "Join BarberSync",
+  "registerSubtitle": "Enter your details to get started",
   "loginPlaceholderTitle": "Coming Soon",
   "loginPlaceholderBody": "Login screen is currently under active development."
 }

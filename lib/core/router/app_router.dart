@@ -9,6 +9,7 @@ import 'package:barber_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:barber_app/features/auth/presentation/screens/login_placeholder_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:barber_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/welcome_role_screen.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -39,7 +40,8 @@ String? evaluateAuthRedirect({
   final isCustomerRoute = matchedLocation.startsWith('/customer');
   final isProtectedRoute = isBarberRoute || isCustomerRoute;
   final isPublicAuthRoute = matchedLocation == AppRoutes.welcome ||
-      matchedLocation == AppRoutes.login;
+      matchedLocation == AppRoutes.login ||
+      matchedLocation == AppRoutes.register;
 
   if (authState is Unauthenticated || authState is AuthFailureState) {
     if (isProtectedRoute) {
@@ -93,6 +95,10 @@ GoRouter createAppRouter({
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: AppRoutes.barberDashboard,

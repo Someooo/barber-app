@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+abstract class AppAssets {
+  static const String lightLogo = 'assets/images/logoApp-withOutBackground.png';
+  static const String darkLogo = 'assets/images/darkMode_logo.jpg';
+}
+
 abstract class AppRadius {
   static const double control = 12.0;
   static const double card = 16.0;

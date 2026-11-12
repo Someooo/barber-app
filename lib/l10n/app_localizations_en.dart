@@ -104,6 +104,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signOutButton => 'Sign Out';
 
   @override
+  String get registerButton => 'Create Account';
+
+  @override
+  String get registerScreenTitle => 'Create Account';
+
+  @override
+  String get registerWelcomeTitle => 'Join BarberSync';
+
+  @override
+  String get registerSubtitle => 'Enter your details to get started';
+
+  @override
   String get loginPlaceholderTitle => 'Coming Soon';
 
   @override

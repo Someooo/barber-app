@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
 import 'package:barber_app/core/router/app_routes.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
@@ -17,9 +18,23 @@ class RoleSelectionActions extends StatelessWidget {
       padding: const EdgeInsetsDirectional.symmetric(
         vertical: AppSpacing.xs,
       ),
-      child: LuxuryPrimaryButton(
-        text: l10n.loginButton,
-        onPressed: () => context.push(AppRoutes.login),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          LuxuryPrimaryButton(
+            text: l10n.loginButton,
+            onPressed: () => context.push(AppRoutes.login),
+          ),
+          AppSpacing.verticalMd,
+          LuxuryOutlinedButton(
+            borderColor: Colors.black,
+            text: l10n.registerButton,
+            height: AppSizes.buttonHeight,
+            isFullWidth: true,
+            onPressed: () => context.push(AppRoutes.register),
+          ),
+        ],
       ),
     );
   }

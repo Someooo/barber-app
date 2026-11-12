@@ -278,6 +278,30 @@ abstract class AppLocalizations {
   /// **'Sign Out'**
   String get signOutButton;
 
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get registerButton;
+
+  /// No description provided for @registerScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get registerScreenTitle;
+
+  /// No description provided for @registerWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join BarberSync'**
+  String get registerWelcomeTitle;
+
+  /// No description provided for @registerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your details to get started'**
+  String get registerSubtitle;
+
   /// No description provided for @loginPlaceholderTitle.
   ///
   /// In en, this message translates to:

@@ -30,6 +30,10 @@
   "networkError": "لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة والمحاولة مرة أخرى.",
   "unknownAuthError": "فشلت عملية تسجيل الدخول. يرجى المحاولة لاحقاً.",
   "signOutButton": "تسجيل الخروج",
+  "registerButton": "إنشاء حساب جديد",
+  "registerScreenTitle": "إنشاء حساب",
+  "registerWelcomeTitle": "انضم إلى BarberSync",
+  "registerSubtitle": "أدخل بياناتك للبدء",
   "loginPlaceholderTitle": "قريباً",
   "loginPlaceholderBody": "شاشة تسجيل الدخول قيد التطوير حالياً."
 }

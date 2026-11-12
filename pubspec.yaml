@@ -52,6 +52,7 @@ flutter:
   generate: true
   assets:
     - assets/images/
+    - assets/images/darkMode_logo.jpg
     - assets/icons/
     - assets/fonts/
 

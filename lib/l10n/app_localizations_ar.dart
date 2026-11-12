@@ -104,6 +104,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signOutButton => 'تسجيل الخروج';
 
   @override
+  String get registerButton => 'إنشاء حساب جديد';
+
+  @override
+  String get registerScreenTitle => 'إنشاء حساب';
+
+  @override
+  String get registerWelcomeTitle => 'انضم إلى BarberSync';
+
+  @override
+  String get registerSubtitle => 'أدخل بياناتك للبدء';
+
+  @override
   String get loginPlaceholderTitle => 'قريباً';
 
   @override

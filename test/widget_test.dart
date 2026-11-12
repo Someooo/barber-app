@@ -1,3 +1,4 @@
+import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/main.dart';
@@ -25,6 +26,15 @@ void main() {
     expect(initialScaffold.backgroundColor, AppColors.cream);
     expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
     expect(find.byIcon(Icons.light_mode_outlined), findsNothing);
+    expect(find.byType(BrandLogo), findsOneWidget);
+
+    final initialImage = tester.widget<Image>(
+      find.descendant(of: find.byType(BrandLogo), matching: find.byType(Image)),
+    );
+    expect(
+      (initialImage.image as AssetImage).assetName,
+      AppAssets.lightLogo,
+    );
 
     await tester.tap(find.byIcon(Icons.dark_mode_outlined));
     await tester.pumpAndSettle();
@@ -37,6 +47,14 @@ void main() {
     expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);
     expect(find.byIcon(Icons.dark_mode_outlined), findsNothing);
 
+    final darkImage = tester.widget<Image>(
+      find.descendant(of: find.byType(BrandLogo), matching: find.byType(Image)),
+    );
+    expect(
+      (darkImage.image as AssetImage).assetName,
+      AppAssets.darkLogo,
+    );
+
     await tester.tap(find.byIcon(Icons.light_mode_outlined));
     await tester.pumpAndSettle();
 
@@ -46,9 +64,18 @@ void main() {
     final restoredScaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     expect(restoredScaffold.backgroundColor, AppColors.cream);
     expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
+
+    final restoredImage = tester.widget<Image>(
+      find.descendant(of: find.byType(BrandLogo), matching: find.byType(Image)),
+    );
+    expect(
+      (restoredImage.image as AssetImage).assetName,
+      AppAssets.lightLogo,
+    );
   });
 
-  testWidgets('Welcome screen renders English strings and single Login button',
+  testWidgets(
+      'Welcome screen renders English strings, Login button, and Create Account button',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());
     await tester.pumpAndSettle();
@@ -56,12 +83,27 @@ void main() {
     expect(find.text('BarberSync'), findsOneWidget);
     expect(find.text("The Modern Gentleman's Grooming"), findsOneWidget);
     expect(find.text('Login'), findsOneWidget);
+    expect(find.text('Create Account'), findsOneWidget);
     expect(find.byType(LuxuryPrimaryButton), findsOneWidget);
+    expect(find.byType(LuxuryOutlinedButton), findsOneWidget);
     expect(find.text('Barber Portal'), findsNothing);
     expect(find.text('Customer Booking'), findsNothing);
 
     final context = tester.element(find.text('BarberSync'));
     expect(Directionality.of(context), TextDirection.ltr);
+  });
+
+  testWidgets('Create Account button navigates to /register screen',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const BarberSyncApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Create Account'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Join BarberSync'), findsOneWidget);
+    expect(find.text('Enter your details to get started'), findsOneWidget);
+    expect(find.byType(BrandLogo), findsOneWidget);
   });
 
   testWidgets('Toggling EN/AR translates strings and inverts direction',

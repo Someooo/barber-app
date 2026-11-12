@@ -1,3 +1,4 @@
+export 'brand_logo.dart';
 export 'kpi_card.dart';
 export 'luxury_app_bar.dart';
 export 'luxury_avatar.dart';
