@@ -19,7 +19,7 @@ abstract class AppTheme {
     onTertiary: AppColors.neutral,
     error: AppColors.error,
     onError: AppColors.white,
-    surface: AppColors.neutral,
+    surface: AppColors.cream,
     onSurface: AppColors.primary,
     onSurfaceVariant: AppColors.tertiary,
     surfaceContainerLowest: AppColors.white,

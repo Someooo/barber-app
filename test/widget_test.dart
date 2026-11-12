@@ -1,3 +1,4 @@
+import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/main.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,32 @@ Future<void> _tapLanguageChip(WidgetTester tester, String currentCode) async {
 }
 
 void main() {
+  testWidgets('BarberSyncApp initializes with ThemeMode.light by default',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const BarberSyncApp());
+    await tester.pumpAndSettle();
+
+    final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(materialApp.themeMode, ThemeMode.light);
+    expect(materialApp.theme?.colorScheme.surface, AppColors.cream);
+    expect(materialApp.theme?.colorScheme.primary, AppColors.primary);
+    expect(materialApp.theme?.scaffoldBackgroundColor, AppColors.cream);
+
+    await tester.tap(find.byIcon(Icons.dark_mode_outlined));
+    await tester.pumpAndSettle();
+
+    final darkMaterialApp =
+        tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(darkMaterialApp.themeMode, ThemeMode.dark);
+
+    await tester.tap(find.byIcon(Icons.light_mode_outlined));
+    await tester.pumpAndSettle();
+
+    final lightMaterialApp =
+        tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(lightMaterialApp.themeMode, ThemeMode.light);
+  });
+
   testWidgets('Welcome screen renders English strings and single Login button',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());

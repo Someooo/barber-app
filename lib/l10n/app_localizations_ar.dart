@@ -45,7 +45,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get fullNameLabel => 'الاسم الثنائي';
 
   @override
-  String get fullNameHint => 'مثال: سامي المحور';
+  String get fullNameHint => 'مثال: سامي المهر';
 
   @override
   String get fullNameRequiredError => 'يرجى إدخال الاسم الثنائي';

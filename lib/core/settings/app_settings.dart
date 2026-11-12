@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppSettingsController extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.light;
   Locale _locale = const Locale('en');
 
   ThemeMode get themeMode => _themeMode;
