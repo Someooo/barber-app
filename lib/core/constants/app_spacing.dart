@@ -28,4 +28,3 @@ abstract class AppSpacing {
   static const EdgeInsetsDirectional dialogPadding =
       EdgeInsetsDirectional.all(20.0);
 }
-

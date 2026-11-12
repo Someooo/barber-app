@@ -20,7 +20,7 @@ abstract class ResponsiveUtils {
 
   static bool isDesktop(BuildContext context) =>
       screenWidth(context) >= tabletBreakpoint;
- 
+
   static T valueByDevice<T>({
     required BuildContext context,
     required T mobile,
@@ -60,4 +60,3 @@ class MaxContentWidth extends StatelessWidget {
     );
   }
 }
-

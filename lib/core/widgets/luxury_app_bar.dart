@@ -7,7 +7,6 @@ import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 import 'luxury_avatar.dart';
 
-/// Top navigation bar with brand monogram, title/caption, and action controls.
 class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LuxuryAppBar({
     super.key,
@@ -27,16 +26,19 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.showBottomBorder = true,
     this.showBrand = true,
+    this.showBackButton = false,
+    this.onBackTap,
   });
 
-  /// Overrides the bar surface color (defaults to the theme surface).
   final Color? backgroundColor;
 
-  /// Whether to draw the hairline divider under the bar.
   final bool showBottomBorder;
 
-  /// When false, hides the monogram/title block so only actions are shown.
   final bool showBrand;
+
+  final bool showBackButton;
+
+  final VoidCallback? onBackTap;
 
   final String title;
   final String? subtitle;
@@ -186,6 +188,17 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: Row(
           children: [
+            if (showBackButton) ...[
+              IconButton(
+                onPressed: onBackTap ?? () => Navigator.of(context).maybePop(),
+                iconSize: AppSizes.iconMd,
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: scheme.onSurface,
+                ),
+              ),
+              AppSpacing.horizontalXs,
+            ],
             if (showBrand) ...[
               _buildMonogram(context),
               AppSpacing.horizontalSm,
@@ -246,4 +259,3 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-

@@ -9,7 +9,6 @@ import 'luxury_avatar.dart';
 import 'luxury_badge.dart';
 import 'luxury_buttons.dart';
 
-/// Chronological timeline tile displaying a barber appointment slot.
 class TimelineAppointmentTile extends StatelessWidget {
   const TimelineAppointmentTile({
     super.key,
@@ -31,14 +30,14 @@ class TimelineAppointmentTile extends StatelessWidget {
     this.onTap,
   });
 
-  final String time; // e.g. "10:00"
-  final String period; // e.g. "AM"
+  final String time;
+  final String period;
   final String customerName;
   final String serviceName;
   final String? serviceNotes;
-  final String durationText; // e.g. "45 mins"
-  final String priceText; // e.g. "$85"
-  final String statusLabel; // e.g. "In Progress"
+  final String durationText;
+  final String priceText;
+  final String statusLabel;
   final LuxuryStatusType statusType;
   final bool isActive;
   final bool isLast;
@@ -101,7 +100,6 @@ class TimelineAppointmentTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Row 1: Avatar, Customer Name, and Status Badge
           Row(
             children: [
               LuxuryAvatar(
@@ -141,7 +139,6 @@ class TimelineAppointmentTile extends StatelessWidget {
               ),
             ],
           ),
-
           if (serviceNotes != null) ...[
             AppSpacing.verticalSm,
             Text(
@@ -155,10 +152,7 @@ class TimelineAppointmentTile extends StatelessWidget {
               ),
             ),
           ],
-
           AppSpacing.verticalMd,
-
-          // Row 2: Duration, Price, and Action Controls
           Row(
             children: [
               Text(
@@ -246,4 +240,3 @@ class TimelineAppointmentTile extends StatelessWidget {
     );
   }
 }
-

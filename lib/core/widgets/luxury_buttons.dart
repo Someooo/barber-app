@@ -5,7 +5,6 @@ import '../constants/app_spacing.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
-/// Primary action button with high-contrast theme inversion and loading state.
 class LuxuryPrimaryButton extends StatelessWidget {
   const LuxuryPrimaryButton({
     super.key,
@@ -90,8 +89,7 @@ class LuxuryPrimaryButton extends StatelessWidget {
           foregroundColor: fgColor,
           disabledBackgroundColor:
               bgColor.withValues(alpha: AppOpacity.disabled),
-          disabledForegroundColor:
-              fgColor.withValues(alpha: AppOpacity.scrim),
+          disabledForegroundColor: fgColor.withValues(alpha: AppOpacity.scrim),
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
           padding: const EdgeInsetsDirectional.symmetric(
@@ -104,7 +102,6 @@ class LuxuryPrimaryButton extends StatelessWidget {
   }
 }
 
-/// Secondary button styled for biometric auth, passkeys, and alternative actions.
 class LuxurySecondaryButton extends StatelessWidget {
   const LuxurySecondaryButton({
     super.key,
@@ -191,7 +188,6 @@ class LuxurySecondaryButton extends StatelessWidget {
   }
 }
 
-/// Minimalist outlined action button suited for table/timeline actions (e.g. Reschedule, Cancel).
 class LuxuryOutlinedButton extends StatelessWidget {
   const LuxuryOutlinedButton({
     super.key,
@@ -256,4 +252,3 @@ class LuxuryOutlinedButton extends StatelessWidget {
     );
   }
 }
-

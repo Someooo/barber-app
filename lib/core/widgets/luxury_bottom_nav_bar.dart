@@ -22,7 +22,6 @@ class LuxuryNavItem {
   final bool showBadgeDot;
 }
 
-/// Persistent bottom navigation bar with high-contrast active tabs.
 class LuxuryBottomNavBar extends StatelessWidget {
   const LuxuryBottomNavBar({
     super.key,
@@ -66,9 +65,8 @@ class LuxuryBottomNavBar extends StatelessWidget {
   }) {
     final scheme = context.colors;
     final fg = isSelected ? scheme.primary : scheme.onSurfaceVariant;
-    final iconData = (isSelected && item.activeIcon != null)
-        ? item.activeIcon!
-        : item.icon;
+    final iconData =
+        (isSelected && item.activeIcon != null) ? item.activeIcon! : item.icon;
 
     return Expanded(
       child: InkWell(
@@ -158,4 +156,3 @@ class LuxuryBottomNavBar extends StatelessWidget {
     );
   }
 }
-

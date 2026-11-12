@@ -5,7 +5,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
-/// Luxury circular avatar with presence indicator and graceful fallback.
 class LuxuryAvatar extends StatelessWidget {
   const LuxuryAvatar({
     super.key,
@@ -105,4 +104,3 @@ class LuxuryAvatar extends StatelessWidget {
     );
   }
 }
-

@@ -7,7 +7,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import 'luxury_avatar.dart';
 
-/// Editorial image card with frosted badge and headline typography.
 class HeroCardBanner extends StatelessWidget {
   const HeroCardBanner({
     super.key,
@@ -50,7 +49,6 @@ class HeroCardBanner extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Dark gradient scrim
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -66,7 +64,6 @@ class HeroCardBanner extends StatelessWidget {
                 ),
               ),
             ),
-            // Text and badge content
             PositionedDirectional(
               start: AppSpacing.md,
               bottom: AppSpacing.md,
@@ -117,7 +114,6 @@ class HeroCardBanner extends StatelessWidget {
                 ],
               ),
             ),
-            // Frosted translucent watermark icon
             if (watermarkIcon != null)
               PositionedDirectional(
                 end: AppSpacing.md,
@@ -169,7 +165,6 @@ class HeroCardBanner extends StatelessWidget {
   }
 }
 
-/// Obsidian card summarizing the user's immediate next appointment.
 class ActiveAppointmentBanner extends StatelessWidget {
   const ActiveAppointmentBanner({
     super.key,
@@ -208,7 +203,6 @@ class ActiveAppointmentBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Top Header: Status pill + Live Countdown
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -273,8 +267,6 @@ class ActiveAppointmentBanner extends StatelessWidget {
             ],
           ),
           AppSpacing.verticalMd,
-
-          // Center: Barber avatar, service info, Details button
           Row(
             children: [
               LuxuryAvatar(
@@ -350,8 +342,6 @@ class ActiveAppointmentBanner extends StatelessWidget {
             ],
           ),
           AppSpacing.verticalMd,
-
-          // Footer: Time representation in English and Arabic
           Container(
             padding: const EdgeInsetsDirectional.symmetric(
               horizontal: AppSpacing.md,
@@ -396,4 +386,3 @@ class ActiveAppointmentBanner extends StatelessWidget {
     );
   }
 }
-

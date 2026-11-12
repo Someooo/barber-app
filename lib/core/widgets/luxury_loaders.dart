@@ -5,7 +5,6 @@ import '../constants/app_spacing.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
-/// Progress bar for splash sync and background synchronization tasks.
 class ScheduleSyncProgressBar extends StatelessWidget {
   const ScheduleSyncProgressBar({
     super.key,
@@ -15,7 +14,6 @@ class ScheduleSyncProgressBar extends StatelessWidget {
     this.height = AppSizes.progressBarHeight,
   });
 
-  /// Value between 0.0 and 1.0.
   final double progress;
   final String statusLabel;
   final bool showPercentage;
@@ -88,7 +86,6 @@ class ScheduleSyncProgressBar extends StatelessWidget {
   }
 }
 
-/// Shimmer skeleton loader with 16px card radius and custom dimensions.
 class LuxuryShimmerCard extends StatefulWidget {
   const LuxuryShimmerCard({
     super.key,
@@ -153,4 +150,3 @@ class _LuxuryShimmerCardState extends State<LuxuryShimmerCard>
     );
   }
 }
-

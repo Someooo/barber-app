@@ -6,7 +6,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
-/// Metric summary card for dashboard KPIs (Today, Served, Pending, etc.).
 class KpiCard extends StatelessWidget {
   const KpiCard({
     super.key,
@@ -18,9 +17,9 @@ class KpiCard extends StatelessWidget {
     this.onTap,
   });
 
-  final String title; // e.g. "TODAY"
-  final String count; // e.g. "8"
-  final String subtitle; // e.g. "Bookings"
+  final String title;
+  final String count;
+  final String subtitle;
   final IconData icon;
   final Color? iconColor;
   final VoidCallback? onTap;
@@ -44,7 +43,6 @@ class KpiCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Top Row: Title + Icon
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -68,8 +66,6 @@ class KpiCard extends StatelessWidget {
             ],
           ),
           AppSpacing.verticalSm,
-
-          // Center: Large Metric Number
           Text(
             count,
             style: AppTextStyles.headlineMedium.copyWith(
@@ -78,8 +74,6 @@ class KpiCard extends StatelessWidget {
             ),
           ),
           AppSpacing.verticalXs,
-
-          // Bottom: Descriptor
           Text(
             subtitle,
             maxLines: 1,
@@ -103,4 +97,3 @@ class KpiCard extends StatelessWidget {
     return card;
   }
 }
-

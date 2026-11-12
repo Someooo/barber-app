@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Corner radius tokens.
 abstract class AppRadius {
   static const double control = 12.0;
   static const double card = 16.0;
@@ -14,7 +13,6 @@ abstract class AppRadius {
       BorderRadius.all(Radius.circular(stadium));
 }
 
-/// Fixed component dimension tokens (dp).
 abstract class AppSizes {
   static const double hairline = 1.0;
   static const double focusBorder = 1.5;
@@ -43,7 +41,6 @@ abstract class AppSizes {
   static const double frostBlur = 12.0;
 }
 
-/// Opacity tokens for tints, scrims, and disabled states.
 abstract class AppOpacity {
   static const double subtle = 0.08;
   static const double soft = 0.12;
@@ -52,10 +49,8 @@ abstract class AppOpacity {
   static const double scrim = 0.65;
 }
 
-/// Motion & animation tokens.
 abstract class AppDurations {
   static const Duration fast = Duration(milliseconds: 200);
   static const Duration progress = Duration(milliseconds: 600);
   static const Duration shimmer = Duration(milliseconds: 1400);
 }
-

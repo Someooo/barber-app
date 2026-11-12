@@ -3,7 +3,6 @@ import 'package:barber_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// Switches the app language through the real EN/AR chip in the top bar.
 Future<void> _tapLanguageChip(WidgetTester tester, String currentCode) async {
   await tester.tap(find.text(currentCode));
   await tester.pumpAndSettle();
@@ -40,7 +39,6 @@ void main() {
     final context = tester.element(find.text('BarberSync'));
     expect(Directionality.of(context), TextDirection.rtl);
 
-    // And back to English.
     await _tapLanguageChip(tester, 'AR');
     expect(find.text('Login'), findsOneWidget);
     expect(
@@ -49,7 +47,7 @@ void main() {
     );
   });
 
-  testWidgets('Login button navigates to /login placeholder screen',
+  testWidgets('Login button navigates to /login screen',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());
     await tester.pumpAndSettle();
@@ -58,14 +56,15 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Sign In'), findsOneWidget);
-    expect(find.text('Coming Soon'), findsOneWidget);
+    expect(find.text('Welcome Back'), findsOneWidget);
     expect(
-      find.text('Login screen is currently under active development.'),
+      find.text('Sign in or create an account to continue'),
       findsOneWidget,
     );
+    expect(find.text('Continue'), findsOneWidget);
   });
 
-  testWidgets('Login placeholder is localized in Arabic',
+  testWidgets('Login screen is localized in Arabic',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());
     await tester.pumpAndSettle();
@@ -75,8 +74,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('تسجيل الدخول'), findsOneWidget);
-    expect(find.text('قريباً'), findsOneWidget);
-    expect(find.text('شاشة تسجيل الدخول قيد التطوير حالياً.'), findsOneWidget);
+    expect(find.text('مرحباً بعودتك'), findsOneWidget);
+    expect(find.text('سجّل دخولك أو أنشئ حساباً للمتابعة'), findsOneWidget);
+    expect(find.text('متابعة'), findsOneWidget);
   });
 }
-

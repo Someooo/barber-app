@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:barber_app/core/constants/app_spacing.dart';
 import 'package:barber_app/core/settings/app_settings.dart';
@@ -8,19 +7,8 @@ import 'package:barber_app/core/theme/app_theme.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/features/auth/presentation/widgets/widgets.dart';
 
-class WelcomeRoleScreen extends StatefulWidget {
+class WelcomeRoleScreen extends StatelessWidget {
   const WelcomeRoleScreen({super.key});
-
-  @override
-  State<WelcomeRoleScreen> createState() => _WelcomeRoleScreenState();
-}
-
-class _WelcomeRoleScreenState extends State<WelcomeRoleScreen> {
-  @override
-  void initState() {
-    super.initState();
-    FlutterNativeSplash.remove();
-  }
 
   @override
   Widget build(BuildContext context) {

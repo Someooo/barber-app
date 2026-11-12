@@ -17,7 +17,6 @@ enum LuxuryStatusType {
   cancelled,
 }
 
-/// Stadium chip for status flags, craftsman levels, and availability counters.
 class LuxuryBadge extends StatelessWidget {
   const LuxuryBadge({
     super.key,
@@ -184,4 +183,3 @@ class LuxuryBadge extends StatelessWidget {
 }
 
 typedef LuxuryChip = LuxuryBadge;
-

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppTextStyles {
-  // Headlines & Titles (Newsreader serif)
   static TextStyle get headlineLarge => GoogleFonts.newsreader(
         fontSize: 32,
         height: 40 / 32,
@@ -22,7 +21,6 @@ abstract class AppTextStyles {
         fontWeight: FontWeight.w600,
       );
 
-  // Body & Labels (Plus Jakarta Sans)
   static TextStyle get titleMedium => GoogleFonts.plusJakartaSans(
         fontSize: 16,
         height: 24 / 16,

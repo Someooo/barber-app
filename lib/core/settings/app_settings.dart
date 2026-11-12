@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Holds app-wide user preferences (theme mode and locale).
 class AppSettingsController extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
   Locale _locale = const Locale('en');
@@ -8,10 +7,8 @@ class AppSettingsController extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   Locale get locale => _locale;
 
-  /// Short uppercase language code for UI chips, e.g. `EN` / `AR`.
   String get languageCode => _locale.languageCode.toUpperCase();
 
-  /// Resolves whether the app is effectively rendering in dark mode.
   bool isDarkMode(Brightness platformBrightness) {
     switch (_themeMode) {
       case ThemeMode.dark:
@@ -30,14 +27,12 @@ class AppSettingsController extends ChangeNotifier {
   }
 
   void toggleLocale() {
-    _locale = _locale.languageCode == 'en'
-        ? const Locale('ar')
-        : const Locale('en');
+    _locale =
+        _locale.languageCode == 'en' ? const Locale('ar') : const Locale('en');
     notifyListeners();
   }
 }
 
-/// Exposes [AppSettingsController] to the widget tree.
 class AppSettingsScope extends InheritedNotifier<AppSettingsController> {
   const AppSettingsScope({
     super.key,
@@ -52,4 +47,3 @@ class AppSettingsScope extends InheritedNotifier<AppSettingsController> {
     return scope!.notifier!;
   }
 }
-

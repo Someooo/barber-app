@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../constants/app_constants.dart';
 import '../constants/app_spacing.dart';
@@ -6,7 +7,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
 
-/// Form text input field with dual-language top labels, custom icons, and validation support.
 class LuxuryTextField extends StatefulWidget {
   const LuxuryTextField({
     super.key,
@@ -27,6 +27,7 @@ class LuxuryTextField extends StatefulWidget {
     this.maxLines = 1,
     this.autofillHints,
     this.focusNode,
+    this.inputFormatters,
   });
 
   final TextEditingController? controller;
@@ -46,6 +47,7 @@ class LuxuryTextField extends StatefulWidget {
   final int maxLines;
   final Iterable<String>? autofillHints;
   final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<LuxuryTextField> createState() => _LuxuryTextFieldState();
@@ -159,6 +161,7 @@ class _LuxuryTextFieldState extends State<LuxuryTextField> {
           onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxLines,
           autofillHints: widget.autofillHints,
+          inputFormatters: widget.inputFormatters,
           style: AppTextStyles.bodyMedium.copyWith(
             color: scheme.onSurface,
           ),
@@ -205,4 +208,3 @@ class _LuxuryTextFieldState extends State<LuxuryTextField> {
     );
   }
 }
-
