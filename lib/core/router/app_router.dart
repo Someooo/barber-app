@@ -14,15 +14,24 @@ GoRouter createAppRouter() {
         builder: (context, state) => const WelcomeRoleScreen(),
       ),
       GoRoute(
-        path: AppRoutes.barberLogin,
-        builder: (context, state) =>
-            const LoginPlaceholderScreen(role: AuthRole.barber),
+        path: AppRoutes.login,
+        builder: (context, state) => LoginPlaceholderScreen(
+          titleBuilder: (l10n) => l10n.loginScreenTitle,
+        ),
       ),
       GoRoute(
-        path: AppRoutes.customerLogin,
-        builder: (context, state) =>
-            const LoginPlaceholderScreen(role: AuthRole.customer),
+        path: AppRoutes.barberDashboard,
+        builder: (context, state) => LoginPlaceholderScreen(
+          titleBuilder: (l10n) => l10n.barberDashboardTitle,
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.customerHome,
+        builder: (context, state) => LoginPlaceholderScreen(
+          titleBuilder: (l10n) => l10n.customerHomeTitle,
+        ),
       ),
     ],
   );
 }
+

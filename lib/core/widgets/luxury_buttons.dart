@@ -18,6 +18,8 @@ class LuxuryPrimaryButton extends StatelessWidget {
     this.showTrailingArrow = false,
     this.height = AppSizes.buttonHeight,
     this.borderRadius,
+    this.backgroundColor,
+    this.foregroundColor,
   });
 
   final String text;
@@ -29,6 +31,8 @@ class LuxuryPrimaryButton extends StatelessWidget {
   final bool showTrailingArrow;
   final double height;
   final BorderRadius? borderRadius;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +40,8 @@ class LuxuryPrimaryButton extends StatelessWidget {
     final effectiveRadius = borderRadius ?? AppRadius.controlBorder;
     final isEnabled = onPressed != null && !isLoading;
 
-    final bgColor = scheme.primary;
-    final fgColor = scheme.onPrimary;
+    final bgColor = backgroundColor ?? scheme.primary;
+    final fgColor = foregroundColor ?? scheme.onPrimary;
 
     Widget content = Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,

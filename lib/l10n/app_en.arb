@@ -5,6 +5,10 @@
   "syncingSystems": "Syncing Salon Systems...",
   "barberPortal": "Barber Portal",
   "customerBooking": "Customer Booking",
+  "loginButton": "Login",
+  "loginScreenTitle": "Sign In",
+  "barberDashboardTitle": "Barber Dashboard",
+  "customerHomeTitle": "Customer Booking",
   "loginPlaceholderTitle": "Coming Soon",
   "loginPlaceholderBody": "Login screen is currently under active development."
 }

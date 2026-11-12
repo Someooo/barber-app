@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 
 import 'package:barber_app/core/constants/app_spacing.dart';
+import 'package:barber_app/core/settings/app_settings.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
 import 'package:barber_app/core/theme/theme_context_x.dart';
+import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/l10n/app_localizations.dart';
 
-/// Roles selectable from the welcome gate.
-enum AuthRole { barber, customer }
-
-/// Temporary destination for the role-specific login routes.
-/// Replaced by the real login screens in a later phase.
+/// Temporary lightweight placeholder screen used for routes pending full UI.
 class LoginPlaceholderScreen extends StatelessWidget {
-  const LoginPlaceholderScreen({super.key, required this.role});
+  const LoginPlaceholderScreen({
+    super.key,
+    this.titleBuilder,
+  });
 
-  final AuthRole role;
+  final String Function(AppLocalizations l10n)? titleBuilder;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final scheme = context.colors;
-    final roleLabel = switch (role) {
-      AuthRole.barber => l10n.barberPortal,
-      AuthRole.customer => l10n.customerBooking,
-    };
+    final settings = AppSettingsScope.of(context);
+    final platformBrightness = MediaQuery.platformBrightnessOf(context);
+    final isDark = settings.isDarkMode(platformBrightness);
+    final title = titleBuilder?.call(l10n) ?? l10n.loginScreenTitle;
 
     return Scaffold(
-      appBar: AppBar(title: Text(roleLabel)),
+      appBar: LuxuryAppBar(
+        title: title,
+        currentLanguage: settings.languageCode,
+        onLanguageToggle: settings.toggleLocale,
+        isDarkMode: isDark,
+        onThemeToggle: () => settings.toggleTheme(platformBrightness),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -56,3 +63,4 @@ class LoginPlaceholderScreen extends StatelessWidget {
     );
   }
 }
+

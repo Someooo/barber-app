@@ -5,6 +5,10 @@
   "syncingSystems": "جاري مزامنة أنظمة الصالون...",
   "barberPortal": "بوابة الحلاقين",
   "customerBooking": "حجز المواعيد للزبائن",
+  "loginButton": "تسجيل الدخول",
+  "loginScreenTitle": "تسجيل الدخول",
+  "barberDashboardTitle": "لوحة تحكم الحلاق",
+  "customerHomeTitle": "حجز المواعيد",
   "loginPlaceholderTitle": "قريباً",
   "loginPlaceholderBody": "شاشة تسجيل الدخول قيد التطوير حالياً."
 }

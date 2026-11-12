@@ -1,3 +1,4 @@
+import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,15 +10,17 @@ Future<void> _tapLanguageChip(WidgetTester tester, String currentCode) async {
 }
 
 void main() {
-  testWidgets('Welcome screen renders English strings by default',
+  testWidgets('Welcome screen renders English strings and single Login button',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());
     await tester.pumpAndSettle();
 
     expect(find.text('BarberSync'), findsOneWidget);
     expect(find.text("The Modern Gentleman's Grooming"), findsOneWidget);
-    expect(find.text('Barber Portal'), findsOneWidget);
-    expect(find.text('Customer Booking'), findsOneWidget);
+    expect(find.text('Login'), findsOneWidget);
+    expect(find.byType(LuxuryPrimaryButton), findsOneWidget);
+    expect(find.text('Barber Portal'), findsNothing);
+    expect(find.text('Customer Booking'), findsNothing);
 
     final context = tester.element(find.text('BarberSync'));
     expect(Directionality.of(context), TextDirection.ltr);
@@ -31,29 +34,30 @@ void main() {
     await _tapLanguageChip(tester, 'EN');
 
     expect(find.text('تجربة الحلاقة العصرية الفاخرة'), findsOneWidget);
-    expect(find.text('بوابة الحلاقين'), findsOneWidget);
-    expect(find.text('حجز المواعيد للزبائن'), findsOneWidget);
-    expect(find.text('Barber Portal'), findsNothing);
+    expect(find.text('تسجيل الدخول'), findsOneWidget);
+    expect(find.text('Login'), findsNothing);
 
     final context = tester.element(find.text('BarberSync'));
     expect(Directionality.of(context), TextDirection.rtl);
 
     // And back to English.
     await _tapLanguageChip(tester, 'AR');
-    expect(find.text('Barber Portal'), findsOneWidget);
+    expect(find.text('Login'), findsOneWidget);
     expect(
       Directionality.of(tester.element(find.text('BarberSync'))),
       TextDirection.ltr,
     );
   });
 
-  testWidgets('Role buttons open localized login placeholders',
+  testWidgets('Login button navigates to /login placeholder screen',
       (WidgetTester tester) async {
     await tester.pumpWidget(const BarberSyncApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Barber Portal'));
+    await tester.tap(find.text('Login'));
     await tester.pumpAndSettle();
+
+    expect(find.text('Sign In'), findsOneWidget);
     expect(find.text('Coming Soon'), findsOneWidget);
     expect(
       find.text('Login screen is currently under active development.'),
@@ -67,10 +71,12 @@ void main() {
     await tester.pumpAndSettle();
 
     await _tapLanguageChip(tester, 'EN');
-    await tester.tap(find.text('حجز المواعيد للزبائن'));
+    await tester.tap(find.text('تسجيل الدخول'));
     await tester.pumpAndSettle();
 
+    expect(find.text('تسجيل الدخول'), findsOneWidget);
     expect(find.text('قريباً'), findsOneWidget);
     expect(find.text('شاشة تسجيل الدخول قيد التطوير حالياً.'), findsOneWidget);
   });
 }
+
