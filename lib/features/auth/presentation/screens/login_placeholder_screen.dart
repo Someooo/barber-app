@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
-import 'package:barber_app/core/settings/app_settings.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
-import 'package:barber_app/core/theme/theme_context_x.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_event.dart';
@@ -20,13 +19,14 @@ class LoginPlaceholderScreen extends StatelessWidget {
 
   final String Function(AppLocalizations l10n)? titleBuilder;
 
-  Widget _buildSessionSummary(BuildContext context, AppLocalizations l10n) {
+  Widget _buildSessionSummary(BuildContext context) {
     final hasAuthBloc = context.read<AuthBloc?>() != null;
     if (!hasAuthBloc) {
       return const SizedBox.shrink();
     }
 
     final scheme = context.colors;
+    final l10n = context.l10n;
 
     return BlocBuilder<AuthBloc, AuthState>(
       buildWhen: (previous, current) => previous != current,
@@ -72,20 +72,17 @@ class LoginPlaceholderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = context.l10n;
     final scheme = context.colors;
-    final settings = AppSettingsScope.of(context);
-    final platformBrightness = MediaQuery.platformBrightnessOf(context);
-    final isDark = settings.isDarkMode(platformBrightness);
     final title = titleBuilder?.call(l10n) ?? l10n.loginScreenTitle;
 
     return Scaffold(
       appBar: LuxuryAppBar(
         title: title,
-        currentLanguage: settings.languageCode,
-        onLanguageToggle: settings.toggleLocale,
-        isDarkMode: isDark,
-        onThemeToggle: () => settings.toggleTheme(platformBrightness),
+        currentLanguage: context.languageCode,
+        onLanguageToggle: context.toggleLocale,
+        isDarkMode: context.isDarkMode,
+        onThemeToggle: context.toggleTheme,
       ),
       body: SafeArea(
         child: Center(
@@ -109,7 +106,7 @@ class LoginPlaceholderScreen extends StatelessWidget {
                     color: scheme.onSurfaceVariant,
                   ),
                 ),
-                _buildSessionSummary(context, l10n),
+                _buildSessionSummary(context),
               ],
             ),
           ),

@@ -40,10 +40,15 @@ class AppSettingsScope extends InheritedNotifier<AppSettingsController> {
     required super.child,
   }) : super(notifier: controller);
 
+  static AppSettingsController? maybeOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<AppSettingsScope>()
+        ?.notifier;
+  }
+
   static AppSettingsController of(BuildContext context) {
-    final scope =
-        context.dependOnInheritedWidgetOfExactType<AppSettingsScope>();
-    assert(scope != null, 'AppSettingsScope not found in widget tree.');
-    return scope!.notifier!;
+    final controller = maybeOf(context);
+    assert(controller != null, 'AppSettingsScope not found in widget tree.');
+    return controller!;
   }
 }

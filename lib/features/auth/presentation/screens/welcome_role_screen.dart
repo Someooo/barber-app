@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:barber_app/core/constants/app_spacing.dart';
-import 'package:barber_app/core/settings/app_settings.dart';
-import 'package:barber_app/core/theme/theme_context_x.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
+import 'package:barber_app/core/router/app_routes.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/features/auth/presentation/widgets/widgets.dart';
 
@@ -11,9 +12,6 @@ class WelcomeRoleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = AppSettingsScope.of(context);
-    final platformBrightness = MediaQuery.platformBrightnessOf(context);
-    final isDark = settings.isDarkMode(platformBrightness);
     final surfaceColor = context.colors.surface;
 
     return Scaffold(
@@ -25,10 +23,10 @@ class WelcomeRoleScreen extends StatelessWidget {
               showBrand: false,
               showBottomBorder: false,
               backgroundColor: surfaceColor,
-              currentLanguage: settings.languageCode,
-              onLanguageToggle: settings.toggleLocale,
-              isDarkMode: isDark,
-              onThemeToggle: () => settings.toggleTheme(platformBrightness),
+              currentLanguage: context.languageCode,
+              onLanguageToggle: context.toggleLocale,
+              isDarkMode: context.isDarkMode,
+              onThemeToggle: context.toggleTheme,
             ),
             Expanded(
               child: LayoutBuilder(
@@ -47,7 +45,12 @@ class WelcomeRoleScreen extends StatelessWidget {
                             const WelcomeBrandHeader(),
                             AppSpacing.verticalXl,
                             const Spacer(flex: 1),
-                            const RoleSelectionActions(),
+                            RoleSelectionActions(
+                              onLoginPressed: () =>
+                                  context.push(AppRoutes.login),
+                              onRegisterPressed: () =>
+                                  context.push(AppRoutes.register),
+                            ),
                             const Spacer(flex: 2),
                           ],
                         ),

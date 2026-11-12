@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:barber_app/core/errors/failures.dart';
-import 'package:barber_app/l10n/app_localizations.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
 
 String mapAuthFailureToMessage(BuildContext context, Failure failure) {
-  final l10n = AppLocalizations.of(context)!;
+  final l10n = context.l10n;
 
   return switch (failure) {
     RoleMismatchFailure() => l10n.roleMismatchError,

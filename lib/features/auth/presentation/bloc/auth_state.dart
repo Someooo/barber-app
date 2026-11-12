@@ -6,6 +6,13 @@ import '../../domain/entities/user_entity.dart';
 sealed class AuthState extends Equatable {
   const AuthState();
 
+  bool get isSubmitting => this is AuthLoading;
+
+  Failure? get activeFailure => switch (this) {
+        AuthFailureState(:final failure) => failure,
+        _ => null,
+      };
+
   @override
   List<Object?> get props => [];
 }

@@ -3,10 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
-import 'package:barber_app/core/theme/theme_context_x.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
-import 'package:barber_app/l10n/app_localizations.dart';
 
 class WelcomeBrandHeader extends StatelessWidget {
   const WelcomeBrandHeader({super.key});
@@ -43,7 +42,7 @@ class WelcomeBrandHeader extends StatelessWidget {
         ),
         AppSpacing.verticalSm,
         Text(
-          AppLocalizations.of(context)!.welcomeTagline,
+          context.l10n.welcomeTagline,
           textAlign: TextAlign.center,
           style: AppTextStyles.bodyMedium.copyWith(
             color: scheme.onSurfaceVariant,

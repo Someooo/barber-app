@@ -72,7 +72,22 @@ Every task, file creation, refactor, and bug fix MUST strictly comply with these
 
 ---
 
-## 7. Verification & Definition of Done (DoD)
+## 7. Strict Layer & Presentation Isolation Rules (All Features)
+1. **Strict Layer Dependency Rule:**
+   - `domain` imports NOTHING outside pure Dart and `core/errors`.
+   - `data` imports ONLY `domain` and `core`.
+   - `presentation` imports ONLY `domain` and `core` (NEVER `data`).
+2. **BLoC Purity Rule:**
+   - BLoCs/Cubits must NEVER import `package:flutter/material.dart` (except `@immutable` from `foundation.dart`), `BuildContext`, `GoRouter`, or `AppLocalizations`.
+   - Keep `buildWhen` / `listenWhen` predicates concise by exposing semantic getters on State classes rather than complex multi-line boolean expressions inside widgets.
+3. **UI Context & Boilerplate Rule:**
+   - Never repeat `AppLocalizations.of(context)!`, `MediaQuery.platformBrightnessOf(context)`, or `AppSettingsScope.of(context)` inside screen `build()` methods. Always use centralized `BuildContext` extensions (`context.l10n`, `context.isDarkMode`, `context.colors`, `context.textTheme`).
+4. **Pure Widget vs. Smart Container Rule:**
+   - Form and card widgets inside `presentation/widgets/` must remain decoupled from `BlocProvider`/`context.read<Bloc>()` whenever possible, receiving state via constructor parameters and emitting user actions via typed callbacks.
+
+---
+
+## 8. Verification & Definition of Done (DoD)
 Before finalizing any prompt or task:
 1. Run `dart analyze lib test` and ensure zero warnings, zero infos, zero errors.
 2. Run relevant tests (`flutter test`) and confirm everything passes.

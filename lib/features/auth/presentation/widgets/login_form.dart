@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/theme/app_colors.dart';
-import 'package:barber_app/core/theme/theme_context_x.dart';
 import 'package:barber_app/core/widgets/widgets.dart';
 import 'package:barber_app/features/auth/domain/entities/user_role.dart';
+import 'package:barber_app/features/auth/presentation/widgets/auth_error_banner.dart';
 import 'package:barber_app/features/auth/presentation/widgets/role_dropdown_field.dart';
-import 'package:barber_app/l10n/app_localizations.dart';
 
 typedef LoginFormSubmitCallback = void Function(
   String fullName,
@@ -22,11 +22,13 @@ class LoginForm extends StatefulWidget {
     super.key,
     this.onSubmit,
     this.isLoading = false,
+    this.errorMessage,
     this.initialRole = UserRole.customer,
   });
 
   final LoginFormSubmitCallback? onSubmit;
   final bool isLoading;
+  final String? errorMessage;
   final UserRole initialRole;
 
   @override
@@ -57,30 +59,30 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  String? _validateFullName(String? value, AppLocalizations l10n) {
+  String? _validateFullName(String? value, String errorText) {
     final trimmed = value?.trim() ?? '';
     if (trimmed.isEmpty) {
-      return l10n.fullNameRequiredError;
+      return errorText;
     }
     final words =
         trimmed.split(RegExp(r'\s+')).where((part) => part.isNotEmpty).toList();
     if (words.length < 2) {
-      return l10n.fullNameRequiredError;
+      return errorText;
     }
     return null;
   }
 
-  String? _validatePhone(String? value, AppLocalizations l10n) {
+  String? _validatePhone(String? value, String errorText) {
     final digits = (value ?? '').trim().replaceAll(RegExp(r'\D'), '');
     if (digits.length < 9 || digits.length > 15) {
-      return l10n.phoneInvalidError;
+      return errorText;
     }
     return null;
   }
 
-  String? _validatePassword(String? value, AppLocalizations l10n) {
+  String? _validatePassword(String? value, String errorText) {
     if (value == null || value.length < 6) {
-      return l10n.passwordShortError;
+      return errorText;
     }
     return null;
   }
@@ -103,7 +105,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = context.l10n;
     final scheme = context.colors;
 
     return Form(
@@ -112,6 +114,10 @@ class _LoginFormState extends State<LoginForm> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          if (widget.errorMessage != null) ...[
+            AuthErrorBanner(message: widget.errorMessage!),
+            AppSpacing.verticalMd,
+          ],
           RoleDropdownField(
             selectedRole: _selectedRole,
             enabled: !widget.isLoading,
@@ -135,7 +141,8 @@ class _LoginFormState extends State<LoginForm> {
               size: AppSizes.iconMd,
               color: scheme.onSurfaceVariant,
             ),
-            validator: (value) => _validateFullName(value, l10n),
+            validator: (value) =>
+                _validateFullName(value, l10n.fullNameRequiredError),
           ),
           AppSpacing.verticalMd,
           LuxuryTextField(
@@ -152,7 +159,7 @@ class _LoginFormState extends State<LoginForm> {
               size: AppSizes.iconMd,
               color: scheme.onSurfaceVariant,
             ),
-            validator: (value) => _validatePhone(value, l10n),
+            validator: (value) => _validatePhone(value, l10n.phoneInvalidError),
           ),
           AppSpacing.verticalMd,
           LuxuryTextField(
@@ -170,7 +177,8 @@ class _LoginFormState extends State<LoginForm> {
               color: scheme.onSurfaceVariant,
             ),
             onFieldSubmitted: (_) => _handleSubmit(),
-            validator: (value) => _validatePassword(value, l10n),
+            validator: (value) =>
+                _validatePassword(value, l10n.passwordShortError),
           ),
           AppSpacing.verticalMd,
           LuxuryPrimaryButton(

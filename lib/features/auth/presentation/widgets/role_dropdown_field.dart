@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
 import 'package:barber_app/core/constants/app_spacing.dart';
+import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
-import 'package:barber_app/core/theme/theme_context_x.dart';
 import 'package:barber_app/features/auth/domain/entities/user_role.dart';
-import 'package:barber_app/l10n/app_localizations.dart';
 
 class RoleDropdownField extends StatelessWidget {
   const RoleDropdownField({
@@ -22,7 +21,7 @@ class RoleDropdownField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = context.l10n;
     final scheme = context.colors;
 
     final border = OutlineInputBorder(
@@ -33,17 +32,17 @@ class RoleDropdownField extends StatelessWidget {
       ),
     );
 
-    final focusedBorder = OutlineInputBorder(
+    const focusedBorder = OutlineInputBorder(
       borderRadius: AppRadius.controlBorder,
-      borderSide: const BorderSide(
+      borderSide: BorderSide(
         color: AppColors.secondary,
         width: AppSizes.focusBorder,
       ),
     );
 
-    final errorBorder = OutlineInputBorder(
+    const errorBorder = OutlineInputBorder(
       borderRadius: AppRadius.controlBorder,
-      borderSide: const BorderSide(
+      borderSide: BorderSide(
         color: AppColors.error,
         width: AppSizes.hairline,
       ),
