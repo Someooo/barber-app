@@ -9,6 +9,16 @@ import '../../features/auth/domain/usecases/authenticate_user_usecase.dart';
 import '../../features/auth/domain/usecases/check_auth_session_usecase.dart';
 import '../../features/auth/domain/usecases/sign_out_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/customer/data/datasources/customer_remote_data_source.dart';
+import '../../features/customer/data/datasources/in_memory_firestore_customer_data_source.dart';
+import '../../features/customer/data/repositories/customer_repository_impl.dart';
+import '../../features/customer/domain/repositories/customer_repository.dart';
+import '../../features/customer/domain/usecases/cancel_booking_usecase.dart';
+import '../../features/customer/domain/usecases/create_instant_booking_usecase.dart';
+import '../../features/customer/domain/usecases/get_available_time_slots_usecase.dart';
+import '../../features/customer/domain/usecases/get_customer_bookings_usecase.dart';
+import '../../features/customer/domain/usecases/get_customer_home_data_usecase.dart';
+import '../../features/customer/presentation/bloc/customer_home_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -17,6 +27,68 @@ Future<void> initDependencies({FirebaseAuth? firebaseAuth}) async {
     serviceLocator: sl,
     firebaseAuth: firebaseAuth,
   );
+  registerCustomerDependencies(
+    serviceLocator: sl,
+  );
+}
+
+void registerCustomerDependencies({
+  GetIt? serviceLocator,
+  CustomerRemoteDataSource? remoteDataSource,
+}) {
+  final locator = serviceLocator ?? sl;
+
+  if (!locator.isRegistered<CustomerRemoteDataSource>()) {
+    locator.registerLazySingleton<CustomerRemoteDataSource>(
+      () => remoteDataSource ?? InMemoryFirestoreCustomerDataSource(),
+    );
+  }
+
+  if (!locator.isRegistered<CustomerRepository>()) {
+    locator.registerLazySingleton<CustomerRepository>(
+      () => CustomerRepositoryImpl(
+        remoteDataSource: locator<CustomerRemoteDataSource>(),
+      ),
+    );
+  }
+
+  if (!locator.isRegistered<GetCustomerHomeDataUseCase>()) {
+    locator.registerLazySingleton<GetCustomerHomeDataUseCase>(
+      () => GetCustomerHomeDataUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<GetAvailableTimeSlotsUseCase>()) {
+    locator.registerLazySingleton<GetAvailableTimeSlotsUseCase>(
+      () => GetAvailableTimeSlotsUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<CreateInstantBookingUseCase>()) {
+    locator.registerLazySingleton<CreateInstantBookingUseCase>(
+      () => CreateInstantBookingUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<GetCustomerBookingsUseCase>()) {
+    locator.registerLazySingleton<GetCustomerBookingsUseCase>(
+      () => GetCustomerBookingsUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<CancelBookingUseCase>()) {
+    locator.registerLazySingleton<CancelBookingUseCase>(
+      () => CancelBookingUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<CustomerHomeBloc>()) {
+    locator.registerFactory<CustomerHomeBloc>(
+      () => CustomerHomeBloc(
+        getCustomerHomeDataUseCase: locator<GetCustomerHomeDataUseCase>(),
+      ),
+    );
+  }
 }
 
 void registerAuthDependencies({

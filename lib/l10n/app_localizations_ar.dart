@@ -120,4 +120,111 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get loginPlaceholderBody => 'شاشة تسجيل الدخول قيد التطوير حالياً.';
+
+  @override
+  String get customerNavHome => 'الرئيسية';
+
+  @override
+  String get customerNavBookings => 'حجوزاتي';
+
+  @override
+  String get customerNavProfile => 'حسابي';
+
+  @override
+  String customerGreeting(String name) {
+    return 'مرحباً، $name';
+  }
+
+  @override
+  String get customerDefaultGreeting => 'مرحباً بعودتك';
+
+  @override
+  String get activeBookingTitle => 'موعدك القادم';
+
+  @override
+  String get bookAppointmentCta => 'حجز موعد';
+
+  @override
+  String get servicesSectionTitle => 'الخدمات الفاخرة';
+
+  @override
+  String get servicesSectionSubtitle => 'مصممة لتناسب أناقة الرجل العصري';
+
+  @override
+  String get barbersSectionTitle => 'أمهر الحلاقين';
+
+  @override
+  String get barbersSectionSubtitle => 'حرفية عالية ودقة متناهية';
+
+  @override
+  String get availableTodayBadge => 'متاح اليوم';
+
+  @override
+  String get unavailableBadge => 'غير متاح';
+
+  @override
+  String yearsExperience(int years) {
+    return 'خبرة $years سنوات';
+  }
+
+  @override
+  String durationMinutesLabel(int minutes) {
+    return '$minutes دقيقة';
+  }
+
+  @override
+  String priceDisplay(String price) {
+    return '$price د.أ';
+  }
+
+  @override
+  String get bookingStatusConfirmed => 'مؤكد';
+
+  @override
+  String get bookingStatusRescheduled => 'معاد جدولته';
+
+  @override
+  String get bookingStatusCompleted => 'مكتمل';
+
+  @override
+  String get bookingStatusCancelled => 'ملغي';
+
+  @override
+  String rescheduledReasonLabel(String reason) {
+    return 'السبب: $reason';
+  }
+
+  @override
+  String get noActiveBooking => 'لا توجد مواعيد قادمة';
+
+  @override
+  String get retryButton => 'إعادة المحاولة';
+
+  @override
+  String get genericErrorMessage => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get profileScreenTitle => 'الملف الشخصي';
+
+  @override
+  String get themeToggleLabel => 'الوضع الليلي';
+
+  @override
+  String get languageToggleLabel => 'اللغة';
+
+  @override
+  String get myBookingsPlaceholderTitle => 'حجوزاتي';
+
+  @override
+  String get myBookingsPlaceholderSubtitle =>
+      'ستظهر هنا سجلات مواعيدك وحجوزاتك القادمة.';
+
+  @override
+  String get customerHomeHeadline => 'تجربة حلاقة استثنائية متكاملة';
+
+  @override
+  String get bookNowBanner => 'جاهز لموعد حلاقتك القادم؟';
+
+  @override
+  String get bookNowBannerSubtitle => 'تأكيد فوري للحجز مع حلاقك المفضل';
 }

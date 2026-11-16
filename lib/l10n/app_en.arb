@@ -35,6 +35,73 @@
   "registerWelcomeTitle": "Join BarberSync",
   "registerSubtitle": "Enter your details to get started",
   "loginPlaceholderTitle": "Coming Soon",
-  "loginPlaceholderBody": "Login screen is currently under active development."
+  "loginPlaceholderBody": "Login screen is currently under active development.",
+  "customerNavHome": "Home",
+  "customerNavBookings": "My Bookings",
+  "customerNavProfile": "Profile",
+  "customerGreeting": "Hello, {name}",
+  "@customerGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "customerDefaultGreeting": "Welcome back",
+  "activeBookingTitle": "Upcoming Appointment",
+  "bookAppointmentCta": "Book Appointment",
+  "servicesSectionTitle": "Luxury Services",
+  "servicesSectionSubtitle": "Crafted for the modern gentleman",
+  "barbersSectionTitle": "Master Barbers",
+  "barbersSectionSubtitle": "Dedicated craft & precision",
+  "availableTodayBadge": "Available Today",
+  "unavailableBadge": "Unavailable",
+  "yearsExperience": "{years} yrs exp",
+  "@yearsExperience": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutesLabel": "{minutes} min",
+  "@durationMinutesLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "priceDisplay": "${price}",
+  "@priceDisplay": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingStatusConfirmed": "Confirmed",
+  "bookingStatusRescheduled": "Rescheduled",
+  "bookingStatusCompleted": "Completed",
+  "bookingStatusCancelled": "Cancelled",
+  "rescheduledReasonLabel": "Reason: {reason}",
+  "@rescheduledReasonLabel": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "noActiveBooking": "No upcoming appointments",
+  "retryButton": "Retry",
+  "genericErrorMessage": "Something went wrong. Please try again.",
+  "profileScreenTitle": "Profile",
+  "themeToggleLabel": "Dark Mode",
+  "languageToggleLabel": "Language",
+  "myBookingsPlaceholderTitle": "My Bookings",
+  "myBookingsPlaceholderSubtitle": "Your appointment history and upcoming bookings will appear here.",
+  "customerHomeHeadline": "Precision Grooming Experience",
+  "bookNowBanner": "Ready for your next cut?",
+  "bookNowBannerSubtitle": "Instant confirmation with your favorite barber"
 }
 

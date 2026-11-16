@@ -11,6 +11,7 @@ import 'package:barber_app/features/auth/presentation/screens/login_placeholder_
 import 'package:barber_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/welcome_role_screen.dart';
+import 'package:barber_app/features/customer/presentation/screens/customer_shell_screen.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
@@ -111,9 +112,7 @@ GoRouter createAppRouter({
       ),
       GoRoute(
         path: AppRoutes.customerHome,
-        builder: (context, state) => LoginPlaceholderScreen(
-          titleBuilder: (l10n) => l10n.customerHomeTitle,
-        ),
+        builder: (context, state) => const CustomerShellScreen(),
       ),
     ],
   );

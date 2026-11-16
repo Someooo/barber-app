@@ -121,4 +121,112 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get loginPlaceholderBody =>
       'Login screen is currently under active development.';
+
+  @override
+  String get customerNavHome => 'Home';
+
+  @override
+  String get customerNavBookings => 'My Bookings';
+
+  @override
+  String get customerNavProfile => 'Profile';
+
+  @override
+  String customerGreeting(String name) {
+    return 'Hello, $name';
+  }
+
+  @override
+  String get customerDefaultGreeting => 'Welcome back';
+
+  @override
+  String get activeBookingTitle => 'Upcoming Appointment';
+
+  @override
+  String get bookAppointmentCta => 'Book Appointment';
+
+  @override
+  String get servicesSectionTitle => 'Luxury Services';
+
+  @override
+  String get servicesSectionSubtitle => 'Crafted for the modern gentleman';
+
+  @override
+  String get barbersSectionTitle => 'Master Barbers';
+
+  @override
+  String get barbersSectionSubtitle => 'Dedicated craft & precision';
+
+  @override
+  String get availableTodayBadge => 'Available Today';
+
+  @override
+  String get unavailableBadge => 'Unavailable';
+
+  @override
+  String yearsExperience(int years) {
+    return '$years yrs exp';
+  }
+
+  @override
+  String durationMinutesLabel(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String priceDisplay(String price) {
+    return '\$$price';
+  }
+
+  @override
+  String get bookingStatusConfirmed => 'Confirmed';
+
+  @override
+  String get bookingStatusRescheduled => 'Rescheduled';
+
+  @override
+  String get bookingStatusCompleted => 'Completed';
+
+  @override
+  String get bookingStatusCancelled => 'Cancelled';
+
+  @override
+  String rescheduledReasonLabel(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
+  String get noActiveBooking => 'No upcoming appointments';
+
+  @override
+  String get retryButton => 'Retry';
+
+  @override
+  String get genericErrorMessage => 'Something went wrong. Please try again.';
+
+  @override
+  String get profileScreenTitle => 'Profile';
+
+  @override
+  String get themeToggleLabel => 'Dark Mode';
+
+  @override
+  String get languageToggleLabel => 'Language';
+
+  @override
+  String get myBookingsPlaceholderTitle => 'My Bookings';
+
+  @override
+  String get myBookingsPlaceholderSubtitle =>
+      'Your appointment history and upcoming bookings will appear here.';
+
+  @override
+  String get customerHomeHeadline => 'Precision Grooming Experience';
+
+  @override
+  String get bookNowBanner => 'Ready for your next cut?';
+
+  @override
+  String get bookNowBannerSubtitle =>
+      'Instant confirmation with your favorite barber';
 }

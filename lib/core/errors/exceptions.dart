@@ -57,3 +57,10 @@ class NetworkException extends AppException {
     super.code = 'network-request-failed',
   });
 }
+
+class ServerException extends AppException {
+  const ServerException({
+    required super.message,
+    super.code = 'server-error',
+  });
+}

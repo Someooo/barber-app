@@ -46,6 +46,20 @@ class NetworkFailure extends Failure {
   });
 }
 
+class ServerFailure extends Failure {
+  const ServerFailure({
+    required super.message,
+    super.code = 'server-error',
+  });
+}
+
+class CustomerFailure extends Failure {
+  const CustomerFailure({
+    required super.message,
+    super.code,
+  });
+}
+
 class RoleMismatchFailure extends AuthFailure implements RoleMismatchException {
   const RoleMismatchFailure({
     required this.expectedRole,

@@ -15,6 +15,12 @@ abstract class AppTextStyles {
         fontWeight: FontWeight.w600,
       );
 
+  static TextStyle get headlineSmall => GoogleFonts.newsreader(
+        fontSize: 24,
+        height: 32 / 24,
+        fontWeight: FontWeight.w600,
+      );
+
   static TextStyle get titleLarge => GoogleFonts.newsreader(
         fontSize: 22,
         height: 28 / 22,
@@ -54,6 +60,13 @@ abstract class AppTextStyles {
         height: 20 / 14,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
+      );
+
+  static TextStyle get labelMedium => GoogleFonts.plusJakartaSans(
+        fontSize: 13,
+        height: 18 / 13,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.2,
       );
 
   static TextStyle get labelSmall => GoogleFonts.plusJakartaSans(

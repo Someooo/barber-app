@@ -313,6 +313,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login screen is currently under active development.'**
   String get loginPlaceholderBody;
+
+  /// No description provided for @customerNavHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get customerNavHome;
+
+  /// No description provided for @customerNavBookings.
+  ///
+  /// In en, this message translates to:
+  /// **'My Bookings'**
+  String get customerNavBookings;
+
+  /// No description provided for @customerNavProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get customerNavProfile;
+
+  /// No description provided for @customerGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name}'**
+  String customerGreeting(String name);
+
+  /// No description provided for @customerDefaultGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get customerDefaultGreeting;
+
+  /// No description provided for @activeBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Appointment'**
+  String get activeBookingTitle;
+
+  /// No description provided for @bookAppointmentCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Appointment'**
+  String get bookAppointmentCta;
+
+  /// No description provided for @servicesSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxury Services'**
+  String get servicesSectionTitle;
+
+  /// No description provided for @servicesSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crafted for the modern gentleman'**
+  String get servicesSectionSubtitle;
+
+  /// No description provided for @barbersSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Master Barbers'**
+  String get barbersSectionTitle;
+
+  /// No description provided for @barbersSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dedicated craft & precision'**
+  String get barbersSectionSubtitle;
+
+  /// No description provided for @availableTodayBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Today'**
+  String get availableTodayBadge;
+
+  /// No description provided for @unavailableBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get unavailableBadge;
+
+  /// No description provided for @yearsExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'{years} yrs exp'**
+  String yearsExperience(int years);
+
+  /// No description provided for @durationMinutesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String durationMinutesLabel(int minutes);
+
+  /// No description provided for @priceDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'\${price}'**
+  String priceDisplay(String price);
+
+  /// No description provided for @bookingStatusConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get bookingStatusConfirmed;
+
+  /// No description provided for @bookingStatusRescheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescheduled'**
+  String get bookingStatusRescheduled;
+
+  /// No description provided for @bookingStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get bookingStatusCompleted;
+
+  /// No description provided for @bookingStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get bookingStatusCancelled;
+
+  /// No description provided for @rescheduledReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason: {reason}'**
+  String rescheduledReasonLabel(String reason);
+
+  /// No description provided for @noActiveBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming appointments'**
+  String get noActiveBooking;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryButton;
+
+  /// No description provided for @genericErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get genericErrorMessage;
+
+  /// No description provided for @profileScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileScreenTitle;
+
+  /// No description provided for @themeToggleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get themeToggleLabel;
+
+  /// No description provided for @languageToggleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageToggleLabel;
+
+  /// No description provided for @myBookingsPlaceholderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Bookings'**
+  String get myBookingsPlaceholderTitle;
+
+  /// No description provided for @myBookingsPlaceholderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your appointment history and upcoming bookings will appear here.'**
+  String get myBookingsPlaceholderSubtitle;
+
+  /// No description provided for @customerHomeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Precision Grooming Experience'**
+  String get customerHomeHeadline;
+
+  /// No description provided for @bookNowBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for your next cut?'**
+  String get bookNowBanner;
+
+  /// No description provided for @bookNowBannerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant confirmation with your favorite barber'**
+  String get bookNowBannerSubtitle;
 }
 
 class _AppLocalizationsDelegate
