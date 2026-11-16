@@ -47,12 +47,14 @@ class LuxuryPrimaryButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (isLoading) ...[
-          SizedBox(
-            width: AppSizes.iconMd,
-            height: AppSizes.iconMd,
-            child: CircularProgressIndicator(
-              strokeWidth: AppSizes.loaderStroke,
-              valueColor: AlwaysStoppedAnimation<Color>(fgColor),
+          RepaintBoundary(
+            child: SizedBox(
+              width: AppSizes.iconMd,
+              height: AppSizes.iconMd,
+              child: CircularProgressIndicator(
+                strokeWidth: AppSizes.loaderStroke,
+                valueColor: AlwaysStoppedAnimation<Color>(fgColor),
+              ),
             ),
           ),
           AppSpacing.horizontalSm,
@@ -79,24 +81,27 @@ class LuxuryPrimaryButton extends StatelessWidget {
       ],
     );
 
-    return SizedBox(
-      height: height,
-      width: isFullWidth ? double.infinity : null,
-      child: ElevatedButton(
-        onPressed: isEnabled ? onPressed : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: bgColor,
-          foregroundColor: fgColor,
-          disabledBackgroundColor:
-              bgColor.withValues(alpha: AppOpacity.disabled),
-          disabledForegroundColor: fgColor.withValues(alpha: AppOpacity.scrim),
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.lg,
+    return RepaintBoundary(
+      child: SizedBox(
+        height: height,
+        width: isFullWidth ? double.infinity : null,
+        child: ElevatedButton(
+          onPressed: isEnabled ? onPressed : null,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: bgColor,
+            foregroundColor: fgColor,
+            disabledBackgroundColor:
+                bgColor.withValues(alpha: AppOpacity.disabled),
+            disabledForegroundColor:
+                fgColor.withValues(alpha: AppOpacity.scrim),
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
           ),
+          child: content,
         ),
-        child: content,
       ),
     );
   }
@@ -138,12 +143,14 @@ class LuxurySecondaryButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (isLoading) ...[
-          SizedBox(
-            width: AppSizes.iconMd,
-            height: AppSizes.iconMd,
-            child: CircularProgressIndicator(
-              strokeWidth: AppSizes.loaderStroke,
-              valueColor: AlwaysStoppedAnimation<Color>(fgColor),
+          RepaintBoundary(
+            child: SizedBox(
+              width: AppSizes.iconMd,
+              height: AppSizes.iconMd,
+              child: CircularProgressIndicator(
+                strokeWidth: AppSizes.loaderStroke,
+                valueColor: AlwaysStoppedAnimation<Color>(fgColor),
+              ),
             ),
           ),
           AppSpacing.horizontalSm,
@@ -164,25 +171,27 @@ class LuxurySecondaryButton extends StatelessWidget {
       ],
     );
 
-    return SizedBox(
-      height: height,
-      width: isFullWidth ? double.infinity : null,
-      child: OutlinedButton(
-        onPressed: isEnabled ? onPressed : null,
-        style: OutlinedButton.styleFrom(
-          backgroundColor: bgColor,
-          foregroundColor: fgColor,
-          side: BorderSide(
-            color: context.borderColor,
-            width: AppSizes.hairline,
+    return RepaintBoundary(
+      child: SizedBox(
+        height: height,
+        width: isFullWidth ? double.infinity : null,
+        child: OutlinedButton(
+          onPressed: isEnabled ? onPressed : null,
+          style: OutlinedButton.styleFrom(
+            backgroundColor: bgColor,
+            foregroundColor: fgColor,
+            side: BorderSide(
+              color: context.borderColor,
+              width: AppSizes.hairline,
+            ),
+            shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
+            elevation: 0,
           ),
-          shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.lg,
-          ),
-          elevation: 0,
+          child: content,
         ),
-        child: content,
       ),
     );
   }
@@ -217,36 +226,38 @@ class LuxuryOutlinedButton extends StatelessWidget {
     final color = textColor ?? scheme.onSurface;
     final border = borderColor ?? context.borderColor;
 
-    return SizedBox(
-      height: height,
-      width: isFullWidth ? double.infinity : null,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: color,
-          side: BorderSide(color: border, width: AppSizes.hairline),
-          shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.md,
-          ),
-          elevation: 0,
-        ),
-        child: Row(
-          mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (prefixIcon != null) ...[
-              prefixIcon!,
-              AppSpacing.horizontalXs,
-            ],
-            Text(
-              text,
-              style: AppTextStyles.labelSmall.copyWith(
-                color: color,
-                fontWeight: FontWeight.w600,
-              ),
+    return RepaintBoundary(
+      child: SizedBox(
+        height: height,
+        width: isFullWidth ? double.infinity : null,
+        child: OutlinedButton(
+          onPressed: onPressed,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: color,
+            side: BorderSide(color: border, width: AppSizes.hairline),
+            shape: RoundedRectangleBorder(borderRadius: effectiveRadius),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.md,
             ),
-          ],
+            elevation: 0,
+          ),
+          child: Row(
+            mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (prefixIcon != null) ...[
+                prefixIcon!,
+                AppSpacing.horizontalXs,
+              ],
+              Text(
+                text,
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

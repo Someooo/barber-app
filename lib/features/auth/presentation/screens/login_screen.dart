@@ -13,7 +13,7 @@ import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:barber_app/features/auth/presentation/utils/auth_failure_mapper.dart';
 import 'package:barber_app/features/auth/presentation/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({
     super.key,
     this.onSubmit,
@@ -23,44 +23,88 @@ class LoginScreen extends StatelessWidget {
   final LoginFormSubmitCallback? onSubmit;
   final bool isLoading;
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final ValueNotifier<bool> _isSubmitting = ValueNotifier<bool>(false);
+
+  @override
+  void dispose() {
+    _isSubmitting.dispose();
+    super.dispose();
+  }
+
   Widget _buildInteractiveForm(BuildContext context) {
     final hasAuthBloc = context.read<AuthBloc?>() != null;
     if (!hasAuthBloc) {
       return LoginForm(
-        onSubmit: onSubmit,
-        isLoading: isLoading,
+        onSubmit: widget.onSubmit,
+        isLoading: widget.isLoading,
       );
     }
 
-    return BlocConsumer<AuthBloc, AuthState>(
-      listenWhen: (previous, current) => current.activeFailure != null,
-      listener: (context, state) {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      buildWhen: (previous, current) =>
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting ||
-          previous.activeFailure != current.activeFailure,
-      builder: (context, state) {
-        final failure = state.activeFailure;
-        final errorMessage =
-            failure != null ? mapAuthFailureToMessage(context, failure) : null;
-
-        return LoginForm(
-          isLoading: isLoading || state.isSubmitting,
-          errorMessage: errorMessage,
-          onSubmit: (fullName, phoneNumber, password, selectedRole) {
-            onSubmit?.call(fullName, phoneNumber, password, selectedRole);
-            context.read<AuthBloc>().add(
-                  AuthSubmitRequested(
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    password: password,
-                    selectedRole: selectedRole,
-                  ),
-                );
-          },
-        );
+          current is AuthFailureState,
+      listener: (context, state) {
+        _isSubmitting.value = state.isSubmitting;
+        if (state is AuthFailureState) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
       },
+      child: LoginForm(
+        isLoading: widget.isLoading,
+        isSubmittingListenable: _isSubmitting,
+        errorBanner: BlocBuilder<AuthBloc, AuthState>(
+          buildWhen: (previous, current) =>
+              previous.activeFailure != current.activeFailure,
+          builder: (context, state) {
+            final failure = state.activeFailure;
+            if (failure == null) {
+              return const SizedBox.shrink();
+            }
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AuthErrorBanner(
+                  message: mapAuthFailureToMessage(context, failure),
+                ),
+                AppSpacing.verticalMd,
+              ],
+            );
+          },
+        ),
+        submitButtonBuilder: (context, handleSubmit) {
+          return BlocBuilder<AuthBloc, AuthState>(
+            buildWhen: (previous, current) =>
+                previous.isSubmitting != current.isSubmitting,
+            builder: (context, state) {
+              return LuxuryPrimaryButton(
+                text: context.l10n.continueButton,
+                isLoading: widget.isLoading || state.isSubmitting,
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.neutral,
+                onPressed: handleSubmit,
+              );
+            },
+          );
+        },
+        onSubmit: (fullName, phoneNumber, password, selectedRole) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          widget.onSubmit?.call(fullName, phoneNumber, password, selectedRole);
+          context.read<AuthBloc>().add(
+                AuthSubmitRequested(
+                  fullName: fullName,
+                  phoneNumber: phoneNumber,
+                  password: password,
+                  selectedRole: selectedRole,
+                ),
+              );
+        },
+      ),
     );
   }
 

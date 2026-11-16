@@ -19,16 +19,18 @@ class BrandLogo extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final assetPath = isDark ? AppAssets.darkLogo : AppAssets.lightLogo;
 
-    return SizedBox(
-      width: size,
-      height: size,
-      child: ClipRRect(
-        borderRadius: borderRadius ?? AppRadius.controlBorder,
-        child: Image.asset(
-          assetPath,
-          width: size,
-          height: size,
-          fit: fit,
+    return RepaintBoundary(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: ClipRRect(
+          borderRadius: borderRadius ?? AppRadius.controlBorder,
+          child: Image.asset(
+            assetPath,
+            width: size,
+            height: size,
+            fit: fit,
+          ),
         ),
       ),
     );

@@ -127,26 +127,28 @@ class _LuxuryShimmerCardState extends State<LuxuryShimmerCard>
     final baseColor = context.cardSurface;
     final highlightColor = context.borderColor;
 
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Container(
-          height: widget.height,
-          width: widget.width,
-          decoration: BoxDecoration(
-            borderRadius: effectiveRadius,
-            gradient: LinearGradient(
-              begin: Alignment(-2.0 + (_controller.value * 4.0), 0),
-              end: Alignment(-1.0 + (_controller.value * 4.0), 0),
-              colors: [
-                baseColor,
-                highlightColor,
-                baseColor,
-              ],
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Container(
+            height: widget.height,
+            width: widget.width,
+            decoration: BoxDecoration(
+              borderRadius: effectiveRadius,
+              gradient: LinearGradient(
+                begin: Alignment(-2.0 + (_controller.value * 4.0), 0),
+                end: Alignment(-1.0 + (_controller.value * 4.0), 0),
+                colors: [
+                  baseColor,
+                  highlightColor,
+                  baseColor,
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

@@ -41,4 +41,3 @@ extension AppBuildContextX on BuildContext {
     AppSettingsScope.maybeOf(this)?.toggleTheme(platformBrightness);
   }
 }
-

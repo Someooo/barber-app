@@ -62,79 +62,81 @@ class RoleDropdownField extends StatelessWidget {
             ),
           ),
         ),
-        DropdownButtonFormField<UserRole>(
-          key: ValueKey<UserRole>(selectedRole),
-          initialValue: selectedRole,
-          isExpanded: true,
-          dropdownColor: context.cardSurface,
-          icon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            size: AppSizes.iconLg,
-            color: scheme.onSurfaceVariant,
-          ),
-          style: AppTextStyles.bodyMedium.copyWith(
-            color: scheme.onSurface,
-          ),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: context.inputFill,
-            enabled: enabled,
-            contentPadding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.md,
+        RepaintBoundary(
+          child: DropdownButtonFormField<UserRole>(
+            key: ValueKey<UserRole>(selectedRole),
+            initialValue: selectedRole,
+            isExpanded: true,
+            dropdownColor: context.cardSurface,
+            icon: Icon(
+              Icons.keyboard_arrow_down_rounded,
+              size: AppSizes.iconLg,
+              color: scheme.onSurfaceVariant,
             ),
-            border: border,
-            enabledBorder: border,
-            focusedBorder: focusedBorder,
-            errorBorder: errorBorder,
-          ),
-          items: [
-            DropdownMenuItem<UserRole>(
-              value: UserRole.customer,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person_outline,
-                    size: AppSizes.iconMd,
-                    color: scheme.onSurfaceVariant,
-                  ),
-                  AppSpacing.horizontalSm,
-                  Text(
-                    l10n.roleCustomerOption,
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: scheme.onSurface,
-                    ),
-                  ),
-                ],
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: scheme.onSurface,
+            ),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: context.inputFill,
+              enabled: enabled,
+              contentPadding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.md,
               ),
+              border: border,
+              enabledBorder: border,
+              focusedBorder: focusedBorder,
+              errorBorder: errorBorder,
             ),
-            DropdownMenuItem<UserRole>(
-              value: UserRole.barber,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.content_cut,
-                    size: AppSizes.iconMd,
-                    color: scheme.onSurfaceVariant,
-                  ),
-                  AppSpacing.horizontalSm,
-                  Text(
-                    l10n.roleBarberOption,
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: scheme.onSurface,
+            items: [
+              DropdownMenuItem<UserRole>(
+                value: UserRole.customer,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_outline,
+                      size: AppSizes.iconMd,
+                      color: scheme.onSurfaceVariant,
                     ),
-                  ),
-                ],
+                    AppSpacing.horizontalSm,
+                    Text(
+                      l10n.roleCustomerOption,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: scheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-          onChanged: enabled
-              ? (value) {
-                  if (value != null) {
-                    onChanged(value);
+              DropdownMenuItem<UserRole>(
+                value: UserRole.barber,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.content_cut,
+                      size: AppSizes.iconMd,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                    AppSpacing.horizontalSm,
+                    Text(
+                      l10n.roleBarberOption,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: scheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            onChanged: enabled
+                ? (value) {
+                    if (value != null) {
+                      onChanged(value);
+                    }
                   }
-                }
-              : null,
+                : null,
+          ),
         ),
       ],
     );

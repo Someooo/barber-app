@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,12 +24,21 @@ class LoginForm extends StatefulWidget {
     this.onSubmit,
     this.isLoading = false,
     this.errorMessage,
+    this.errorBanner,
+    this.submitButtonBuilder,
+    this.submitButton,
+    this.isSubmittingListenable,
     this.initialRole = UserRole.customer,
   });
 
   final LoginFormSubmitCallback? onSubmit;
   final bool isLoading;
   final String? errorMessage;
+  final Widget? errorBanner;
+  final Widget Function(BuildContext context, VoidCallback handleSubmit)?
+      submitButtonBuilder;
+  final Widget? submitButton;
+  final ValueListenable<bool>? isSubmittingListenable;
   final UserRole initialRole;
 
   @override
@@ -95,6 +105,7 @@ class _LoginFormState extends State<LoginForm> {
     if (!isValid) {
       return;
     }
+    FocusManager.instance.primaryFocus?.unfocus();
     widget.onSubmit?.call(
       _fullNameController.text.trim(),
       _phoneController.text.trim(),
@@ -103,91 +114,137 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  Widget _buildFields(
+    BuildContext context,
+    bool isFieldDisabled,
+    ColorScheme scheme,
+  ) {
+    final l10n = context.l10n;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        RoleDropdownField(
+          selectedRole: _selectedRole,
+          enabled: !isFieldDisabled,
+          onChanged: (role) {
+            _selectedRole = role;
+          },
+        ),
+        AppSpacing.verticalXl,
+        LuxuryTextField(
+          controller: _fullNameController,
+          label: l10n.fullNameLabel,
+          hintText: l10n.fullNameHint,
+          enabled: !isFieldDisabled,
+          keyboardType: TextInputType.name,
+          textInputAction: TextInputAction.next,
+          autofillHints: const [AutofillHints.name],
+          prefixIcon: Icon(
+            Icons.badge_outlined,
+            size: AppSizes.iconMd,
+            color: scheme.onSurfaceVariant,
+          ),
+          validator: (value) =>
+              _validateFullName(value, l10n.fullNameRequiredError),
+        ),
+        AppSpacing.verticalMd,
+        LuxuryTextField(
+          controller: _phoneController,
+          label: l10n.phoneLabel,
+          hintText: l10n.phoneHint,
+          enabled: !isFieldDisabled,
+          keyboardType: TextInputType.phone,
+          textInputAction: TextInputAction.next,
+          autofillHints: const [AutofillHints.telephoneNumber],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          prefixIcon: Icon(
+            Icons.phone_outlined,
+            size: AppSizes.iconMd,
+            color: scheme.onSurfaceVariant,
+          ),
+          validator: (value) => _validatePhone(value, l10n.phoneInvalidError),
+        ),
+        AppSpacing.verticalMd,
+        LuxuryTextField(
+          controller: _passwordController,
+          label: l10n.passwordLabel,
+          hintText: l10n.passwordHint,
+          enabled: !isFieldDisabled,
+          isPassword: true,
+          keyboardType: TextInputType.visiblePassword,
+          textInputAction: TextInputAction.done,
+          autofillHints: const [AutofillHints.password],
+          prefixIcon: Icon(
+            Icons.lock_outline,
+            size: AppSizes.iconMd,
+            color: scheme.onSurfaceVariant,
+          ),
+          onFieldSubmitted: (_) => _handleSubmit(),
+          validator: (value) =>
+              _validatePassword(value, l10n.passwordShortError),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final scheme = context.colors;
 
+    Widget fieldsWidget;
+    if (widget.isSubmittingListenable != null) {
+      fieldsWidget = ValueListenableBuilder<bool>(
+        valueListenable: widget.isSubmittingListenable!,
+        builder: (context, isSubmitting, _) {
+          return _buildFields(
+            context,
+            widget.isLoading || isSubmitting,
+            scheme,
+          );
+        },
+      );
+    } else {
+      fieldsWidget = _buildFields(context, widget.isLoading, scheme);
+    }
+
+    Widget? effectiveErrorBanner = widget.errorBanner;
+    if (effectiveErrorBanner == null && widget.errorMessage != null) {
+      effectiveErrorBanner = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AuthErrorBanner(message: widget.errorMessage!),
+          AppSpacing.verticalMd,
+        ],
+      );
+    }
+
+    Widget effectiveSubmitButton = widget.submitButtonBuilder?.call(
+          context,
+          _handleSubmit,
+        ) ??
+        widget.submitButton ??
+        LuxuryPrimaryButton(
+          text: l10n.continueButton,
+          isLoading: widget.isLoading,
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.neutral,
+          onPressed: _handleSubmit,
+        );
+
     return Form(
       key: _formKey,
+      autovalidateMode: AutovalidateMode.disabled,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (widget.errorMessage != null) ...[
-            AuthErrorBanner(message: widget.errorMessage!),
-            AppSpacing.verticalMd,
-          ],
-          RoleDropdownField(
-            selectedRole: _selectedRole,
-            enabled: !widget.isLoading,
-            onChanged: (role) {
-              setState(() {
-                _selectedRole = role;
-              });
-            },
-          ),
-          AppSpacing.verticalXl,
-          LuxuryTextField(
-            controller: _fullNameController,
-            label: l10n.fullNameLabel,
-            hintText: l10n.fullNameHint,
-            enabled: !widget.isLoading,
-            keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-            autofillHints: const [AutofillHints.name],
-            prefixIcon: Icon(
-              Icons.badge_outlined,
-              size: AppSizes.iconMd,
-              color: scheme.onSurfaceVariant,
-            ),
-            validator: (value) =>
-                _validateFullName(value, l10n.fullNameRequiredError),
-          ),
+          if (effectiveErrorBanner != null) effectiveErrorBanner,
+          fieldsWidget,
           AppSpacing.verticalMd,
-          LuxuryTextField(
-            controller: _phoneController,
-            label: l10n.phoneLabel,
-            hintText: l10n.phoneHint,
-            enabled: !widget.isLoading,
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            autofillHints: const [AutofillHints.telephoneNumber],
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            prefixIcon: Icon(
-              Icons.phone_outlined,
-              size: AppSizes.iconMd,
-              color: scheme.onSurfaceVariant,
-            ),
-            validator: (value) => _validatePhone(value, l10n.phoneInvalidError),
-          ),
-          AppSpacing.verticalMd,
-          LuxuryTextField(
-            controller: _passwordController,
-            label: l10n.passwordLabel,
-            hintText: l10n.passwordHint,
-            enabled: !widget.isLoading,
-            isPassword: true,
-            keyboardType: TextInputType.visiblePassword,
-            textInputAction: TextInputAction.done,
-            autofillHints: const [AutofillHints.password],
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              size: AppSizes.iconMd,
-              color: scheme.onSurfaceVariant,
-            ),
-            onFieldSubmitted: (_) => _handleSubmit(),
-            validator: (value) =>
-                _validatePassword(value, l10n.passwordShortError),
-          ),
-          AppSpacing.verticalMd,
-          LuxuryPrimaryButton(
-            text: l10n.continueButton,
-            isLoading: widget.isLoading,
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.neutral,
-            onPressed: _handleSubmit,
-          ),
+          effectiveSubmitButton,
         ],
       ),
     );

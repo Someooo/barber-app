@@ -15,36 +15,38 @@ class AuthErrorBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: AppSpacing.cardPadding,
-      decoration: BoxDecoration(
-        color: AppColors.error.withValues(alpha: AppOpacity.subtle),
-        borderRadius: AppRadius.controlBorder,
-        border: Border.all(
-          color: AppColors.error,
-          width: AppSizes.hairline,
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.error_outline,
+    return RepaintBoundary(
+      child: Container(
+        width: double.infinity,
+        padding: AppSpacing.cardPadding,
+        decoration: BoxDecoration(
+          color: AppColors.error.withValues(alpha: AppOpacity.subtle),
+          borderRadius: AppRadius.controlBorder,
+          border: Border.all(
             color: AppColors.error,
-            size: AppSizes.iconMd,
+            width: AppSizes.hairline,
           ),
-          AppSpacing.horizontalSm,
-          Expanded(
-            child: Text(
-              message,
-              style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.error_outline,
+              color: AppColors.error,
+              size: AppSizes.iconMd,
+            ),
+            AppSpacing.horizontalSm,
+            Expanded(
+              child: Text(
+                message,
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.error,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

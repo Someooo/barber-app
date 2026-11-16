@@ -148,58 +148,60 @@ class _LuxuryTextFieldState extends State<LuxuryTextField> {
       mainAxisSize: MainAxisSize.min,
       children: [
         _buildTopLabel(context),
-        TextFormField(
-          controller: widget.controller,
-          initialValue: widget.initialValue,
-          focusNode: widget.focusNode,
-          enabled: widget.enabled,
-          obscureText: _obscureText,
-          keyboardType: widget.keyboardType,
-          textInputAction: widget.textInputAction,
-          validator: widget.validator,
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          maxLines: widget.maxLines,
-          autofillHints: widget.autofillHints,
-          inputFormatters: widget.inputFormatters,
-          style: AppTextStyles.bodyMedium.copyWith(
-            color: scheme.onSurface,
-          ),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: context.inputFill,
-            hintText: widget.hintText,
-            hintStyle: AppTextStyles.bodyMedium.copyWith(
-              color: scheme.onSurfaceVariant.withValues(
-                alpha: AppOpacity.scrim,
+        RepaintBoundary(
+          child: TextFormField(
+            controller: widget.controller,
+            initialValue: widget.initialValue,
+            focusNode: widget.focusNode,
+            enabled: widget.enabled,
+            obscureText: _obscureText,
+            keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
+            validator: widget.validator,
+            onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            maxLines: widget.maxLines,
+            autofillHints: widget.autofillHints,
+            inputFormatters: widget.inputFormatters,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: scheme.onSurface,
+            ),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: context.inputFill,
+              hintText: widget.hintText,
+              hintStyle: AppTextStyles.bodyMedium.copyWith(
+                color: scheme.onSurfaceVariant.withValues(
+                  alpha: AppOpacity.scrim,
+                ),
               ),
-            ),
-            contentPadding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.md,
-            ),
-            prefixIcon: widget.prefixIcon != null
-                ? Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      start: AppSpacing.md,
-                      end: AppSpacing.sm,
-                    ),
-                    child: widget.prefixIcon,
-                  )
-                : null,
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: AppSizes.iconLg,
-              minHeight: AppSizes.iconLg,
-            ),
-            suffixIcon: _buildSuffixIcon(context),
-            border: border,
-            enabledBorder: border,
-            focusedBorder: focusedBorder,
-            errorBorder: errorBorder,
-            focusedErrorBorder: errorBorder.copyWith(
-              borderSide: const BorderSide(
-                color: AppColors.error,
-                width: AppSizes.focusBorder,
+              contentPadding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.md,
+              ),
+              prefixIcon: widget.prefixIcon != null
+                  ? Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: AppSpacing.md,
+                        end: AppSpacing.sm,
+                      ),
+                      child: widget.prefixIcon,
+                    )
+                  : null,
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: AppSizes.iconLg,
+                minHeight: AppSizes.iconLg,
+              ),
+              suffixIcon: _buildSuffixIcon(context),
+              border: border,
+              enabledBorder: border,
+              focusedBorder: focusedBorder,
+              errorBorder: errorBorder,
+              focusedErrorBorder: errorBorder.copyWith(
+                borderSide: const BorderSide(
+                  color: AppColors.error,
+                  width: AppSizes.focusBorder,
+                ),
               ),
             ),
           ),

@@ -75,12 +75,15 @@ String? evaluateAuthRedirect({
 
 GoRouter createAppRouter({
   AuthBloc? authBloc,
+  Listenable? refreshListenable,
   String initialLocation = AppRoutes.welcome,
 }) {
+  final effectiveRefreshListenable = refreshListenable ??
+      (authBloc != null ? GoRouterRefreshStream(authBloc.stream) : null);
+
   return GoRouter(
     initialLocation: initialLocation,
-    refreshListenable:
-        authBloc != null ? GoRouterRefreshStream(authBloc.stream) : null,
+    refreshListenable: effectiveRefreshListenable,
     redirect: authBloc == null
         ? null
         : (context, state) => evaluateAuthRedirect(

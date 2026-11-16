@@ -51,6 +51,7 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
   final AppSettingsController _settings = AppSettingsController();
   late final AuthBloc _authBloc;
   late final bool _ownsAuthBloc;
+  late final GoRouterRefreshStream _refreshStream;
   late final GoRouter _router;
   StreamSubscription<AuthState>? _authSubscription;
   bool _splashRemoved = false;
@@ -73,8 +74,10 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
       _handleSplashRemoval(_authBloc.state);
     }
 
+    _refreshStream = GoRouterRefreshStream(_authBloc.stream);
     _router = createAppRouter(
       authBloc: _authBloc,
+      refreshListenable: _refreshStream,
       initialLocation: widget.initialLocation,
     );
   }
@@ -95,6 +98,7 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
   void dispose() {
     _authSubscription?.cancel();
     _router.dispose();
+    _refreshStream.dispose();
     if (_ownsAuthBloc) {
       _authBloc.close();
     }

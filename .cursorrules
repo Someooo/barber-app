@@ -87,7 +87,17 @@ Every task, file creation, refactor, and bug fix MUST strictly comply with these
 
 ---
 
-## 8. Verification & Definition of Done (DoD)
+## 8. Rendering, Repaint & Rebuild Performance Rules (All Features)
+1. **Zero Root Rebuilds on Feature State:** Never instantiate `GoRouter` inside `build()` and never rebuild `MaterialApp` on Bloc/Cubit state changes; bind `GoRouter.refreshListenable` to state streams instead.
+2. **Mandatory `RepaintBoundary` Isolation:** Always wrap continuous animations (`CircularProgressIndicator`, custom loaders) and static raster brand assets (`BrandLogo`) in `RepaintBoundary` so 60fps animations or form interactions do not trigger full-screen repaints.
+3. **Leaf-Only `BlocBuilder` Rule:** Never wrap entire screens or full forms in `BlocConsumer`/`BlocBuilder`. Isolate `BlocBuilder` with explicit `buildWhen` predicates strictly around the smallest dynamic leaf widget (such as the submit button or error banner), and handle side effects via `BlocListener`.
+4. **Zero Typing Rebuilds Rule:** Never use `AutovalidateMode.onUserInteraction` on multi-field forms or trigger `setState` inside `onChanged` during typing; rely on `TextEditingController` and validate on submission.
+5. **Single `SafeArea` Rule:** Always place `LuxuryAppBar` inside `Scaffold.appBar` and never nest `SafeArea` widgets.
+6. **Text Input & Editable Layer Isolation Rule:** All reusable text input components (such as `LuxuryTextField` and any future `TextField`/`TextFormField` wrappers) MUST wrap their `TextFormField` leaf in a `RepaintBoundary`. Never allow `RenderEditable` cursor-blink or keystroke `markNeedsPaint()` signals to bubble up into parent `Form` or `Scaffold.body` layers.
+
+---
+
+## 9. Verification & Definition of Done (DoD)
 Before finalizing any prompt or task:
 1. Run `dart analyze lib test` and ensure zero warnings, zero infos, zero errors.
 2. Run relevant tests (`flutter test`) and confirm everything passes.

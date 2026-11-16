@@ -16,51 +16,44 @@ class WelcomeRoleScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: surfaceColor,
+      appBar: LuxuryAppBar(
+        showBrand: false,
+        showBottomBorder: false,
+        backgroundColor: surfaceColor,
+        currentLanguage: context.languageCode,
+        onLanguageToggle: context.toggleLocale,
+        isDarkMode: context.isDarkMode,
+        onThemeToggle: context.toggleTheme,
+      ),
       body: SafeArea(
-        child: Column(
-          children: [
-            LuxuryAppBar(
-              showBrand: false,
-              showBottomBorder: false,
-              backgroundColor: surfaceColor,
-              currentLanguage: context.languageCode,
-              onLanguageToggle: context.toggleLocale,
-              isDarkMode: context.isDarkMode,
-              onThemeToggle: context.toggleTheme,
-            ),
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return SingleChildScrollView(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight - (AppSpacing.lg * 2),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight - (AppSpacing.lg * 2),
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Spacer(flex: 2),
+                      const WelcomeBrandHeader(),
+                      AppSpacing.verticalXl,
+                      const Spacer(flex: 1),
+                      RoleSelectionActions(
+                        onLoginPressed: () => context.push(AppRoutes.login),
+                        onRegisterPressed: () =>
+                            context.push(AppRoutes.register),
                       ),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Spacer(flex: 2),
-                            const WelcomeBrandHeader(),
-                            AppSpacing.verticalXl,
-                            const Spacer(flex: 1),
-                            RoleSelectionActions(
-                              onLoginPressed: () =>
-                                  context.push(AppRoutes.login),
-                              onRegisterPressed: () =>
-                                  context.push(AppRoutes.register),
-                            ),
-                            const Spacer(flex: 2),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                      const Spacer(flex: 2),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
