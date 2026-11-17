@@ -96,11 +96,13 @@ class LuxuryAvatar extends StatelessWidget {
       );
     }
 
-    return Semantics(
-      label: semanticLabel,
-      image: true,
-      button: onTap != null,
-      child: avatar,
+    return RepaintBoundary(
+      child: Semantics(
+        label: semanticLabel,
+        image: true,
+        button: onTap != null,
+        child: avatar,
+      ),
     );
   }
 }

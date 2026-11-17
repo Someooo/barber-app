@@ -83,8 +83,9 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
     _ownsAuthBloc = widget.authBloc == null;
     _authBloc = widget.authBloc ?? sl<AuthBloc>();
 
-    _authSubscription = _authBloc.stream.listen(_handleSplashRemoval);
+    _authSubscription = _authBloc.stream.listen(_handleAuthState);
 
+    _syncActiveUser(_authBloc.state);
     if (_authBloc.state is AuthInitial) {
       _authBloc.add(const AuthCheckRequested());
     } else {
@@ -97,6 +98,19 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
       refreshListenable: _refreshStream,
       initialLocation: widget.initialLocation,
     );
+  }
+
+  void _handleAuthState(AuthState state) {
+    _syncActiveUser(state);
+    _handleSplashRemoval(state);
+  }
+
+  void _syncActiveUser(AuthState state) {
+    if (state is Authenticated) {
+      _settings.setActiveUser(state.user.uid);
+    } else if (state is Unauthenticated) {
+      _settings.setActiveUser(null);
+    }
   }
 
   void _handleSplashRemoval(AuthState state) {

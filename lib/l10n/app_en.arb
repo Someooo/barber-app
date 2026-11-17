@@ -154,6 +154,11 @@
   "accountDetailsTitle": "Account Details",
   "preferencesTitle": "Preferences",
   "bookingCancelledSuccess": "Booking cancelled successfully",
-  "bookingCancelError": "Failed to cancel booking. Please try again."
+  "bookingCancelError": "Failed to cancel booking. Please try again.",
+  "changeProfilePhoto": "Change Profile Photo",
+  "chooseFromGallery": "Choose Photo from Gallery",
+  "takePhoto": "Take Photo with Camera",
+  "removePhoto": "Remove Photo",
+  "profilePhotoUpdated": "Profile photo updated"
 }
 

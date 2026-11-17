@@ -105,6 +105,11 @@
   "accountDetailsTitle": "تفاصيل الحساب",
   "preferencesTitle": "التفضيلات",
   "bookingCancelledSuccess": "تم إلغاء الموعد بنجاح",
-  "bookingCancelError": "فشل في إلغاء الموعد. يرجى المحاولة مرة أخرى."
+  "bookingCancelError": "فشل في إلغاء الموعد. يرجى المحاولة مرة أخرى.",
+  "changeProfilePhoto": "تغيير الصورة الشخصية",
+  "chooseFromGallery": "اختيار صورة من المعرض",
+  "takePhoto": "التقاط صورة بالكاميرا",
+  "removePhoto": "إزالة الصورة",
+  "profilePhotoUpdated": "تم تحديث الصورة الشخصية"
 }
 

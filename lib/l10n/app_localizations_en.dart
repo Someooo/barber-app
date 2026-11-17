@@ -354,4 +354,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get bookingCancelError =>
       'Failed to cancel booking. Please try again.';
+
+  @override
+  String get changeProfilePhoto => 'Change Profile Photo';
+
+  @override
+  String get chooseFromGallery => 'Choose Photo from Gallery';
+
+  @override
+  String get takePhoto => 'Take Photo with Camera';
+
+  @override
+  String get removePhoto => 'Remove Photo';
+
+  @override
+  String get profilePhotoUpdated => 'Profile photo updated';
 }

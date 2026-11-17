@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_constants.dart';
 import '../constants/app_spacing.dart';
+import '../settings/app_settings.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/theme_context_x.dart';
@@ -19,6 +23,8 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isDarkMode,
     this.profileImage,
     this.profileFallbackLabel,
+    this.profileImagePathListenable,
+    this.showProfilePhoto = true,
     this.onProfileTap,
     this.notificationCount,
     this.onNotificationTap,
@@ -49,6 +55,8 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? isDarkMode;
   final ImageProvider? profileImage;
   final String? profileFallbackLabel;
+  final ValueListenable<String?>? profileImagePathListenable;
+  final bool showProfilePhoto;
   final VoidCallback? onProfileTap;
   final int? notificationCount;
   final VoidCallback? onNotificationTap;
@@ -164,6 +172,47 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  Widget _buildReactiveProfilePhoto(BuildContext context) {
+    final listenable = profileImagePathListenable ??
+        AppSettingsScope.maybeOf(context)?.profileImagePathListenable;
+    if (listenable == null) {
+      return const SizedBox.shrink();
+    }
+
+    return ValueListenableBuilder<String?>(
+      valueListenable: listenable,
+      builder: (context, path, _) {
+        if (path == null || path.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        final file = File(path);
+        if (!file.existsSync()) {
+          return const SizedBox.shrink();
+        }
+
+        return Padding(
+          padding: const EdgeInsetsDirectional.only(start: AppSpacing.xs),
+          child: RepaintBoundary(
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.secondary,
+                  width: AppSizes.hairline,
+                ),
+              ),
+              child: LuxuryAvatar(
+                image: FileImage(file),
+                size: AppSizes.avatarSm,
+                onTap: onProfileTap,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final scheme = context.colors;
@@ -251,7 +300,8 @@ class LuxuryAppBar extends StatelessWidget implements PreferredSizeWidget {
                 size: AppSizes.avatarSm,
                 onTap: onProfileTap,
               ),
-            ],
+            ] else if (showProfilePhoto)
+              _buildReactiveProfilePhoto(context),
             if (additionalActions != null) ...additionalActions!,
           ],
         ),

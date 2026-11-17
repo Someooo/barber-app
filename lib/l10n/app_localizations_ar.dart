@@ -351,4 +351,19 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get bookingCancelError =>
       'فشل في إلغاء الموعد. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get changeProfilePhoto => 'تغيير الصورة الشخصية';
+
+  @override
+  String get chooseFromGallery => 'اختيار صورة من المعرض';
+
+  @override
+  String get takePhoto => 'التقاط صورة بالكاميرا';
+
+  @override
+  String get removePhoto => 'إزالة الصورة';
+
+  @override
+  String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية';
 }
