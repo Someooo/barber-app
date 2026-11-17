@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/errors/exceptions.dart';
 import '../../domain/entities/user_role.dart';
@@ -18,17 +19,42 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  const AuthRemoteDataSourceImpl({FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth;
+  AuthRemoteDataSourceImpl({
+    FirebaseAuth? firebaseAuth,
+    SharedPreferences? prefs,
+  })  : _firebaseAuth = firebaseAuth,
+        _prefs = prefs;
 
   final FirebaseAuth? _firebaseAuth;
+  final SharedPreferences? _prefs;
+  bool _localOwnerActive = false;
 
   FirebaseAuth get _auth => _firebaseAuth ?? FirebaseAuth.instance;
 
   static const String emailDomain = UserModel.internalEmailDomain;
+  static const String officialOwnerUid = 'owner_sami_almuhur';
+  static const String officialOwnerName = 'سامي المهر';
+  static const String officialOwnerPhone = '0799081839';
+  static const String officialOwnerPassword = r'12345678';
+  static const String officialOwnerSessionKey = 'barbersync_owner_session';
 
   static String sanitizePhoneNumber(String phoneNumber) {
     return phoneNumber.trim().replaceAll(RegExp(r'[^\d+]'), '');
+  }
+
+  static String normalizeJordanPhone(String phoneNumber) {
+    final sanitized = sanitizePhoneNumber(phoneNumber);
+    if (sanitized.startsWith('+962') && sanitized.length > 4) {
+      return '0${sanitized.substring(4)}';
+    }
+    if (sanitized.startsWith('962') && sanitized.length == 12) {
+      return '0${sanitized.substring(3)}';
+    }
+    return sanitized;
+  }
+
+  static bool isOfficialOwnerPhone(String phoneNumber) {
+    return normalizeJordanPhone(phoneNumber) == officialOwnerPhone;
   }
 
   static String phoneToEmail(String phoneNumber) {
@@ -47,8 +73,40 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required UserRole selectedRole,
   }) async {
     final sanitizedPhone = sanitizePhoneNumber(phoneNumber);
-    final email = phoneToEmail(phoneNumber);
+    final normalizedPhone = normalizeJordanPhone(phoneNumber);
     final trimmedName = fullName.trim();
+
+    if (isOfficialOwnerPhone(normalizedPhone)) {
+      if (password != officialOwnerPassword) {
+        throw FirebaseAuthException(
+          code: 'wrong-password',
+          message: 'Invalid password for Shop Owner account.',
+        );
+      }
+      if (selectedRole == UserRole.customer) {
+        throw RoleMismatchException(
+          expectedRole: selectedRole.toStringValue(),
+          actualRole: UserRole.owner.toStringValue(),
+        );
+      }
+      _localOwnerActive = true;
+      await _prefs?.setBool(officialOwnerSessionKey, true);
+      return const UserModel(
+        uid: officialOwnerUid,
+        fullName: officialOwnerName,
+        phoneNumber: officialOwnerPhone,
+        role: UserRole.owner,
+      );
+    }
+
+    if (selectedRole == UserRole.owner) {
+      throw RoleMismatchException(
+        expectedRole: UserRole.owner.toStringValue(),
+        actualRole: UserRole.customer.toStringValue(),
+      );
+    }
+
+    final email = phoneToEmail(phoneNumber);
 
     try {
       final credential = await _auth.signInWithEmailAndPassword(
@@ -139,6 +197,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<UserModel?> getCurrentUserSession() async {
+    if (_localOwnerActive ||
+        (_prefs?.getBool(officialOwnerSessionKey) ?? false)) {
+      return const UserModel(
+        uid: officialOwnerUid,
+        fullName: officialOwnerName,
+        phoneNumber: officialOwnerPhone,
+        role: UserRole.owner,
+      );
+    }
+
     final User? user;
     try {
       user = _auth.currentUser;
@@ -168,6 +236,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<void> signOut() async {
-    await _auth.signOut();
+    _localOwnerActive = false;
+    await _prefs?.remove(officialOwnerSessionKey);
+    try {
+      await _auth.signOut();
+    } catch (_) {}
   }
 }

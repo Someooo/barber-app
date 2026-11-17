@@ -1153,6 +1153,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get ownerSaveButton;
+
+  /// No description provided for @myScheduleTab.
+  ///
+  /// In en, this message translates to:
+  /// **'My Schedule'**
+  String get myScheduleTab;
+
+  /// No description provided for @ownerYouBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner / You'**
+  String get ownerYouBadge;
 }
 
 class _AppLocalizationsDelegate

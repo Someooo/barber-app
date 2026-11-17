@@ -7,7 +7,14 @@ import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
 
 class OwnerPreferencesCard extends StatelessWidget {
-  const OwnerPreferencesCard({super.key});
+  const OwnerPreferencesCard({
+    super.key,
+    this.isAvailableToday,
+    this.onAvailabilityChanged,
+  });
+
+  final bool? isAvailableToday;
+  final ValueChanged<bool>? onAvailabilityChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,26 @@ class OwnerPreferencesCard extends StatelessWidget {
         ),
         child: Column(
           children: [
+            if (isAvailableToday != null && onAvailabilityChanged != null) ...[
+              ListTile(
+                onTap: () => onAvailabilityChanged!(!isAvailableToday!),
+                leading: const _LeadingIconBox(
+                  icon: Icons.event_available_outlined,
+                ),
+                title: Text(
+                  context.l10n.availableTodayBadge,
+                  style: AppTextStyles.titleSmall.copyWith(
+                    color: scheme.onSurface,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                trailing: _LuxuryOwnerSwitch(
+                  value: isAvailableToday!,
+                  onChanged: onAvailabilityChanged!,
+                ),
+              ),
+              const Divider(height: 1),
+            ],
             ListTile(
               onTap: () => context.toggleTheme(),
               leading: _LeadingIconBox(

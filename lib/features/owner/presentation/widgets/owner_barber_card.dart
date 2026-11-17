@@ -13,10 +13,12 @@ class OwnerBarberCard extends StatelessWidget {
   const OwnerBarberCard({
     super.key,
     required this.barber,
+    this.isOwnerSelf = false,
     required this.onDelete,
   });
 
   final BarberEntity barber;
+  final bool isOwnerSelf;
   final VoidCallback onDelete;
 
   @override
@@ -49,14 +51,29 @@ class OwnerBarberCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    barber.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.titleSmall.copyWith(
-                      color: scheme.onSurface,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          barber.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.titleSmall.copyWith(
+                            color: scheme.onSurface,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      if (isOwnerSelf) ...[
+                        AppSpacing.horizontalSm,
+                        LuxuryBadge.tier(
+                          label: context.l10n.ownerYouBadge,
+                          backgroundColor:
+                              AppColors.secondary.withValues(alpha: 0.15),
+                          foregroundColor: AppColors.secondary,
+                        ),
+                      ],
+                    ],
                   ),
                   AppSpacing.verticalXs,
                   Text(
@@ -90,14 +107,15 @@ class OwnerBarberCard extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: onDelete,
-              tooltip: context.l10n.ownerDeleteConfirm,
-              icon: const Icon(
-                Icons.delete_outline,
-                color: AppColors.error,
+            if (!isOwnerSelf)
+              IconButton(
+                onPressed: onDelete,
+                tooltip: context.l10n.ownerDeleteConfirm,
+                icon: const Icon(
+                  Icons.delete_outline,
+                  color: AppColors.error,
+                ),
               ),
-            ),
           ],
         ),
       ),

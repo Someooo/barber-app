@@ -568,4 +568,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ownerSaveButton => 'Save';
+
+  @override
+  String get myScheduleTab => 'My Schedule';
+
+  @override
+  String get ownerYouBadge => 'Owner / You';
 }

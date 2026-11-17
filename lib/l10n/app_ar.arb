@@ -175,6 +175,8 @@
   "ownerBarberImageUrl": "رابط الصورة (اختياري)",
   "ownerFieldRequired": "هذا الحقل مطلوب",
   "ownerInvalidNumber": "أدخل رقماً موجباً صحيحاً",
-  "ownerSaveButton": "حفظ"
+  "ownerSaveButton": "حفظ",
+  "myScheduleTab": "جدولي",
+  "ownerYouBadge": "المدير / أنت"
 }
 

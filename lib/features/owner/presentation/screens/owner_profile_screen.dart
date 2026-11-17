@@ -13,6 +13,9 @@ import 'package:barber_app/core/widgets/luxury_buttons.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_event.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
+import 'package:barber_app/features/barber/presentation/bloc/barber_dashboard_bloc.dart';
+import 'package:barber_app/features/barber/presentation/bloc/barber_dashboard_event.dart';
+import 'package:barber_app/features/barber/presentation/bloc/barber_dashboard_state.dart';
 import 'package:barber_app/features/customer/presentation/widgets/sign_out_confirmation_dialog.dart';
 import '../widgets/owner_identity_card.dart';
 import '../widgets/owner_preferences_card.dart';
@@ -70,6 +73,12 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
     final fullName = user?.fullName ?? context.l10n.roleOwnerOption;
     final phone = user?.phoneNumber ?? '';
     final settings = AppSettingsScope.maybeOf(context);
+    BarberDashboardBloc? barberBloc;
+    try {
+      barberBloc = context.read<BarberDashboardBloc>();
+    } catch (_) {
+      barberBloc = null;
+    }
 
     return Scaffold(
       backgroundColor: context.colors.surface,
@@ -104,7 +113,33 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                 roleLabel: context.l10n.roleOwnerOption,
               ),
             AppSpacing.verticalLg,
-            const OwnerPreferencesCard(),
+            if (barberBloc != null)
+              BlocBuilder<BarberDashboardBloc, BarberDashboardState>(
+                buildWhen: (prev, curr) {
+                  if (prev is BarberDashboardLoaded &&
+                      curr is BarberDashboardLoaded) {
+                    return prev.barberProfile.isAvailableToday !=
+                        curr.barberProfile.isAvailableToday;
+                  }
+                  return prev.runtimeType != curr.runtimeType;
+                },
+                builder: (context, state) {
+                  final available = state is BarberDashboardLoaded
+                      ? state.barberProfile.isAvailableToday
+                      : true;
+                  return OwnerPreferencesCard(
+                    isAvailableToday: available,
+                    onAvailabilityChanged: (value) {
+                      barberBloc!.add(BarberAvailabilityToggled(
+                        barberId: userId,
+                        isAvailableToday: value,
+                      ));
+                    },
+                  );
+                },
+              )
+            else
+              const OwnerPreferencesCard(),
             AppSpacing.verticalXl,
             RepaintBoundary(
               child: LuxurySecondaryButton(

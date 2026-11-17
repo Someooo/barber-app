@@ -164,6 +164,9 @@ void registerAuthDependencies({
       () => AuthRemoteDataSourceImpl(
         firebaseAuth: firebaseAuth ??
             (Firebase.apps.isNotEmpty ? locator<FirebaseAuth>() : null),
+        prefs: locator.isRegistered<SharedPreferences>()
+            ? locator<SharedPreferences>()
+            : null,
       ),
     );
   }

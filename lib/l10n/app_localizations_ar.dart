@@ -564,4 +564,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ownerSaveButton => 'حفظ';
+
+  @override
+  String get myScheduleTab => 'جدولي';
+
+  @override
+  String get ownerYouBadge => 'المدير / أنت';
 }

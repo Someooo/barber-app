@@ -7,6 +7,8 @@ import 'package:barber_app/core/theme/app_text_styles.dart';
 import 'package:barber_app/core/widgets/luxury_app_bar.dart';
 import 'package:barber_app/core/widgets/luxury_buttons.dart';
 import 'package:barber_app/core/widgets/luxury_loaders.dart';
+import 'package:barber_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
 import '../bloc/owner_dashboard_bloc.dart';
 import '../bloc/owner_dashboard_event.dart';
 import '../bloc/owner_dashboard_state.dart';
@@ -52,6 +54,8 @@ class OwnerBarbersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final authState = context.read<AuthBloc>().state;
+    final currentOwnerId = authState is Authenticated ? authState.user.uid : '';
 
     return Scaffold(
       backgroundColor: context.colors.surface,
@@ -113,6 +117,7 @@ class OwnerBarbersScreen extends StatelessWidget {
                       final barber = state.barbers[index];
                       return OwnerBarberCard(
                         barber: barber,
+                        isOwnerSelf: barber.id == currentOwnerId,
                         onDelete: () => _onDeleteBarber(context, barber.id),
                       );
                     },

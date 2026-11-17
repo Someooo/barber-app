@@ -110,7 +110,8 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
   void _syncActiveUser(AuthState state) {
     if (state is Authenticated) {
       _settings.setActiveUser(state.user.uid);
-      if (state.user.role == UserRole.barber &&
+      if ((state.user.role == UserRole.barber ||
+              state.user.role == UserRole.owner) &&
           sl.isRegistered<EnsureBarberProfileUseCase>()) {
         unawaited(_ensureBarberSynced(state.user.uid, state.user.fullName));
       }
