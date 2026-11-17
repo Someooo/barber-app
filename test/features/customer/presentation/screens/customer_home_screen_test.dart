@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:barber_app/core/di/injection_container.dart';
-import 'package:barber_app/core/errors/failures.dart';
 import 'package:barber_app/core/settings/app_settings.dart';
 import 'package:barber_app/core/theme/app_theme.dart';
 import 'package:barber_app/core/widgets/luxury_loaders.dart';
@@ -25,7 +24,6 @@ import 'package:barber_app/features/customer/domain/entities/service_entity.dart
 import 'package:barber_app/features/customer/domain/repositories/customer_repository.dart';
 import 'package:barber_app/features/customer/domain/usecases/get_customer_home_data_usecase.dart';
 import 'package:barber_app/features/customer/presentation/bloc/customer_home_bloc.dart';
-import 'package:barber_app/features/customer/presentation/bloc/customer_home_event.dart';
 import 'package:barber_app/features/customer/presentation/bloc/customer_home_state.dart';
 import 'package:barber_app/features/customer/presentation/screens/customer_home_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/customer_shell_screen.dart';
@@ -516,5 +514,5 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Luxury Services'), findsOneWidget);
     });
-  });
+        });
 }

@@ -227,4 +227,61 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bookNowBannerSubtitle => 'تأكيد فوري للحجز مع حلاقك المفضل';
+
+  @override
+  String get customerBookTitle => 'حجز موعد';
+
+  @override
+  String get selectServicesTitle => 'اختر الخدمات';
+
+  @override
+  String get selectServicesSubtitle => 'اختر خدمة واحدة أو أكثر للعناية بمظهرك';
+
+  @override
+  String get selectBarberTitle => 'اختر الحلاق';
+
+  @override
+  String get selectBarberSubtitle => 'اختر الحلاق المتخصص المفضل لديك';
+
+  @override
+  String get selectDateTimeTitle => 'التاريخ والوقت';
+
+  @override
+  String get selectDateTimeSubtitle => 'المواعيد المتاحة تتحدث فورياً ومباشرة';
+
+  @override
+  String get noSlotsAvailable => 'لا توجد مواعيد متاحة في هذا التاريخ';
+
+  @override
+  String get selectBarberPrompt => 'يرجى اختيار الحلاق لعرض الأوقات المتاحة';
+
+  @override
+  String get bookingNotesLabel => 'ملاحظات (اختياري)';
+
+  @override
+  String get bookingNotesHint => 'أي تفضيلات أو طلبات خاصة...';
+
+  @override
+  String get confirmInstantBookingCta => 'تأكيد الحجز الفوري';
+
+  @override
+  String get totalLabel => 'المجموع';
+
+  @override
+  String get bookingConfirmationSuccess => 'تم تأكيد الحجز الفوري بنجاح!';
+
+  @override
+  String get bookingConfirmationSubtitle =>
+      'تم تثبيت موعدك فورياً، نتطلع لاستقبالك وتقديم أفضل تجربة.';
+
+  @override
+  String get doneButton => 'تم';
+
+  @override
+  String ratingValue(String rating) {
+    return '$rating ★';
+  }
+
+  @override
+  String get bookingError => 'فشل في إتمام الحجز. يرجى المحاولة مرة أخرى.';
 }

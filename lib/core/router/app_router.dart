@@ -11,6 +11,7 @@ import 'package:barber_app/features/auth/presentation/screens/login_placeholder_
 import 'package:barber_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/welcome_role_screen.dart';
+import 'package:barber_app/features/customer/presentation/screens/booking_flow_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/customer_shell_screen.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -113,6 +114,29 @@ GoRouter createAppRouter({
       GoRoute(
         path: AppRoutes.customerHome,
         builder: (context, state) => const CustomerShellScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.customerBook,
+        builder: (context, state) {
+          final extra = state.extra;
+          String? preselectedServiceId;
+          String? preselectedBarberId;
+          if (extra is Map<String, dynamic>) {
+            preselectedServiceId = extra['serviceId'] as String? ??
+                extra['preselectedServiceId'] as String?;
+            preselectedBarberId = extra['barberId'] as String? ??
+                extra['preselectedBarberId'] as String?;
+          }
+          preselectedServiceId ??= state.uri.queryParameters['serviceId'] ??
+              state.uri.queryParameters['preselectedServiceId'];
+          preselectedBarberId ??= state.uri.queryParameters['barberId'] ??
+              state.uri.queryParameters['preselectedBarberId'];
+
+          return BookingFlowScreen(
+            preselectedServiceId: preselectedServiceId,
+            preselectedBarberId: preselectedBarberId,
+          );
+        },
       ),
     ],
   );

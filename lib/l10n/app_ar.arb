@@ -67,6 +67,24 @@
   "myBookingsPlaceholderSubtitle": "ستظهر هنا سجلات مواعيدك وحجوزاتك القادمة.",
   "customerHomeHeadline": "تجربة حلاقة استثنائية متكاملة",
   "bookNowBanner": "جاهز لموعد حلاقتك القادم؟",
-  "bookNowBannerSubtitle": "تأكيد فوري للحجز مع حلاقك المفضل"
+  "bookNowBannerSubtitle": "تأكيد فوري للحجز مع حلاقك المفضل",
+  "customerBookTitle": "حجز موعد",
+  "selectServicesTitle": "اختر الخدمات",
+  "selectServicesSubtitle": "اختر خدمة واحدة أو أكثر للعناية بمظهرك",
+  "selectBarberTitle": "اختر الحلاق",
+  "selectBarberSubtitle": "اختر الحلاق المتخصص المفضل لديك",
+  "selectDateTimeTitle": "التاريخ والوقت",
+  "selectDateTimeSubtitle": "المواعيد المتاحة تتحدث فورياً ومباشرة",
+  "noSlotsAvailable": "لا توجد مواعيد متاحة في هذا التاريخ",
+  "selectBarberPrompt": "يرجى اختيار الحلاق لعرض الأوقات المتاحة",
+  "bookingNotesLabel": "ملاحظات (اختياري)",
+  "bookingNotesHint": "أي تفضيلات أو طلبات خاصة...",
+  "confirmInstantBookingCta": "تأكيد الحجز الفوري",
+  "totalLabel": "المجموع",
+  "bookingConfirmationSuccess": "تم تأكيد الحجز الفوري بنجاح!",
+  "bookingConfirmationSubtitle": "تم تثبيت موعدك فورياً، نتطلع لاستقبالك وتقديم أفضل تجربة.",
+  "doneButton": "تم",
+  "ratingValue": "{rating} ★",
+  "bookingError": "فشل في إتمام الحجز. يرجى المحاولة مرة أخرى."
 }
 

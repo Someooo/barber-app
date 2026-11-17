@@ -102,6 +102,31 @@
   "myBookingsPlaceholderSubtitle": "Your appointment history and upcoming bookings will appear here.",
   "customerHomeHeadline": "Precision Grooming Experience",
   "bookNowBanner": "Ready for your next cut?",
-  "bookNowBannerSubtitle": "Instant confirmation with your favorite barber"
+  "bookNowBannerSubtitle": "Instant confirmation with your favorite barber",
+  "customerBookTitle": "Book Appointment",
+  "selectServicesTitle": "Select Services",
+  "selectServicesSubtitle": "Choose one or more grooming services",
+  "selectBarberTitle": "Select Barber",
+  "selectBarberSubtitle": "Choose your master barber",
+  "selectDateTimeTitle": "Date & Time",
+  "selectDateTimeSubtitle": "Available slots updated in real-time",
+  "noSlotsAvailable": "No available time slots for this date",
+  "selectBarberPrompt": "Please select a barber to view available times",
+  "bookingNotesLabel": "Notes (Optional)",
+  "bookingNotesHint": "Any special preferences or requests...",
+  "confirmInstantBookingCta": "Confirm Instant Booking",
+  "totalLabel": "Total",
+  "bookingConfirmationSuccess": "Instant Booking Confirmed!",
+  "bookingConfirmationSubtitle": "Your appointment is confirmed. We look forward to serving you.",
+  "doneButton": "Done",
+  "ratingValue": "{rating} ★",
+  "@ratingValue": {
+    "placeholders": {
+      "rating": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingError": "Failed to create booking. Please try again."
 }
 

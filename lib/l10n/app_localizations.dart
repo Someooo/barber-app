@@ -505,6 +505,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Instant confirmation with your favorite barber'**
   String get bookNowBannerSubtitle;
+
+  /// No description provided for @customerBookTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Appointment'**
+  String get customerBookTitle;
+
+  /// No description provided for @selectServicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Services'**
+  String get selectServicesTitle;
+
+  /// No description provided for @selectServicesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose one or more grooming services'**
+  String get selectServicesSubtitle;
+
+  /// No description provided for @selectBarberTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Barber'**
+  String get selectBarberTitle;
+
+  /// No description provided for @selectBarberSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your master barber'**
+  String get selectBarberSubtitle;
+
+  /// No description provided for @selectDateTimeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Date & Time'**
+  String get selectDateTimeTitle;
+
+  /// No description provided for @selectDateTimeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Available slots updated in real-time'**
+  String get selectDateTimeSubtitle;
+
+  /// No description provided for @noSlotsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No available time slots for this date'**
+  String get noSlotsAvailable;
+
+  /// No description provided for @selectBarberPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a barber to view available times'**
+  String get selectBarberPrompt;
+
+  /// No description provided for @bookingNotesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes (Optional)'**
+  String get bookingNotesLabel;
+
+  /// No description provided for @bookingNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Any special preferences or requests...'**
+  String get bookingNotesHint;
+
+  /// No description provided for @confirmInstantBookingCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Instant Booking'**
+  String get confirmInstantBookingCta;
+
+  /// No description provided for @totalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get totalLabel;
+
+  /// No description provided for @bookingConfirmationSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant Booking Confirmed!'**
+  String get bookingConfirmationSuccess;
+
+  /// No description provided for @bookingConfirmationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your appointment is confirmed. We look forward to serving you.'**
+  String get bookingConfirmationSubtitle;
+
+  /// No description provided for @doneButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneButton;
+
+  /// No description provided for @ratingValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{rating} ★'**
+  String ratingValue(String rating);
+
+  /// No description provided for @bookingError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create booking. Please try again.'**
+  String get bookingError;
 }
 
 class _AppLocalizationsDelegate

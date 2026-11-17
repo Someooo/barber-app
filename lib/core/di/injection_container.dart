@@ -18,6 +18,7 @@ import '../../features/customer/domain/usecases/create_instant_booking_usecase.d
 import '../../features/customer/domain/usecases/get_available_time_slots_usecase.dart';
 import '../../features/customer/domain/usecases/get_customer_bookings_usecase.dart';
 import '../../features/customer/domain/usecases/get_customer_home_data_usecase.dart';
+import '../../features/customer/presentation/bloc/booking_flow_bloc.dart';
 import '../../features/customer/presentation/bloc/customer_home_bloc.dart';
 
 final GetIt sl = GetIt.instance;
@@ -85,6 +86,16 @@ void registerCustomerDependencies({
   if (!locator.isRegistered<CustomerHomeBloc>()) {
     locator.registerFactory<CustomerHomeBloc>(
       () => CustomerHomeBloc(
+        getCustomerHomeDataUseCase: locator<GetCustomerHomeDataUseCase>(),
+      ),
+    );
+  }
+
+  if (!locator.isRegistered<BookingFlowBloc>()) {
+    locator.registerFactory<BookingFlowBloc>(
+      () => BookingFlowBloc(
+        getAvailableTimeSlotsUseCase: locator<GetAvailableTimeSlotsUseCase>(),
+        createInstantBookingUseCase: locator<CreateInstantBookingUseCase>(),
         getCustomerHomeDataUseCase: locator<GetCustomerHomeDataUseCase>(),
       ),
     );

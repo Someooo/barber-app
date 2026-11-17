@@ -34,6 +34,13 @@ abstract class AppTextStyles {
         letterSpacing: 0.15,
       );
 
+  static TextStyle get titleSmall => GoogleFonts.plusJakartaSans(
+        fontSize: 14,
+        height: 20 / 14,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+      );
+
   static TextStyle get bodyLarge => GoogleFonts.plusJakartaSans(
         fontSize: 16,
         height: 24 / 16,

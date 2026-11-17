@@ -229,4 +229,62 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get bookNowBannerSubtitle =>
       'Instant confirmation with your favorite barber';
+
+  @override
+  String get customerBookTitle => 'Book Appointment';
+
+  @override
+  String get selectServicesTitle => 'Select Services';
+
+  @override
+  String get selectServicesSubtitle => 'Choose one or more grooming services';
+
+  @override
+  String get selectBarberTitle => 'Select Barber';
+
+  @override
+  String get selectBarberSubtitle => 'Choose your master barber';
+
+  @override
+  String get selectDateTimeTitle => 'Date & Time';
+
+  @override
+  String get selectDateTimeSubtitle => 'Available slots updated in real-time';
+
+  @override
+  String get noSlotsAvailable => 'No available time slots for this date';
+
+  @override
+  String get selectBarberPrompt =>
+      'Please select a barber to view available times';
+
+  @override
+  String get bookingNotesLabel => 'Notes (Optional)';
+
+  @override
+  String get bookingNotesHint => 'Any special preferences or requests...';
+
+  @override
+  String get confirmInstantBookingCta => 'Confirm Instant Booking';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get bookingConfirmationSuccess => 'Instant Booking Confirmed!';
+
+  @override
+  String get bookingConfirmationSubtitle =>
+      'Your appointment is confirmed. We look forward to serving you.';
+
+  @override
+  String get doneButton => 'Done';
+
+  @override
+  String ratingValue(String rating) {
+    return '$rating ★';
+  }
+
+  @override
+  String get bookingError => 'Failed to create booking. Please try again.';
 }

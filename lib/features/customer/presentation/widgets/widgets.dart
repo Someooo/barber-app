@@ -1,6 +1,14 @@
 export 'active_booking_hero_card.dart';
 export 'barber_card.dart';
 export 'barbers_showcase_section.dart';
+export 'booking_barber_card.dart';
+export 'booking_barbers_step.dart';
+export 'booking_confirmation_sheet.dart';
+export 'booking_date_time_step.dart';
+export 'booking_notes_input.dart';
+export 'booking_service_card.dart';
+export 'booking_services_step.dart';
+export 'booking_summary_bottom_bar.dart';
 export 'customer_home_error_banner.dart';
 export 'quick_book_cta_banner.dart';
 export 'service_card.dart';
