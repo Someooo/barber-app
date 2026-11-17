@@ -110,6 +110,44 @@ class _BookingFlowScreenState extends State<BookingFlowScreen> {
     ));
   }
 
+  void _onBookingFlowStateChanged(
+      BuildContext context, BookingFlowState state) {
+    if (state.createdBooking != null) {
+      final customerId = _resolveCustomerId();
+      try {
+        context
+            .read<CustomerHomeBloc>()
+            .add(CustomerHomeRefreshRequested(customerId: customerId));
+      } catch (_) {}
+      try {
+        context
+            .read<CustomerBookingsBloc>()
+            .add(CustomerBookingsLoadRequested(customerId));
+      } catch (_) {}
+
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (dialogContext) => BookingConfirmationSheet(
+          booking: state.createdBooking!,
+          onDone: () {
+            Navigator.of(dialogContext).pop();
+            if (context.mounted && Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          },
+        ),
+      );
+    } else if (state.failure != null) {
+      final msg = state.failure!.message;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(msg.isNotEmpty ? msg : context.l10n.bookingError)),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BookingFlowBloc>.value(
@@ -119,48 +157,7 @@ class _BookingFlowScreenState extends State<BookingFlowScreen> {
             (prev.createdBooking != curr.createdBooking &&
                 curr.createdBooking != null) ||
             (prev.failure != curr.failure && curr.failure != null),
-        listener: (context, state) {
-          if (state.createdBooking != null) {
-            try {
-              final homeBloc = context.read<CustomerHomeBloc>();
-              homeBloc.add(CustomerHomeRefreshRequested(
-                customerId: _resolveCustomerId(),
-              ));
-            } catch (_) {}
-
-            try {
-              final bookingsBloc = context.read<CustomerBookingsBloc>();
-              bookingsBloc.add(CustomerBookingsLoadRequested(
-                _resolveCustomerId(),
-              ));
-            } catch (_) {}
-
-            showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              builder: (dialogContext) => BookingConfirmationSheet(
-                booking: state.createdBooking!,
-                onDone: () {
-                  Navigator.of(dialogContext).pop();
-                  if (context.mounted && Navigator.of(context).canPop()) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              ),
-            );
-          } else if (state.failure != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.failure!.message.isNotEmpty
-                      ? state.failure!.message
-                      : context.l10n.bookingError,
-                ),
-              ),
-            );
-          }
-        },
+        listener: _onBookingFlowStateChanged,
         child: Scaffold(
           backgroundColor: context.colors.surface,
           appBar: LuxuryAppBar(

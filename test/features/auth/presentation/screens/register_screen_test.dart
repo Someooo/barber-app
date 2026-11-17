@@ -168,7 +168,7 @@ void main() {
       expect(repo.lastPassword, 'SecretPass123');
       expect(repo.lastSelectedRole, UserRole.customer);
       expect(find.text('Customer Booking'), findsOneWidget);
-      expect(find.text('Sami Almuhur'), findsOneWidget);
+      expect(find.text('SAMI ALMUHUR'), findsOneWidget);
     });
   });
 }

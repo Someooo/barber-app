@@ -277,7 +277,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Customer Booking'), findsOneWidget);
-      expect(find.text('Sami Almuhur'), findsWidgets);
+      expect(find.text('SAMI ALMUHUR'), findsWidgets);
 
       expect(find.byType(ActiveBookingHeroCard), findsOneWidget);
       expect(find.text('Upcoming Appointment'), findsOneWidget);

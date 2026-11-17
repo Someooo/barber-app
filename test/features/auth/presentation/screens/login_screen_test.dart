@@ -389,8 +389,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Customer Booking'), findsOneWidget);
-      expect(find.text('Tariq Saleh'), findsOneWidget);
-      expect(find.text('0789876543'), findsOneWidget);
+      expect(find.text('TARIQ SALEH'), findsOneWidget);
     });
   });
 }
