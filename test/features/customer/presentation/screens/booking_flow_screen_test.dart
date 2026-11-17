@@ -190,6 +190,8 @@ void main() {
     testWidgets(
         'confirm button is disabled until service, barber, and slot are selected',
         (WidgetTester tester) async {
+      final now = DateTime.now();
+      final tomorrow = DateTime(now.year, now.month, now.day + 1);
       final bloc = BookingFlowBloc(
         getAvailableTimeSlotsUseCase: getAvailableTimeSlotsUseCase,
         createInstantBookingUseCase: createInstantBookingUseCase,
@@ -197,6 +199,7 @@ void main() {
         initialState: BookingFlowState.initial().copyWith(
           availableServices: [tService1, tService2],
           availableBarbers: [tBarber],
+          selectedDate: tomorrow,
         ),
       );
       addTearDown(bloc.close);

@@ -179,6 +179,10 @@ void main() {
     test(
         'BookingFlowInitialized loads services & barbers and applies preselection',
         () async {
+      final now = DateTime.now();
+      final tomorrow = DateTime(now.year, now.month, now.day + 1);
+      bloc.emit(BookingFlowState.initial().copyWith(selectedDate: tomorrow));
+
       bloc.add(const BookingFlowInitialized(
         availableServices: [tService1, tService2],
         availableBarbers: [tBarber],
@@ -252,11 +256,14 @@ void main() {
     test(
         'BookingBarberSelected fetches slots and resets previously selected slot',
         () async {
+      final now = DateTime.now();
+      final tomorrow = DateTime(now.year, now.month, now.day + 1);
       final initialSlot = DateTime(2026, 12, 1, 10, 0);
       bloc.emit(BookingFlowState.initial().copyWith(
         availableServices: [tService1],
         selectedServiceIds: {'srv_1'},
         totalDurationMinutes: 45,
+        selectedDate: tomorrow,
         selectedSlot: () => initialSlot,
       ));
 

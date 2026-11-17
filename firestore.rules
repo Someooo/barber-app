@@ -1,0 +1,63 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return isSignedIn() &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'owner';
+    }
+
+    function isOfficialOwnerPhone(phone) {
+      return phone == '0799081839' || phone == '+962799081839';
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow create, update: if isSignedIn() &&
+          request.auth.uid == userId &&
+          (
+            request.resource.data.role != 'owner' ||
+            isOfficialOwnerPhone(request.resource.data.phoneNumber)
+          );
+      allow delete: if false;
+    }
+
+    match /services/{serviceId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isOwner();
+    }
+
+    match /barbers/{barberId} {
+      allow read: if isSignedIn();
+      allow create, delete: if isOwner();
+      allow update: if isOwner() ||
+          (
+            isSignedIn() &&
+            request.auth.uid == barberId &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isAvailableToday'])
+          );
+    }
+
+    match /bookings/{bookingId} {
+      allow read: if isSignedIn() &&
+          (
+            resource.data.customerId == request.auth.uid ||
+            resource.data.barberId == request.auth.uid ||
+            isOwner()
+          );
+      allow create: if isSignedIn() &&
+          request.resource.data.customerId == request.auth.uid;
+      allow update: if isSignedIn() &&
+          (
+            resource.data.customerId == request.auth.uid ||
+            resource.data.barberId == request.auth.uid ||
+            isOwner()
+          );
+      allow delete: if false;
+    }
+  }
+}
