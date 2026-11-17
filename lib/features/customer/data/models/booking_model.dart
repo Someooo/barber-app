@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entities/booking_entity.dart';
 import '../../domain/entities/booking_status.dart';
 import 'service_model.dart';
@@ -21,7 +23,11 @@ class BookingModel extends BookingEntity {
   factory BookingModel.fromMap(Map<String, dynamic> map, [String? id]) {
     DateTime parsedDateTime;
     final rawDate = map['dateTime'];
-    if (rawDate is String) {
+    if (rawDate is Timestamp) {
+      parsedDateTime = rawDate.toDate();
+    } else if (rawDate is DateTime) {
+      parsedDateTime = rawDate;
+    } else if (rawDate is String) {
       parsedDateTime = DateTime.tryParse(rawDate) ?? DateTime.now();
     } else if (rawDate is int) {
       parsedDateTime = DateTime.fromMillisecondsSinceEpoch(rawDate);

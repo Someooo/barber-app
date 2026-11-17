@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,11 +22,14 @@ abstract class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({
     FirebaseAuth? firebaseAuth,
+    FirebaseFirestore? firestore,
     SharedPreferences? prefs,
   })  : _firebaseAuth = firebaseAuth,
+        _firestore = firestore,
         _prefs = prefs;
 
   final FirebaseAuth? _firebaseAuth;
+  final FirebaseFirestore? _firestore;
   final SharedPreferences? _prefs;
   bool _localOwnerActive = false;
 
@@ -91,12 +95,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       _localOwnerActive = true;
       await _prefs?.setBool(officialOwnerSessionKey, true);
-      return const UserModel(
+      const ownerModel = UserModel(
         uid: officialOwnerUid,
         fullName: officialOwnerName,
         phoneNumber: officialOwnerPhone,
         role: UserRole.owner,
       );
+      await _syncUserToFirestore(ownerModel);
+      return ownerModel;
     }
 
     if (selectedRole == UserRole.owner) {
@@ -131,12 +137,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         );
       }
 
-      return UserModel.fromFirebaseUser(
+      final model = UserModel.fromFirebaseUser(
         user,
         fallbackFullName: trimmedName,
         fallbackRole: selectedRole,
         fallbackPhoneNumber: sanitizedPhone,
       );
+      await _syncUserToFirestore(model);
+      return model;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
         return _registerNewUser(
@@ -178,12 +186,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       await newUser.updateDisplayName(encodedProfile);
 
-      return UserModel.fromFirebaseUser(
+      final model = UserModel.fromFirebaseUser(
         newUser,
         fallbackFullName: fullName,
         fallbackRole: selectedRole,
         fallbackPhoneNumber: sanitizedPhone,
       );
+      await _syncUserToFirestore(model);
+      return model;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         throw FirebaseAuthException(
@@ -232,6 +242,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       await _auth.signOut();
       return null;
     }
+  }
+
+  Future<void> _syncUserToFirestore(UserModel user) async {
+    final firestore = _firestore;
+    if (firestore == null) return;
+    try {
+      await firestore.collection('users').doc(user.uid).set(
+        {
+          'uid': user.uid,
+          'fullName': user.fullName,
+          'phoneNumber': user.phoneNumber,
+          'role': user.role.toStringValue(),
+          'updatedAt': DateTime.now().toIso8601String(),
+        },
+        SetOptions(merge: true),
+      );
+    } catch (_) {}
   }
 
   @override

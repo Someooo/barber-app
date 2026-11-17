@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -18,6 +19,7 @@ import '../../features/barber/domain/usecases/reschedule_booking_usecase.dart';
 import '../../features/barber/domain/usecases/update_barber_availability_usecase.dart';
 import '../../features/barber/presentation/bloc/barber_dashboard_bloc.dart';
 import '../../features/customer/data/datasources/customer_remote_data_source.dart';
+import '../../features/customer/data/datasources/firebase_firestore_customer_data_source.dart';
 import '../../features/customer/data/datasources/in_memory_firestore_customer_data_source.dart';
 import '../../features/customer/data/repositories/customer_repository_impl.dart';
 import '../../features/customer/domain/repositories/customer_repository.dart';
@@ -40,17 +42,28 @@ final GetIt sl = GetIt.instance;
 
 Future<void> initDependencies({
   FirebaseAuth? firebaseAuth,
+  FirebaseFirestore? firestore,
   SharedPreferences? sharedPreferences,
 }) async {
   if (sharedPreferences != null && !sl.isRegistered<SharedPreferences>()) {
     sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   }
+  if (firestore != null && !sl.isRegistered<FirebaseFirestore>()) {
+    sl.registerLazySingleton<FirebaseFirestore>(() => firestore);
+  } else if (Firebase.apps.isNotEmpty &&
+      !sl.isRegistered<FirebaseFirestore>()) {
+    sl.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance,
+    );
+  }
   registerAuthDependencies(
     serviceLocator: sl,
     firebaseAuth: firebaseAuth,
+    firestore: firestore,
   );
   registerCustomerDependencies(
     serviceLocator: sl,
+    firestore: firestore,
     sharedPreferences: sharedPreferences,
   );
   registerBarberDependencies(serviceLocator: sl);
@@ -60,6 +73,7 @@ Future<void> initDependencies({
 void registerCustomerDependencies({
   GetIt? serviceLocator,
   CustomerRemoteDataSource? remoteDataSource,
+  FirebaseFirestore? firestore,
   SharedPreferences? sharedPreferences,
 }) {
   final locator = serviceLocator ?? sl;
@@ -69,15 +83,24 @@ void registerCustomerDependencies({
   }
 
   if (!locator.isRegistered<CustomerRemoteDataSource>()) {
+    final resolvedFirestore = firestore ??
+        (locator.isRegistered<FirebaseFirestore>()
+            ? locator<FirebaseFirestore>()
+            : (Firebase.apps.isNotEmpty ? FirebaseFirestore.instance : null));
+
     locator.registerLazySingleton<CustomerRemoteDataSource>(
       () =>
           remoteDataSource ??
-          InMemoryFirestoreCustomerDataSource(
-            prefs: sharedPreferences ??
-                (locator.isRegistered<SharedPreferences>()
-                    ? locator<SharedPreferences>()
-                    : null),
-          ),
+          (resolvedFirestore != null
+              ? FirebaseFirestoreCustomerDataSource(
+                  firestore: resolvedFirestore,
+                )
+              : InMemoryFirestoreCustomerDataSource(
+                  prefs: sharedPreferences ??
+                      (locator.isRegistered<SharedPreferences>()
+                          ? locator<SharedPreferences>()
+                          : null),
+                )),
     );
   }
 
@@ -150,6 +173,7 @@ void registerCustomerDependencies({
 void registerAuthDependencies({
   GetIt? serviceLocator,
   FirebaseAuth? firebaseAuth,
+  FirebaseFirestore? firestore,
 }) {
   final locator = serviceLocator ?? sl;
 
@@ -160,10 +184,16 @@ void registerAuthDependencies({
   }
 
   if (!locator.isRegistered<AuthRemoteDataSource>()) {
+    final resolvedFirestore = firestore ??
+        (locator.isRegistered<FirebaseFirestore>()
+            ? locator<FirebaseFirestore>()
+            : (Firebase.apps.isNotEmpty ? FirebaseFirestore.instance : null));
+
     locator.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(
         firebaseAuth: firebaseAuth ??
             (Firebase.apps.isNotEmpty ? locator<FirebaseAuth>() : null),
+        firestore: resolvedFirestore,
         prefs: locator.isRegistered<SharedPreferences>()
             ? locator<SharedPreferences>()
             : null,
