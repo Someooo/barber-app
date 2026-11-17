@@ -51,4 +51,14 @@ abstract class CustomerRemoteDataSource {
     required DateTime newDateTime,
     required String reason,
   });
+
+  Future<ServiceModel> addService(ServiceModel service);
+
+  Future<void> deleteService(String serviceId);
+
+  Future<BarberModel> addBarber(BarberModel barber);
+
+  Future<void> deleteBarber(String barberId);
+
+  Future<List<BookingModel>> getAllShopBookings();
 }

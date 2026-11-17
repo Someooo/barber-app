@@ -109,6 +109,21 @@ class _FakeCustomerRemoteDataSource implements CustomerRemoteDataSource {
     required DateTime newDateTime,
     required String reason,
   }) async {}
+
+  @override
+  Future<ServiceModel> addService(ServiceModel service) async => service;
+
+  @override
+  Future<void> deleteService(String serviceId) async {}
+
+  @override
+  Future<BarberModel> addBarber(BarberModel barber) async => barber;
+
+  @override
+  Future<void> deleteBarber(String barberId) async {}
+
+  @override
+  Future<List<BookingModel>> getAllShopBookings() async => const [];
 }
 
 void main() {

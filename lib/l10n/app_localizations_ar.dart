@@ -454,4 +454,114 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get barberBookingCancelledSuccess => 'تم إلغاء الموعد';
+
+  @override
+  String get roleOwnerOption => 'مدير الصالون';
+
+  @override
+  String get ownerDashboardTitle => 'إدارة الصالون';
+
+  @override
+  String get ownerNavOverview => 'نظرة عامة';
+
+  @override
+  String get ownerNavServices => 'الخدمات';
+
+  @override
+  String get ownerNavBarbers => 'الحلاقون';
+
+  @override
+  String get ownerNavProfile => 'الملف الشخصي';
+
+  @override
+  String get ownerTotalRevenue => 'إجمالي الإيرادات';
+
+  @override
+  String get ownerActiveAppointments => 'المواعيد النشطة';
+
+  @override
+  String get ownerTotalBarbers => 'إجمالي الحلاقين';
+
+  @override
+  String get ownerTotalServices => 'إجمالي الخدمات';
+
+  @override
+  String get ownerQuickActions => 'إجراءات سريعة';
+
+  @override
+  String get ownerAddNewService => 'إضافة خدمة جديدة';
+
+  @override
+  String get ownerAddNewBarber => 'إضافة حلاق جديد';
+
+  @override
+  String get ownerRecentActivity => 'النشاط الأخير للصالون';
+
+  @override
+  String get ownerNoServicesTitle => 'لا توجد خدمات بعد';
+
+  @override
+  String get ownerNoBarbersTitle => 'لا يوجد حلاقون بعد';
+
+  @override
+  String get ownerDeleteServiceTitle => 'حذف الخدمة';
+
+  @override
+  String get ownerDeleteServiceMessage =>
+      'هل أنت متأكد من حذف هذه الخدمة من قائمة الصالون؟';
+
+  @override
+  String get ownerDeleteBarberTitle => 'حذف الحلاق';
+
+  @override
+  String get ownerDeleteBarberMessage =>
+      'هل أنت متأكد من إزالة هذا الحلاق من الصالون؟';
+
+  @override
+  String get ownerDeleteConfirm => 'حذف';
+
+  @override
+  String get ownerServiceNameEn => 'اسم الخدمة (بالإنجليزية)';
+
+  @override
+  String get ownerServiceNameAr => 'اسم الخدمة (بالعربية)';
+
+  @override
+  String get ownerServiceDescEn => 'الوصف (بالإنجليزية)';
+
+  @override
+  String get ownerServiceDescAr => 'الوصف (بالعربية)';
+
+  @override
+  String get ownerServicePrice => 'السعر (\$)';
+
+  @override
+  String get ownerServiceDuration => 'المدة (بالدقائق)';
+
+  @override
+  String get ownerServiceIcon => 'أيقونة الخدمة';
+
+  @override
+  String get ownerBarberName => 'الاسم الكامل للحلاق';
+
+  @override
+  String get ownerBarberSpecialtyEn => 'التخصص (بالإنجليزية)';
+
+  @override
+  String get ownerBarberSpecialtyAr => 'التخصص (بالعربية)';
+
+  @override
+  String get ownerBarberExperience => 'سنوات الخبرة';
+
+  @override
+  String get ownerBarberImageUrl => 'رابط الصورة (اختياري)';
+
+  @override
+  String get ownerFieldRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get ownerInvalidNumber => 'أدخل رقماً موجباً صحيحاً';
+
+  @override
+  String get ownerSaveButton => 'حفظ';
 }

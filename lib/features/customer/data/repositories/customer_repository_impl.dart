@@ -6,6 +6,7 @@ import 'package:barber_app/features/customer/domain/entities/service_entity.dart
 import 'package:barber_app/features/customer/domain/repositories/customer_repository.dart';
 
 import '../datasources/customer_remote_data_source.dart';
+import '../models/barber_model.dart';
 import '../models/service_model.dart';
 
 class CustomerRepositoryImpl implements CustomerRepository {
@@ -187,6 +188,65 @@ class CustomerRepositoryImpl implements CustomerRepository {
         newDateTime: newDateTime,
         reason: reason,
       );
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<ServiceEntity> addService(ServiceEntity service) async {
+    try {
+      final model =
+          service is ServiceModel ? service : ServiceModel.fromEntity(service);
+      return await _remoteDataSource.addService(model);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> deleteService(String serviceId) async {
+    try {
+      await _remoteDataSource.deleteService(serviceId);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<BarberEntity> addBarber(BarberEntity barber) async {
+    try {
+      final model =
+          barber is BarberModel ? barber : BarberModel.fromEntity(barber);
+      return await _remoteDataSource.addBarber(model);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> deleteBarber(String barberId) async {
+    try {
+      await _remoteDataSource.deleteBarber(barberId);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<List<BookingEntity>> getAllShopBookings() async {
+    try {
+      return await _remoteDataSource.getAllShopBookings();
     } on AppException catch (e) {
       throw ServerFailure(message: e.message, code: e.code);
     } catch (e) {

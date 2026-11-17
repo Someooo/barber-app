@@ -128,6 +128,25 @@ class RoleDropdownField extends StatelessWidget {
                   ],
                 ),
               ),
+              DropdownMenuItem<UserRole>(
+                value: UserRole.owner,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.storefront_outlined,
+                      size: AppSizes.iconMd,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                    AppSpacing.horizontalSm,
+                    Text(
+                      l10n.roleOwnerOption,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: scheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
             onChanged: enabled
                 ? (value) {

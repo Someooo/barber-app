@@ -937,6 +937,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Appointment cancelled'**
   String get barberBookingCancelledSuccess;
+
+  /// No description provided for @roleOwnerOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Owner'**
+  String get roleOwnerOption;
+
+  /// No description provided for @ownerDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Management'**
+  String get ownerDashboardTitle;
+
+  /// No description provided for @ownerNavOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get ownerNavOverview;
+
+  /// No description provided for @ownerNavServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get ownerNavServices;
+
+  /// No description provided for @ownerNavBarbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Barbers'**
+  String get ownerNavBarbers;
+
+  /// No description provided for @ownerNavProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get ownerNavProfile;
+
+  /// No description provided for @ownerTotalRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Revenue'**
+  String get ownerTotalRevenue;
+
+  /// No description provided for @ownerActiveAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Appointments'**
+  String get ownerActiveAppointments;
+
+  /// No description provided for @ownerTotalBarbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Barbers'**
+  String get ownerTotalBarbers;
+
+  /// No description provided for @ownerTotalServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Services'**
+  String get ownerTotalServices;
+
+  /// No description provided for @ownerQuickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Actions'**
+  String get ownerQuickActions;
+
+  /// No description provided for @ownerAddNewService.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Service'**
+  String get ownerAddNewService;
+
+  /// No description provided for @ownerAddNewBarber.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Barber'**
+  String get ownerAddNewBarber;
+
+  /// No description provided for @ownerRecentActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Shop Activity'**
+  String get ownerRecentActivity;
+
+  /// No description provided for @ownerNoServicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Services Yet'**
+  String get ownerNoServicesTitle;
+
+  /// No description provided for @ownerNoBarbersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Barbers Yet'**
+  String get ownerNoBarbersTitle;
+
+  /// No description provided for @ownerDeleteServiceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Service'**
+  String get ownerDeleteServiceTitle;
+
+  /// No description provided for @ownerDeleteServiceMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this service from the barbershop catalog?'**
+  String get ownerDeleteServiceMessage;
+
+  /// No description provided for @ownerDeleteBarberTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Barber'**
+  String get ownerDeleteBarberTitle;
+
+  /// No description provided for @ownerDeleteBarberMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this barber from the barbershop?'**
+  String get ownerDeleteBarberMessage;
+
+  /// No description provided for @ownerDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get ownerDeleteConfirm;
+
+  /// No description provided for @ownerServiceNameEn.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Name (English)'**
+  String get ownerServiceNameEn;
+
+  /// No description provided for @ownerServiceNameAr.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Name (Arabic)'**
+  String get ownerServiceNameAr;
+
+  /// No description provided for @ownerServiceDescEn.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (English)'**
+  String get ownerServiceDescEn;
+
+  /// No description provided for @ownerServiceDescAr.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (Arabic)'**
+  String get ownerServiceDescAr;
+
+  /// No description provided for @ownerServicePrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (\$)'**
+  String get ownerServicePrice;
+
+  /// No description provided for @ownerServiceDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (Minutes)'**
+  String get ownerServiceDuration;
+
+  /// No description provided for @ownerServiceIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Icon'**
+  String get ownerServiceIcon;
+
+  /// No description provided for @ownerBarberName.
+  ///
+  /// In en, this message translates to:
+  /// **'Barber Full Name'**
+  String get ownerBarberName;
+
+  /// No description provided for @ownerBarberSpecialtyEn.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialty (English)'**
+  String get ownerBarberSpecialtyEn;
+
+  /// No description provided for @ownerBarberSpecialtyAr.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialty (Arabic)'**
+  String get ownerBarberSpecialtyAr;
+
+  /// No description provided for @ownerBarberExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience (Years)'**
+  String get ownerBarberExperience;
+
+  /// No description provided for @ownerBarberImageUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo URL (Optional)'**
+  String get ownerBarberImageUrl;
+
+  /// No description provided for @ownerFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get ownerFieldRequired;
+
+  /// No description provided for @ownerInvalidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid positive number'**
+  String get ownerInvalidNumber;
+
+  /// No description provided for @ownerSaveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get ownerSaveButton;
 }
 
 class _AppLocalizationsDelegate

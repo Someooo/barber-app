@@ -14,10 +14,12 @@ import 'customer_remote_data_source.dart';
 class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
   static const String bookingsStorageKey = 'barbersync_customer_bookings';
   static const String barbersStorageKey = 'barbersync_barbers';
+  static const String servicesStorageKey = 'barbersync_services';
 
   InMemoryFirestoreCustomerDataSource({SharedPreferences? prefs})
       : _prefs = prefs {
     _initPreseededData();
+    _loadSavedServices();
     _loadSavedBarbers();
     _loadSavedBookings();
   }
@@ -55,13 +57,14 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
     await prefs.setStringList(bookingsStorageKey, encodedList);
   }
 
-  void _loadSavedBarbers() {
+  void _loadSavedServices() {
     final prefs = _prefs;
     if (prefs == null) return;
 
-    final rawList = prefs.getStringList(barbersStorageKey);
-    if (rawList == null || rawList.isEmpty) return;
+    final rawList = prefs.getStringList(servicesStorageKey);
+    if (rawList == null) return;
 
+    final loaded = <ServiceModel>[];
     for (final raw in rawList) {
       try {
         final decoded = jsonDecode(raw);
@@ -71,15 +74,47 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
         if (map == null) continue;
         final id = (map['id'] as String?) ?? '';
         if (id.isEmpty) continue;
-        final model = BarberModel.fromMap(map, id);
-        final existingIndex = _barbers.indexWhere((b) => b.id == id);
-        if (existingIndex >= 0) {
-          _barbers[existingIndex] = model;
-        } else {
-          _barbers.add(model);
-        }
+        loaded.add(ServiceModel.fromMap(map, id));
       } catch (_) {}
     }
+    _services
+      ..clear()
+      ..addAll(loaded);
+  }
+
+  Future<void> _saveServices() async {
+    final prefs = _prefs;
+    if (prefs == null) return;
+
+    final encodedList = _services
+        .map((s) => jsonEncode(<String, dynamic>{'id': s.id, ...s.toMap()}))
+        .toList();
+    await prefs.setStringList(servicesStorageKey, encodedList);
+  }
+
+  void _loadSavedBarbers() {
+    final prefs = _prefs;
+    if (prefs == null) return;
+
+    final rawList = prefs.getStringList(barbersStorageKey);
+    if (rawList == null) return;
+
+    final loaded = <BarberModel>[];
+    for (final raw in rawList) {
+      try {
+        final decoded = jsonDecode(raw);
+        final map = decoded is Map<String, dynamic>
+            ? decoded
+            : (decoded is Map ? Map<String, dynamic>.from(decoded) : null);
+        if (map == null) continue;
+        final id = (map['id'] as String?) ?? '';
+        if (id.isEmpty) continue;
+        loaded.add(BarberModel.fromMap(map, id));
+      } catch (_) {}
+    }
+    _barbers
+      ..clear()
+      ..addAll(loaded);
   }
 
   Future<void> _saveBarbers() async {
@@ -470,5 +505,62 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
       statusReason: trimmedReason,
     );
     await _saveBookings();
+  }
+
+  @override
+  Future<ServiceModel> addService(ServiceModel service) async {
+    final id = service.id.isNotEmpty
+        ? service.id
+        : 'srv_${DateTime.now().millisecondsSinceEpoch}';
+    final created = ServiceModel(
+      id: id,
+      nameEn: service.nameEn,
+      nameAr: service.nameAr,
+      descriptionEn: service.descriptionEn,
+      descriptionAr: service.descriptionAr,
+      price: service.price,
+      durationMinutes: service.durationMinutes,
+      iconName: service.iconName,
+    );
+    _services.add(created);
+    await _saveServices();
+    return created;
+  }
+
+  @override
+  Future<void> deleteService(String serviceId) async {
+    _services.removeWhere((s) => s.id == serviceId);
+    await _saveServices();
+  }
+
+  @override
+  Future<BarberModel> addBarber(BarberModel barber) async {
+    final id = barber.id.isNotEmpty
+        ? barber.id
+        : 'barber_${DateTime.now().millisecondsSinceEpoch}';
+    final created = BarberModel(
+      id: id,
+      name: barber.name,
+      specialtyEn: barber.specialtyEn,
+      specialtyAr: barber.specialtyAr,
+      rating: barber.rating,
+      experienceYears: barber.experienceYears,
+      isAvailableToday: barber.isAvailableToday,
+      imageUrl: barber.imageUrl,
+    );
+    _barbers.add(created);
+    await _saveBarbers();
+    return created;
+  }
+
+  @override
+  Future<void> deleteBarber(String barberId) async {
+    _barbers.removeWhere((b) => b.id == barberId);
+    await _saveBarbers();
+  }
+
+  @override
+  Future<List<BookingModel>> getAllShopBookings() async {
+    return List.unmodifiable(_bookings);
   }
 }

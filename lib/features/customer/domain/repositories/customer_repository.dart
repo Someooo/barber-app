@@ -51,4 +51,14 @@ abstract class CustomerRepository {
     required DateTime newDateTime,
     required String reason,
   });
+
+  Future<ServiceEntity> addService(ServiceEntity service);
+
+  Future<void> deleteService(String serviceId);
+
+  Future<BarberEntity> addBarber(BarberEntity barber);
+
+  Future<void> deleteBarber(String barberId);
+
+  Future<List<BookingEntity>> getAllShopBookings();
 }

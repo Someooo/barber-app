@@ -1,6 +1,7 @@
 enum UserRole {
   barber,
-  customer;
+  customer,
+  owner;
 
   String toStringValue() => name;
 
@@ -9,6 +10,7 @@ enum UserRole {
     return switch (normalized) {
       'barber' => UserRole.barber,
       'customer' => UserRole.customer,
+      'owner' => UserRole.owner,
       _ => throw FormatException('Unknown UserRole: "$value"'),
     };
   }

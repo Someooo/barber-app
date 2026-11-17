@@ -13,6 +13,7 @@ import 'package:barber_app/features/auth/presentation/screens/welcome_role_scree
 import 'package:barber_app/features/barber/presentation/screens/barber_shell_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/booking_flow_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/customer_shell_screen.dart';
+import 'package:barber_app/features/owner/presentation/screens/owner_shell_screen.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
@@ -40,7 +41,8 @@ String? evaluateAuthRedirect({
 
   final isBarberRoute = matchedLocation.startsWith('/barber');
   final isCustomerRoute = matchedLocation.startsWith('/customer');
-  final isProtectedRoute = isBarberRoute || isCustomerRoute;
+  final isOwnerRoute = matchedLocation.startsWith('/owner');
+  final isProtectedRoute = isBarberRoute || isCustomerRoute || isOwnerRoute;
   final isPublicAuthRoute = matchedLocation == AppRoutes.welcome ||
       matchedLocation == AppRoutes.login ||
       matchedLocation == AppRoutes.register;
@@ -57,18 +59,23 @@ String? evaluateAuthRedirect({
     final roleHome = switch (role) {
       UserRole.barber => AppRoutes.barberDashboard,
       UserRole.customer => AppRoutes.customerHome,
+      UserRole.owner => AppRoutes.ownerDashboard,
     };
 
     if (isPublicAuthRoute) {
       return roleHome;
     }
 
-    if (role == UserRole.customer && isBarberRoute) {
+    if (role == UserRole.customer && (isBarberRoute || isOwnerRoute)) {
       return AppRoutes.customerHome;
     }
 
-    if (role == UserRole.barber && isCustomerRoute) {
+    if (role == UserRole.barber && (isCustomerRoute || isOwnerRoute)) {
       return AppRoutes.barberDashboard;
+    }
+
+    if (role == UserRole.owner && (isCustomerRoute || isBarberRoute)) {
+      return AppRoutes.ownerDashboard;
     }
   }
 
@@ -108,6 +115,10 @@ GoRouter createAppRouter({
       GoRoute(
         path: AppRoutes.barberDashboard,
         builder: (context, state) => const BarberShellScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.ownerDashboard,
+        builder: (context, state) => const OwnerShellScreen(),
       ),
       GoRoute(
         path: AppRoutes.customerHome,

@@ -458,4 +458,114 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get barberBookingCancelledSuccess => 'Appointment cancelled';
+
+  @override
+  String get roleOwnerOption => 'Shop Owner';
+
+  @override
+  String get ownerDashboardTitle => 'Shop Management';
+
+  @override
+  String get ownerNavOverview => 'Overview';
+
+  @override
+  String get ownerNavServices => 'Services';
+
+  @override
+  String get ownerNavBarbers => 'Barbers';
+
+  @override
+  String get ownerNavProfile => 'Profile';
+
+  @override
+  String get ownerTotalRevenue => 'Total Revenue';
+
+  @override
+  String get ownerActiveAppointments => 'Active Appointments';
+
+  @override
+  String get ownerTotalBarbers => 'Total Barbers';
+
+  @override
+  String get ownerTotalServices => 'Total Services';
+
+  @override
+  String get ownerQuickActions => 'Quick Actions';
+
+  @override
+  String get ownerAddNewService => 'Add New Service';
+
+  @override
+  String get ownerAddNewBarber => 'Add New Barber';
+
+  @override
+  String get ownerRecentActivity => 'Recent Shop Activity';
+
+  @override
+  String get ownerNoServicesTitle => 'No Services Yet';
+
+  @override
+  String get ownerNoBarbersTitle => 'No Barbers Yet';
+
+  @override
+  String get ownerDeleteServiceTitle => 'Delete Service';
+
+  @override
+  String get ownerDeleteServiceMessage =>
+      'Are you sure you want to remove this service from the barbershop catalog?';
+
+  @override
+  String get ownerDeleteBarberTitle => 'Delete Barber';
+
+  @override
+  String get ownerDeleteBarberMessage =>
+      'Are you sure you want to remove this barber from the barbershop?';
+
+  @override
+  String get ownerDeleteConfirm => 'Delete';
+
+  @override
+  String get ownerServiceNameEn => 'Service Name (English)';
+
+  @override
+  String get ownerServiceNameAr => 'Service Name (Arabic)';
+
+  @override
+  String get ownerServiceDescEn => 'Description (English)';
+
+  @override
+  String get ownerServiceDescAr => 'Description (Arabic)';
+
+  @override
+  String get ownerServicePrice => 'Price (\$)';
+
+  @override
+  String get ownerServiceDuration => 'Duration (Minutes)';
+
+  @override
+  String get ownerServiceIcon => 'Service Icon';
+
+  @override
+  String get ownerBarberName => 'Barber Full Name';
+
+  @override
+  String get ownerBarberSpecialtyEn => 'Specialty (English)';
+
+  @override
+  String get ownerBarberSpecialtyAr => 'Specialty (Arabic)';
+
+  @override
+  String get ownerBarberExperience => 'Experience (Years)';
+
+  @override
+  String get ownerBarberImageUrl => 'Photo URL (Optional)';
+
+  @override
+  String get ownerFieldRequired => 'This field is required';
+
+  @override
+  String get ownerInvalidNumber => 'Enter a valid positive number';
+
+  @override
+  String get ownerSaveButton => 'Save';
 }

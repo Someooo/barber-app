@@ -29,6 +29,12 @@ import '../../features/customer/domain/usecases/get_customer_home_data_usecase.d
 import '../../features/customer/presentation/bloc/booking_flow_bloc.dart';
 import '../../features/customer/presentation/bloc/customer_bookings_bloc.dart';
 import '../../features/customer/presentation/bloc/customer_home_bloc.dart';
+import '../../features/owner/domain/usecases/add_barber_usecase.dart';
+import '../../features/owner/domain/usecases/add_service_usecase.dart';
+import '../../features/owner/domain/usecases/delete_barber_usecase.dart';
+import '../../features/owner/domain/usecases/delete_service_usecase.dart';
+import '../../features/owner/domain/usecases/get_owner_overview_usecase.dart';
+import '../../features/owner/presentation/bloc/owner_dashboard_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -48,6 +54,7 @@ Future<void> initDependencies({
     sharedPreferences: sharedPreferences,
   );
   registerBarberDependencies(serviceLocator: sl);
+  registerOwnerDependencies(serviceLocator: sl);
 }
 
 void registerCustomerDependencies({
@@ -251,6 +258,56 @@ void registerBarberDependencies({GetIt? serviceLocator}) {
         completeBookingUseCase: locator<CompleteBookingUseCase>(),
         rescheduleBookingUseCase: locator<RescheduleBookingUseCase>(),
         barberCancelBookingUseCase: locator<BarberCancelBookingUseCase>(),
+      ),
+    );
+  }
+}
+
+void registerOwnerDependencies({GetIt? serviceLocator}) {
+  final locator = serviceLocator ?? sl;
+
+  if (!locator.isRegistered<CustomerRepository>()) {
+    registerCustomerDependencies(serviceLocator: locator);
+  }
+
+  if (!locator.isRegistered<GetOwnerOverviewUseCase>()) {
+    locator.registerLazySingleton<GetOwnerOverviewUseCase>(
+      () => GetOwnerOverviewUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<AddServiceUseCase>()) {
+    locator.registerLazySingleton<AddServiceUseCase>(
+      () => AddServiceUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<DeleteServiceUseCase>()) {
+    locator.registerLazySingleton<DeleteServiceUseCase>(
+      () => DeleteServiceUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<AddBarberUseCase>()) {
+    locator.registerLazySingleton<AddBarberUseCase>(
+      () => AddBarberUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<DeleteBarberUseCase>()) {
+    locator.registerLazySingleton<DeleteBarberUseCase>(
+      () => DeleteBarberUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<OwnerDashboardBloc>()) {
+    locator.registerFactory<OwnerDashboardBloc>(
+      () => OwnerDashboardBloc(
+        getOwnerOverviewUseCase: locator<GetOwnerOverviewUseCase>(),
+        addServiceUseCase: locator<AddServiceUseCase>(),
+        deleteServiceUseCase: locator<DeleteServiceUseCase>(),
+        addBarberUseCase: locator<AddBarberUseCase>(),
+        deleteBarberUseCase: locator<DeleteBarberUseCase>(),
       ),
     );
   }

@@ -90,6 +90,21 @@ class _FailingCustomerRepo implements CustomerRepository {
     required DateTime newDateTime,
     required String reason,
   }) async {}
+
+  @override
+  Future<ServiceEntity> addService(ServiceEntity service) async => service;
+
+  @override
+  Future<void> deleteService(String serviceId) async {}
+
+  @override
+  Future<BarberEntity> addBarber(BarberEntity barber) async => barber;
+
+  @override
+  Future<void> deleteBarber(String barberId) async {}
+
+  @override
+  Future<List<BookingEntity>> getAllShopBookings() async => const [];
 }
 
 void main() {
