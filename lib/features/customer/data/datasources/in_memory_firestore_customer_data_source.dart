@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:barber_app/core/errors/exceptions.dart';
 import 'package:barber_app/features/customer/domain/entities/booking_status.dart';
@@ -9,13 +12,46 @@ import '../models/service_model.dart';
 import 'customer_remote_data_source.dart';
 
 class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
-  InMemoryFirestoreCustomerDataSource() {
+  static const String bookingsStorageKey = 'barbersync_customer_bookings';
+
+  InMemoryFirestoreCustomerDataSource({SharedPreferences? prefs})
+      : _prefs = prefs {
     _initPreseededData();
+    _loadSavedBookings();
   }
 
+  final SharedPreferences? _prefs;
   final List<ServiceModel> _services = [];
   final List<BarberModel> _barbers = [];
   final List<BookingModel> _bookings = [];
+
+  void _loadSavedBookings() {
+    final prefs = _prefs;
+    if (prefs == null) return;
+
+    final rawList = prefs.getStringList(bookingsStorageKey);
+    if (rawList == null || rawList.isEmpty) return;
+
+    for (final raw in rawList) {
+      try {
+        final decoded = jsonDecode(raw);
+        if (decoded is Map<String, dynamic>) {
+          _bookings.add(BookingModel.fromMap(decoded));
+        } else if (decoded is Map) {
+          _bookings
+              .add(BookingModel.fromMap(Map<String, dynamic>.from(decoded)));
+        }
+      } catch (_) {}
+    }
+  }
+
+  Future<void> _saveBookings() async {
+    final prefs = _prefs;
+    if (prefs == null) return;
+
+    final encodedList = _bookings.map((b) => jsonEncode(b.toMap())).toList();
+    await prefs.setStringList(bookingsStorageKey, encodedList);
+  }
 
   void _initPreseededData() {
     _services.addAll(const [
@@ -136,8 +172,8 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
     required int durationMinutes,
   }) async {
     final slots = <DateTime>[];
-    final startHour = 9;
-    final endHour = 20;
+    const startHour = 9;
+    const endHour = 20;
 
     final targetDate = DateTime(date.year, date.month, date.day);
     final now = DateTime.now();
@@ -212,6 +248,7 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
     );
 
     _bookings.add(booking);
+    await _saveBookings();
     return booking;
   }
 
@@ -243,5 +280,6 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
       notes: existing.notes,
       statusReason: reason,
     );
+    await _saveBookings();
   }
 }

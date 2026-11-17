@@ -159,6 +159,51 @@ void main() {
     });
 
     testWidgets(
+        'taps enhanced theme icon container to toggle theme and updates icon',
+        (WidgetTester tester) async {
+      final mockRepo = _MockAuthRepo();
+      final authBloc = AuthBloc(
+        authenticateUserUseCase: AuthenticateUserUseCase(mockRepo),
+        checkAuthSessionUseCase: CheckAuthSessionUseCase(mockRepo),
+        signOutUseCase: SignOutUseCase(mockRepo),
+      )..emit(const Authenticated(
+          UserEntity(
+            uid: 'cust_sami',
+            fullName: 'Sami Almuhur',
+            phoneNumber: '0799999999',
+            role: UserRole.customer,
+          ),
+        ));
+      addTearDown(authBloc.close);
+
+      final settings = AppSettingsController();
+
+      await tester.pumpWidget(
+        _buildTestHost(
+          child: const CustomerProfileScreen(),
+          authBloc: authBloc,
+          settingsController: settings,
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(settings.themeMode, ThemeMode.light);
+      expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.light_mode_outlined));
+      await tester.pumpAndSettle();
+
+      expect(settings.themeMode, ThemeMode.dark);
+      expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.dark_mode_outlined));
+      await tester.pumpAndSettle();
+
+      expect(settings.themeMode, ThemeMode.light);
+      expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);
+    });
+
+    testWidgets(
         'Sign Out button opens confirmation dialog and dispatches sign out when confirmed',
         (WidgetTester tester) async {
       final mockRepo = _MockAuthRepo();

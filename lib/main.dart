@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/di/injection_container.dart';
 import 'core/router/app_router.dart';
@@ -21,6 +22,8 @@ Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  final prefs = await SharedPreferences.getInstance();
+
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
@@ -29,8 +32,8 @@ Future<void> main() async {
     }
   } catch (_) {}
 
-  await initDependencies();
-  runApp(const BarberSyncApp());
+  await initDependencies(sharedPreferences: prefs);
+  runApp(BarberSyncApp(sharedPreferences: prefs));
 }
 
 class BarberSyncApp extends StatefulWidget {
@@ -38,17 +41,22 @@ class BarberSyncApp extends StatefulWidget {
     super.key,
     this.authBloc,
     this.initialLocation = AppRoutes.welcome,
+    this.sharedPreferences,
+    this.settingsController,
   });
 
   final AuthBloc? authBloc;
   final String initialLocation;
+  final SharedPreferences? sharedPreferences;
+  final AppSettingsController? settingsController;
 
   @override
   State<BarberSyncApp> createState() => _BarberSyncAppState();
 }
 
 class _BarberSyncAppState extends State<BarberSyncApp> {
-  final AppSettingsController _settings = AppSettingsController();
+  late final AppSettingsController _settings;
+  late final bool _ownsSettings;
   late final AuthBloc _authBloc;
   late final bool _ownsAuthBloc;
   late final GoRouterRefreshStream _refreshStream;
@@ -59,6 +67,15 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
   @override
   void initState() {
     super.initState();
+    _ownsSettings = widget.settingsController == null;
+    _settings = widget.settingsController ??
+        AppSettingsController(
+          prefs: widget.sharedPreferences ??
+              (sl.isRegistered<SharedPreferences>()
+                  ? sl<SharedPreferences>()
+                  : null),
+        );
+
     if (!sl.isRegistered<AuthBloc>()) {
       registerAuthDependencies();
     }
@@ -102,7 +119,9 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
     if (_ownsAuthBloc) {
       _authBloc.close();
     }
-    _settings.dispose();
+    if (_ownsSettings) {
+      _settings.dispose();
+    }
     super.dispose();
   }
 

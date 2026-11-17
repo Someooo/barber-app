@@ -25,10 +25,36 @@ class CustomerPreferencesCard extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              leading: const Icon(
-                Icons.palette_outlined,
-                color: AppColors.secondary,
-                size: AppSizes.iconMd,
+              onTap: () => context.toggleTheme(),
+              leading: RepaintBoundary(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => context.toggleTheme(),
+                    borderRadius: AppRadius.controlBorder,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary.withValues(alpha: 0.08),
+                        borderRadius: AppRadius.controlBorder,
+                        border: Border.all(
+                          color: AppColors.secondary.withValues(alpha: 0.4),
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          context.isDarkMode
+                              ? Icons.dark_mode_outlined
+                              : Icons.light_mode_outlined,
+                          color: AppColors.secondary,
+                          size: AppSizes.iconMd,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               title: Text(
                 context.l10n.themeToggleLabel,
@@ -45,10 +71,34 @@ class CustomerPreferencesCard extends StatelessWidget {
             ),
             const Divider(height: 1),
             ListTile(
-              leading: const Icon(
-                Icons.translate_outlined,
-                color: AppColors.secondary,
-                size: AppSizes.iconMd,
+              onTap: () => context.toggleLocale(),
+              leading: RepaintBoundary(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => context.toggleLocale(),
+                    borderRadius: AppRadius.controlBorder,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary.withValues(alpha: 0.08),
+                        borderRadius: AppRadius.controlBorder,
+                        border: Border.all(
+                          color: AppColors.secondary.withValues(alpha: 0.4),
+                          width: 1.5,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.translate_outlined,
+                          color: AppColors.secondary,
+                          size: AppSizes.iconMd,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               title: Text(
                 context.l10n.languageToggleLabel,

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/data/datasources/auth_remote_data_source.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
@@ -24,25 +25,44 @@ import '../../features/customer/presentation/bloc/customer_home_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
-Future<void> initDependencies({FirebaseAuth? firebaseAuth}) async {
+Future<void> initDependencies({
+  FirebaseAuth? firebaseAuth,
+  SharedPreferences? sharedPreferences,
+}) async {
+  if (sharedPreferences != null && !sl.isRegistered<SharedPreferences>()) {
+    sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  }
   registerAuthDependencies(
     serviceLocator: sl,
     firebaseAuth: firebaseAuth,
   );
   registerCustomerDependencies(
     serviceLocator: sl,
+    sharedPreferences: sharedPreferences,
   );
 }
 
 void registerCustomerDependencies({
   GetIt? serviceLocator,
   CustomerRemoteDataSource? remoteDataSource,
+  SharedPreferences? sharedPreferences,
 }) {
   final locator = serviceLocator ?? sl;
 
+  if (sharedPreferences != null && !locator.isRegistered<SharedPreferences>()) {
+    locator.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  }
+
   if (!locator.isRegistered<CustomerRemoteDataSource>()) {
     locator.registerLazySingleton<CustomerRemoteDataSource>(
-      () => remoteDataSource ?? InMemoryFirestoreCustomerDataSource(),
+      () =>
+          remoteDataSource ??
+          InMemoryFirestoreCustomerDataSource(
+            prefs: sharedPreferences ??
+                (locator.isRegistered<SharedPreferences>()
+                    ? locator<SharedPreferences>()
+                    : null),
+          ),
     );
   }
 

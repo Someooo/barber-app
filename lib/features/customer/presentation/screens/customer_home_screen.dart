@@ -104,9 +104,6 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         onRefresh: _onRefresh,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsetsDirectional.symmetric(
-            vertical: AppSpacing.md,
-          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

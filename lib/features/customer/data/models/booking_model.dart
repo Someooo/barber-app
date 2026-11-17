@@ -18,7 +18,7 @@ class BookingModel extends BookingEntity {
     super.statusReason,
   });
 
-  factory BookingModel.fromMap(Map<String, dynamic> map, String id) {
+  factory BookingModel.fromMap(Map<String, dynamic> map, [String? id]) {
     DateTime parsedDateTime;
     final rawDate = map['dateTime'];
     if (rawDate is String) {
@@ -42,8 +42,10 @@ class BookingModel extends BookingEntity {
       return ServiceModel.fromMap(sMap, sId);
     }).toList();
 
+    final resolvedId = id ?? (map['id'] as String?) ?? '';
+
     return BookingModel(
-      id: id,
+      id: resolvedId,
       customerId: (map['customerId'] as String?) ?? '',
       customerName: (map['customerName'] as String?) ?? '',
       barberId: (map['barberId'] as String?) ?? '',
@@ -80,6 +82,7 @@ class BookingModel extends BookingEntity {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'customerId': customerId,
       'customerName': customerName,
       'barberId': barberId,
