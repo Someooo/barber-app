@@ -1,5 +1,7 @@
 # BarberSync
 
+[![Flutter CI](https://github.com/Someooo/barber-app/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/Someooo/barber-app/actions/workflows/flutter_ci.yml)
+
 Enterprise, offline-first, single-barbershop booking and management platform built with Flutter, Clean Architecture, `flutter_bloc`, `go_router`, `firebase_auth`, and `cloud_firestore`.
 
 ---
@@ -58,3 +60,14 @@ Enterprise, offline-first, single-barbershop booking and management platform bui
    dart analyze lib test
    flutter test
    ```
+
+---
+
+## CI/CD Pipeline (GitHub Actions)
+
+The repository includes an automated workflow at `.github/workflows/flutter_ci.yml` triggered on pushes and pull requests to `main` (and manually via `workflow_dispatch`):
+
+1. Installs dependencies (`flutter pub get`) and generates localizations (`flutter gen-l10n`).
+2. Enforces formatting (`dart format --output=none --set-exit-if-changed lib test`), static analysis (`dart analyze lib test`), and the full test suite (`flutter test`).
+3. Builds `build/app/outputs/flutter-apk/app-debug.apk` and uploads it as the `barbersync-debug-apk` artifact (retained for 7 days).
+4. **Downloading the APK:** Open the **Actions** tab on GitHub, select the latest **Flutter CI** workflow run, and download `barbersync-debug-apk` under **Artifacts**.
