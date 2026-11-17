@@ -108,31 +108,31 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (customerName.isNotEmpty) ...[
-                Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.md,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        customerName,
-                        style: AppTextStyles.titleLarge.copyWith(
-                          color: context.colors.onSurface,
-                        ),
-                      ),
-                      if (customerPhone.isNotEmpty) ...[
-                        AppSpacing.verticalXs,
-                        Text(
-                          customerPhone,
-                          style: AppTextStyles.bodySmall.copyWith(
-                            color: context.colors.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsetsDirectional.symmetric(
+                //     horizontal: AppSpacing.md,
+                //   ),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Text(
+                //         customerName,
+                //         style: AppTextStyles.titleLarge.copyWith(
+                //           color: context.colors.onSurface,
+                //         ),
+                //       ),
+                //       if (customerPhone.isNotEmpty) ...[
+                //         AppSpacing.verticalXs,
+                //         Text(
+                //           customerPhone,
+                //           style: AppTextStyles.bodySmall.copyWith(
+                //             color: context.colors.onSurfaceVariant,
+                //           ),
+                //         ),
+                //       ],
+                //     ],
+                //   ),
+                // ),
                 AppSpacing.verticalMd,
               ],
               CustomerHomeErrorBanner(customerId: customerId),
