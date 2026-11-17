@@ -10,6 +10,8 @@ import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
 import '../bloc/booking_flow_bloc.dart';
 import '../bloc/booking_flow_event.dart';
 import '../bloc/booking_flow_state.dart';
+import '../bloc/customer_bookings_bloc.dart';
+import '../bloc/customer_bookings_event.dart';
 import '../bloc/customer_home_bloc.dart';
 import '../bloc/customer_home_event.dart';
 import '../widgets/booking_barbers_step.dart';
@@ -123,6 +125,13 @@ class _BookingFlowScreenState extends State<BookingFlowScreen> {
               final homeBloc = context.read<CustomerHomeBloc>();
               homeBloc.add(CustomerHomeRefreshRequested(
                 customerId: _resolveCustomerId(),
+              ));
+            } catch (_) {}
+
+            try {
+              final bookingsBloc = context.read<CustomerBookingsBloc>();
+              bookingsBloc.add(CustomerBookingsLoadRequested(
+                _resolveCustomerId(),
               ));
             } catch (_) {}
 

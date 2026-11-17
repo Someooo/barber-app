@@ -613,6 +613,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to create booking. Please try again.'**
   String get bookingError;
+
+  /// No description provided for @upcomingBookingsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcomingBookingsTab;
+
+  /// No description provided for @historyBookingsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyBookingsTab;
+
+  /// No description provided for @cancelBookingButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Booking'**
+  String get cancelBookingButton;
+
+  /// No description provided for @cancelBookingDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Appointment'**
+  String get cancelBookingDialogTitle;
+
+  /// No description provided for @cancelBookingDialogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel this appointment? Your reserved time slot will be released immediately.'**
+  String get cancelBookingDialogMessage;
+
+  /// No description provided for @keepBookingButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Appointment'**
+  String get keepBookingButton;
+
+  /// No description provided for @confirmCancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Cancel'**
+  String get confirmCancelButton;
+
+  /// No description provided for @noUpcomingBookingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Upcoming Bookings'**
+  String get noUpcomingBookingsTitle;
+
+  /// No description provided for @noUpcomingBookingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your upcoming appointments with our master barbers will appear here.'**
+  String get noUpcomingBookingsSubtitle;
+
+  /// No description provided for @noHistoryBookingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Booking History'**
+  String get noHistoryBookingsTitle;
+
+  /// No description provided for @noHistoryBookingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Past completed and cancelled appointments will be listed here.'**
+  String get noHistoryBookingsSubtitle;
+
+  /// No description provided for @cancellationReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation Reason: {reason}'**
+  String cancellationReasonLabel(String reason);
+
+  /// No description provided for @barberNoticeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Barber Update'**
+  String get barberNoticeLabel;
+
+  /// No description provided for @signOutDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get signOutDialogTitle;
+
+  /// No description provided for @signOutDialogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to sign out of your account?'**
+  String get signOutDialogMessage;
+
+  /// No description provided for @cancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @accountDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Details'**
+  String get accountDetailsTitle;
+
+  /// No description provided for @preferencesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferencesTitle;
+
+  /// No description provided for @bookingCancelledSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking cancelled successfully'**
+  String get bookingCancelledSuccess;
+
+  /// No description provided for @bookingCancelError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to cancel booking. Please try again.'**
+  String get bookingCancelError;
 }
 
 class _AppLocalizationsDelegate

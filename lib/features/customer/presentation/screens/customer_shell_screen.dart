@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:barber_app/core/di/injection_container.dart';
 import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/widgets/luxury_bottom_nav_bar.dart';
+import '../bloc/customer_bookings_bloc.dart';
 import '../bloc/customer_home_bloc.dart';
 import 'customer_bookings_screen.dart';
 import 'customer_home_screen.dart';
@@ -13,9 +14,11 @@ class CustomerShellScreen extends StatefulWidget {
   const CustomerShellScreen({
     super.key,
     this.customerHomeBloc,
+    this.customerBookingsBloc,
   });
 
   final CustomerHomeBloc? customerHomeBloc;
+  final CustomerBookingsBloc? customerBookingsBloc;
 
   @override
   State<CustomerShellScreen> createState() => _CustomerShellScreenState();
@@ -24,7 +27,7 @@ class CustomerShellScreen extends StatefulWidget {
 class _CustomerShellScreenState extends State<CustomerShellScreen> {
   int _currentIndex = 0;
 
-  CustomerHomeBloc _resolveBloc() {
+  CustomerHomeBloc _resolveHomeBloc() {
     if (widget.customerHomeBloc != null) {
       return widget.customerHomeBloc!;
     }
@@ -32,6 +35,16 @@ class _CustomerShellScreenState extends State<CustomerShellScreen> {
       registerCustomerDependencies(serviceLocator: sl);
     }
     return sl<CustomerHomeBloc>();
+  }
+
+  CustomerBookingsBloc _resolveBookingsBloc() {
+    if (widget.customerBookingsBloc != null) {
+      return widget.customerBookingsBloc!;
+    }
+    if (!sl.isRegistered<CustomerBookingsBloc>()) {
+      registerCustomerDependencies(serviceLocator: sl);
+    }
+    return sl<CustomerBookingsBloc>();
   }
 
   @override
@@ -54,8 +67,15 @@ class _CustomerShellScreenState extends State<CustomerShellScreen> {
       ),
     ];
 
-    return BlocProvider<CustomerHomeBloc>(
-      create: (context) => _resolveBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CustomerHomeBloc>(
+          create: (context) => _resolveHomeBloc(),
+        ),
+        BlocProvider<CustomerBookingsBloc>(
+          create: (context) => _resolveBookingsBloc(),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: context.colors.surface,
         body: IndexedStack(

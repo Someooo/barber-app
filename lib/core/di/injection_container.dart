@@ -19,6 +19,7 @@ import '../../features/customer/domain/usecases/get_available_time_slots_usecase
 import '../../features/customer/domain/usecases/get_customer_bookings_usecase.dart';
 import '../../features/customer/domain/usecases/get_customer_home_data_usecase.dart';
 import '../../features/customer/presentation/bloc/booking_flow_bloc.dart';
+import '../../features/customer/presentation/bloc/customer_bookings_bloc.dart';
 import '../../features/customer/presentation/bloc/customer_home_bloc.dart';
 
 final GetIt sl = GetIt.instance;
@@ -97,6 +98,15 @@ void registerCustomerDependencies({
         getAvailableTimeSlotsUseCase: locator<GetAvailableTimeSlotsUseCase>(),
         createInstantBookingUseCase: locator<CreateInstantBookingUseCase>(),
         getCustomerHomeDataUseCase: locator<GetCustomerHomeDataUseCase>(),
+      ),
+    );
+  }
+
+  if (!locator.isRegistered<CustomerBookingsBloc>()) {
+    locator.registerFactory<CustomerBookingsBloc>(
+      () => CustomerBookingsBloc(
+        getCustomerBookingsUseCase: locator<GetCustomerBookingsUseCase>(),
+        cancelBookingUseCase: locator<CancelBookingUseCase>(),
       ),
     );
   }

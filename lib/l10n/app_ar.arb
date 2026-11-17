@@ -85,6 +85,26 @@
   "bookingConfirmationSubtitle": "تم تثبيت موعدك فورياً، نتطلع لاستقبالك وتقديم أفضل تجربة.",
   "doneButton": "تم",
   "ratingValue": "{rating} ★",
-  "bookingError": "فشل في إتمام الحجز. يرجى المحاولة مرة أخرى."
+  "bookingError": "فشل في إتمام الحجز. يرجى المحاولة مرة أخرى.",
+  "upcomingBookingsTab": "المواعيد القادمة",
+  "historyBookingsTab": "السجل",
+  "cancelBookingButton": "إلغاء الموعد",
+  "cancelBookingDialogTitle": "إلغاء الموعد",
+  "cancelBookingDialogMessage": "هل أنت متأكد من رغبتك في إلغاء هذا الموعد؟ سيتم إتاحة الوقت المحجوز فورياً للآخرين.",
+  "keepBookingButton": "الاحتفاظ بالموعد",
+  "confirmCancelButton": "نعم، إلغاء",
+  "noUpcomingBookingsTitle": "لا توجد مواعيد قادمة",
+  "noUpcomingBookingsSubtitle": "ستظهر هنا مواعيدك القادمة مع أمهر حلاّقينا.",
+  "noHistoryBookingsTitle": "لا يوجد سجل مواعيد",
+  "noHistoryBookingsSubtitle": "ستظهر هنا سجلات المواعيد السابقة المكتملة أو الملغاة.",
+  "cancellationReasonLabel": "سبب الإلغاء: {reason}",
+  "barberNoticeLabel": "تحديث من الحلاق",
+  "signOutDialogTitle": "تسجيل الخروج",
+  "signOutDialogMessage": "هل أنت متأكد من رغبتك في تسجيل الخروج من حسابك؟",
+  "cancelButton": "إلغاء",
+  "accountDetailsTitle": "تفاصيل الحساب",
+  "preferencesTitle": "التفضيلات",
+  "bookingCancelledSuccess": "تم إلغاء الموعد بنجاح",
+  "bookingCancelError": "فشل في إلغاء الموعد. يرجى المحاولة مرة أخرى."
 }
 

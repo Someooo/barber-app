@@ -284,4 +284,71 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bookingError => 'فشل في إتمام الحجز. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get upcomingBookingsTab => 'المواعيد القادمة';
+
+  @override
+  String get historyBookingsTab => 'السجل';
+
+  @override
+  String get cancelBookingButton => 'إلغاء الموعد';
+
+  @override
+  String get cancelBookingDialogTitle => 'إلغاء الموعد';
+
+  @override
+  String get cancelBookingDialogMessage =>
+      'هل أنت متأكد من رغبتك في إلغاء هذا الموعد؟ سيتم إتاحة الوقت المحجوز فورياً للآخرين.';
+
+  @override
+  String get keepBookingButton => 'الاحتفاظ بالموعد';
+
+  @override
+  String get confirmCancelButton => 'نعم، إلغاء';
+
+  @override
+  String get noUpcomingBookingsTitle => 'لا توجد مواعيد قادمة';
+
+  @override
+  String get noUpcomingBookingsSubtitle =>
+      'ستظهر هنا مواعيدك القادمة مع أمهر حلاّقينا.';
+
+  @override
+  String get noHistoryBookingsTitle => 'لا يوجد سجل مواعيد';
+
+  @override
+  String get noHistoryBookingsSubtitle =>
+      'ستظهر هنا سجلات المواعيد السابقة المكتملة أو الملغاة.';
+
+  @override
+  String cancellationReasonLabel(String reason) {
+    return 'سبب الإلغاء: $reason';
+  }
+
+  @override
+  String get barberNoticeLabel => 'تحديث من الحلاق';
+
+  @override
+  String get signOutDialogTitle => 'تسجيل الخروج';
+
+  @override
+  String get signOutDialogMessage =>
+      'هل أنت متأكد من رغبتك في تسجيل الخروج من حسابك؟';
+
+  @override
+  String get cancelButton => 'إلغاء';
+
+  @override
+  String get accountDetailsTitle => 'تفاصيل الحساب';
+
+  @override
+  String get preferencesTitle => 'التفضيلات';
+
+  @override
+  String get bookingCancelledSuccess => 'تم إلغاء الموعد بنجاح';
+
+  @override
+  String get bookingCancelError =>
+      'فشل في إلغاء الموعد. يرجى المحاولة مرة أخرى.';
 }

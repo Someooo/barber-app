@@ -287,4 +287,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bookingError => 'Failed to create booking. Please try again.';
+
+  @override
+  String get upcomingBookingsTab => 'Upcoming';
+
+  @override
+  String get historyBookingsTab => 'History';
+
+  @override
+  String get cancelBookingButton => 'Cancel Booking';
+
+  @override
+  String get cancelBookingDialogTitle => 'Cancel Appointment';
+
+  @override
+  String get cancelBookingDialogMessage =>
+      'Are you sure you want to cancel this appointment? Your reserved time slot will be released immediately.';
+
+  @override
+  String get keepBookingButton => 'Keep Appointment';
+
+  @override
+  String get confirmCancelButton => 'Yes, Cancel';
+
+  @override
+  String get noUpcomingBookingsTitle => 'No Upcoming Bookings';
+
+  @override
+  String get noUpcomingBookingsSubtitle =>
+      'Your upcoming appointments with our master barbers will appear here.';
+
+  @override
+  String get noHistoryBookingsTitle => 'No Booking History';
+
+  @override
+  String get noHistoryBookingsSubtitle =>
+      'Past completed and cancelled appointments will be listed here.';
+
+  @override
+  String cancellationReasonLabel(String reason) {
+    return 'Cancellation Reason: $reason';
+  }
+
+  @override
+  String get barberNoticeLabel => 'Barber Update';
+
+  @override
+  String get signOutDialogTitle => 'Sign Out';
+
+  @override
+  String get signOutDialogMessage =>
+      'Are you sure you want to sign out of your account?';
+
+  @override
+  String get cancelButton => 'Cancel';
+
+  @override
+  String get accountDetailsTitle => 'Account Details';
+
+  @override
+  String get preferencesTitle => 'Preferences';
+
+  @override
+  String get bookingCancelledSuccess => 'Booking cancelled successfully';
+
+  @override
+  String get bookingCancelError =>
+      'Failed to cancel booking. Please try again.';
 }

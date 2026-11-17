@@ -134,10 +134,8 @@ Widget _buildTestHost({
 
   final effectiveAuthBloc = authBloc ??
       (AuthBloc(
-        authenticateUserUseCase:
-            AuthenticateUserUseCase(_FakeTestAuthRepo()),
-        checkAuthSessionUseCase:
-            CheckAuthSessionUseCase(_FakeTestAuthRepo()),
+        authenticateUserUseCase: AuthenticateUserUseCase(_FakeTestAuthRepo()),
+        checkAuthSessionUseCase: CheckAuthSessionUseCase(_FakeTestAuthRepo()),
         signOutUseCase: SignOutUseCase(_FakeTestAuthRepo()),
       )..add(const AuthCheckRequested()));
 
@@ -499,8 +497,7 @@ void main() {
       await tester.tap(find.text('My Bookings'));
       await tester.pumpAndSettle();
       expect(
-        find.text(
-            'Your appointment history and upcoming bookings will appear here.'),
+        find.text('No Upcoming Bookings'),
         findsOneWidget,
       );
 
@@ -514,5 +511,5 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Luxury Services'), findsOneWidget);
     });
-        });
+  });
 }
