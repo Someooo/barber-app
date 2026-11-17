@@ -12,9 +12,11 @@ import 'core/router/app_router.dart';
 import 'core/router/app_routes.dart';
 import 'core/settings/app_settings.dart';
 import 'core/theme/app_theme.dart';
+import 'features/auth/domain/entities/user_role.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
 import 'features/auth/presentation/bloc/auth_state.dart';
+import 'features/barber/domain/usecases/ensure_barber_profile_usecase.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
@@ -108,9 +110,19 @@ class _BarberSyncAppState extends State<BarberSyncApp> {
   void _syncActiveUser(AuthState state) {
     if (state is Authenticated) {
       _settings.setActiveUser(state.user.uid);
+      if (state.user.role == UserRole.barber &&
+          sl.isRegistered<EnsureBarberProfileUseCase>()) {
+        unawaited(_ensureBarberSynced(state.user.uid, state.user.fullName));
+      }
     } else if (state is Unauthenticated) {
       _settings.setActiveUser(null);
     }
+  }
+
+  Future<void> _ensureBarberSynced(String uid, String name) async {
+    try {
+      await sl<EnsureBarberProfileUseCase>()(barberId: uid, name: name);
+    } catch (_) {}
   }
 
   void _handleSplashRemoval(AuthState state) {

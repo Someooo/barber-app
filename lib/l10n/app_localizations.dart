@@ -763,6 +763,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile photo updated'**
   String get profilePhotoUpdated;
+
+  /// No description provided for @barberNavSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get barberNavSchedule;
+
+  /// No description provided for @barberNavHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get barberNavHistory;
+
+  /// No description provided for @barberNavProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get barberNavProfile;
+
+  /// No description provided for @barberTodayAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Appointments'**
+  String get barberTodayAppointments;
+
+  /// No description provided for @barberExpectedRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected Revenue'**
+  String get barberExpectedRevenue;
+
+  /// No description provided for @barberTodayTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get barberTodayTab;
+
+  /// No description provided for @barberUpcomingTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get barberUpcomingTab;
+
+  /// No description provided for @barberCompleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get barberCompleteAction;
+
+  /// No description provided for @barberRescheduleAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get barberRescheduleAction;
+
+  /// No description provided for @barberCancelAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get barberCancelAction;
+
+  /// No description provided for @barberNoTodayBookingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Appointments Today'**
+  String get barberNoTodayBookingsTitle;
+
+  /// No description provided for @barberNoTodayBookingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your schedule for today is clear.'**
+  String get barberNoTodayBookingsSubtitle;
+
+  /// No description provided for @barberNoUpcomingBookingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Upcoming Appointments'**
+  String get barberNoUpcomingBookingsTitle;
+
+  /// No description provided for @barberNoUpcomingBookingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New customer bookings will appear here.'**
+  String get barberNoUpcomingBookingsSubtitle;
+
+  /// No description provided for @barberHistoryAllFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get barberHistoryAllFilter;
+
+  /// No description provided for @barberHistoryCompletedFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get barberHistoryCompletedFilter;
+
+  /// No description provided for @barberHistoryCancelledFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get barberHistoryCancelledFilter;
+
+  /// No description provided for @barberRescheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule Appointment'**
+  String get barberRescheduleTitle;
+
+  /// No description provided for @barberCancelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Appointment'**
+  String get barberCancelTitle;
+
+  /// No description provided for @barberReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (Required)'**
+  String get barberReasonLabel;
+
+  /// No description provided for @barberReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a clear reason for the customer...'**
+  String get barberReasonHint;
+
+  /// No description provided for @barberReasonRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a reason'**
+  String get barberReasonRequiredError;
+
+  /// No description provided for @barberConfirmReschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Reschedule'**
+  String get barberConfirmReschedule;
+
+  /// No description provided for @barberConfirmCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Cancel'**
+  String get barberConfirmCancel;
+
+  /// No description provided for @barberSelectNewDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select New Date'**
+  String get barberSelectNewDate;
+
+  /// No description provided for @barberSelectNewTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Select New Time'**
+  String get barberSelectNewTime;
+
+  /// No description provided for @barberBookingCompletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment marked as completed'**
+  String get barberBookingCompletedSuccess;
+
+  /// No description provided for @barberBookingRescheduledSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment rescheduled'**
+  String get barberBookingRescheduledSuccess;
+
+  /// No description provided for @barberBookingCancelledSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment cancelled'**
+  String get barberBookingCancelledSuccess;
 }
 
 class _AppLocalizationsDelegate

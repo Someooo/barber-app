@@ -31,4 +31,24 @@ abstract class CustomerRemoteDataSource {
     required String bookingId,
     String? reason,
   });
+
+  Future<BarberModel> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  });
+
+  Future<List<BookingModel>> getBarberBookings(String barberId);
+
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  });
+
+  Future<void> completeBooking(String bookingId);
+
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  });
 }

@@ -31,4 +31,24 @@ abstract class CustomerRepository {
     required String bookingId,
     String? reason,
   });
+
+  Future<BarberEntity> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  });
+
+  Future<List<BookingEntity>> getBarberBookings(String barberId);
+
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  });
+
+  Future<void> completeBooking(String bookingId);
+
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  });
 }

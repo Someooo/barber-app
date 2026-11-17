@@ -369,4 +369,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profilePhotoUpdated => 'Profile photo updated';
+
+  @override
+  String get barberNavSchedule => 'Schedule';
+
+  @override
+  String get barberNavHistory => 'History';
+
+  @override
+  String get barberNavProfile => 'Profile';
+
+  @override
+  String get barberTodayAppointments => 'Today\'s Appointments';
+
+  @override
+  String get barberExpectedRevenue => 'Expected Revenue';
+
+  @override
+  String get barberTodayTab => 'Today';
+
+  @override
+  String get barberUpcomingTab => 'Upcoming';
+
+  @override
+  String get barberCompleteAction => 'Complete';
+
+  @override
+  String get barberRescheduleAction => 'Reschedule';
+
+  @override
+  String get barberCancelAction => 'Cancel';
+
+  @override
+  String get barberNoTodayBookingsTitle => 'No Appointments Today';
+
+  @override
+  String get barberNoTodayBookingsSubtitle =>
+      'Your schedule for today is clear.';
+
+  @override
+  String get barberNoUpcomingBookingsTitle => 'No Upcoming Appointments';
+
+  @override
+  String get barberNoUpcomingBookingsSubtitle =>
+      'New customer bookings will appear here.';
+
+  @override
+  String get barberHistoryAllFilter => 'All';
+
+  @override
+  String get barberHistoryCompletedFilter => 'Completed';
+
+  @override
+  String get barberHistoryCancelledFilter => 'Cancelled';
+
+  @override
+  String get barberRescheduleTitle => 'Reschedule Appointment';
+
+  @override
+  String get barberCancelTitle => 'Cancel Appointment';
+
+  @override
+  String get barberReasonLabel => 'Reason (Required)';
+
+  @override
+  String get barberReasonHint => 'Enter a clear reason for the customer...';
+
+  @override
+  String get barberReasonRequiredError => 'Please enter a reason';
+
+  @override
+  String get barberConfirmReschedule => 'Confirm Reschedule';
+
+  @override
+  String get barberConfirmCancel => 'Confirm Cancel';
+
+  @override
+  String get barberSelectNewDate => 'Select New Date';
+
+  @override
+  String get barberSelectNewTime => 'Select New Time';
+
+  @override
+  String get barberBookingCompletedSuccess => 'Appointment marked as completed';
+
+  @override
+  String get barberBookingRescheduledSuccess => 'Appointment rescheduled';
+
+  @override
+  String get barberBookingCancelledSuccess => 'Appointment cancelled';
 }

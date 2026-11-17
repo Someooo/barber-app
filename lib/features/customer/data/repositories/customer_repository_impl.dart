@@ -118,4 +118,79 @@ class CustomerRepositoryImpl implements CustomerRepository {
       throw ServerFailure(message: e.toString());
     }
   }
+
+  @override
+  Future<BarberEntity> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  }) async {
+    try {
+      return await _remoteDataSource.ensureBarberProfile(
+        barberId: barberId,
+        name: name,
+      );
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<List<BookingEntity>> getBarberBookings(String barberId) async {
+    try {
+      return await _remoteDataSource.getBarberBookings(barberId);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  }) async {
+    try {
+      await _remoteDataSource.updateBarberAvailability(
+        barberId: barberId,
+        isAvailableToday: isAvailableToday,
+      );
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> completeBooking(String bookingId) async {
+    try {
+      await _remoteDataSource.completeBooking(bookingId);
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  }) async {
+    try {
+      await _remoteDataSource.rescheduleBooking(
+        bookingId: bookingId,
+        newDateTime: newDateTime,
+        reason: reason,
+      );
+    } on AppException catch (e) {
+      throw ServerFailure(message: e.message, code: e.code);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
+  }
 }

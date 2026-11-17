@@ -63,6 +63,33 @@ class _FailingCustomerRepo implements CustomerRepository {
   Future<List<ServiceEntity>> getServices() async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<BarberEntity> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  }) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<BookingEntity>> getBarberBookings(String barberId) async =>
+      const [];
+
+  @override
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  }) async {}
+
+  @override
+  Future<void> completeBooking(String bookingId) async {}
+
+  @override
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  }) async {}
 }
 
 void main() {

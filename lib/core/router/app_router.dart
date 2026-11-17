@@ -7,10 +7,10 @@ import 'package:barber_app/core/router/app_routes.dart';
 import 'package:barber_app/features/auth/domain/entities/user_role.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:barber_app/features/auth/presentation/bloc/auth_state.dart';
-import 'package:barber_app/features/auth/presentation/screens/login_placeholder_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:barber_app/features/auth/presentation/screens/welcome_role_screen.dart';
+import 'package:barber_app/features/barber/presentation/screens/barber_shell_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/booking_flow_screen.dart';
 import 'package:barber_app/features/customer/presentation/screens/customer_shell_screen.dart';
 
@@ -107,9 +107,7 @@ GoRouter createAppRouter({
       ),
       GoRoute(
         path: AppRoutes.barberDashboard,
-        builder: (context, state) => LoginPlaceholderScreen(
-          titleBuilder: (l10n) => l10n.barberDashboardTitle,
-        ),
+        builder: (context, state) => const BarberShellScreen(),
       ),
       GoRoute(
         path: AppRoutes.customerHome,

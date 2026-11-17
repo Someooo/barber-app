@@ -65,6 +65,33 @@ class _FakeCustomerRepo implements CustomerRepository {
     required String bookingId,
     String? reason,
   }) async {}
+
+  @override
+  Future<BarberEntity> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  }) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<BookingEntity>> getBarberBookings(String barberId) async =>
+      const [];
+
+  @override
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  }) async {}
+
+  @override
+  Future<void> completeBooking(String bookingId) async {}
+
+  @override
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  }) async {}
 }
 
 class _FakeAuthRepo implements AuthRepository {

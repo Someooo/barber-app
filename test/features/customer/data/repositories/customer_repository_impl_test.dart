@@ -82,6 +82,33 @@ class _FakeCustomerRemoteDataSource implements CustomerRemoteDataSource {
   }) async {
     if (errorToThrow != null) throw errorToThrow!;
   }
+
+  @override
+  Future<BarberModel> ensureBarberProfile({
+    required String barberId,
+    required String name,
+  }) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<BookingModel>> getBarberBookings(String barberId) async =>
+      const [];
+
+  @override
+  Future<void> updateBarberAvailability({
+    required String barberId,
+    required bool isAvailableToday,
+  }) async {}
+
+  @override
+  Future<void> completeBooking(String bookingId) async {}
+
+  @override
+  Future<void> rescheduleBooking({
+    required String bookingId,
+    required DateTime newDateTime,
+    required String reason,
+  }) async {}
 }
 
 void main() {

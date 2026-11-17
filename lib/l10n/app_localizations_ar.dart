@@ -366,4 +366,92 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية';
+
+  @override
+  String get barberNavSchedule => 'المواعيد';
+
+  @override
+  String get barberNavHistory => 'السجل';
+
+  @override
+  String get barberNavProfile => 'الملف الشخصي';
+
+  @override
+  String get barberTodayAppointments => 'مواعيد اليوم';
+
+  @override
+  String get barberExpectedRevenue => 'الإيراد المتوقع';
+
+  @override
+  String get barberTodayTab => 'اليوم';
+
+  @override
+  String get barberUpcomingTab => 'القادمة';
+
+  @override
+  String get barberCompleteAction => 'إكمال';
+
+  @override
+  String get barberRescheduleAction => 'إعادة جدولة';
+
+  @override
+  String get barberCancelAction => 'إلغاء';
+
+  @override
+  String get barberNoTodayBookingsTitle => 'لا توجد مواعيد اليوم';
+
+  @override
+  String get barberNoTodayBookingsSubtitle => 'جدولك لليوم فارغ حالياً.';
+
+  @override
+  String get barberNoUpcomingBookingsTitle => 'لا توجد مواعيد قادمة';
+
+  @override
+  String get barberNoUpcomingBookingsSubtitle =>
+      'ستظهر هنا حجوزات العملاء القادمة.';
+
+  @override
+  String get barberHistoryAllFilter => 'الكل';
+
+  @override
+  String get barberHistoryCompletedFilter => 'المكتملة';
+
+  @override
+  String get barberHistoryCancelledFilter => 'الملغاة';
+
+  @override
+  String get barberRescheduleTitle => 'إعادة جدولة الموعد';
+
+  @override
+  String get barberCancelTitle => 'إلغاء الموعد';
+
+  @override
+  String get barberReasonLabel => 'السبب (مطلوب)';
+
+  @override
+  String get barberReasonHint => 'أدخل سبباً واضحاً للعميل...';
+
+  @override
+  String get barberReasonRequiredError => 'يرجى إدخال السبب';
+
+  @override
+  String get barberConfirmReschedule => 'تأكيد إعادة الجدولة';
+
+  @override
+  String get barberConfirmCancel => 'تأكيد الإلغاء';
+
+  @override
+  String get barberSelectNewDate => 'اختر تاريخاً جديداً';
+
+  @override
+  String get barberSelectNewTime => 'اختر وقتاً جديداً';
+
+  @override
+  String get barberBookingCompletedSuccess => 'تم تحديد الموعد كمكتمل';
+
+  @override
+  String get barberBookingRescheduledSuccess => 'تمت إعادة جدولة الموعد';
+
+  @override
+  String get barberBookingCancelledSuccess => 'تم إلغاء الموعد';
 }

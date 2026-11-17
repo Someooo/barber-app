@@ -10,6 +10,13 @@ import '../../features/auth/domain/usecases/authenticate_user_usecase.dart';
 import '../../features/auth/domain/usecases/check_auth_session_usecase.dart';
 import '../../features/auth/domain/usecases/sign_out_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/barber/domain/usecases/barber_cancel_booking_usecase.dart';
+import '../../features/barber/domain/usecases/complete_booking_usecase.dart';
+import '../../features/barber/domain/usecases/ensure_barber_profile_usecase.dart';
+import '../../features/barber/domain/usecases/get_barber_bookings_usecase.dart';
+import '../../features/barber/domain/usecases/reschedule_booking_usecase.dart';
+import '../../features/barber/domain/usecases/update_barber_availability_usecase.dart';
+import '../../features/barber/presentation/bloc/barber_dashboard_bloc.dart';
 import '../../features/customer/data/datasources/customer_remote_data_source.dart';
 import '../../features/customer/data/datasources/in_memory_firestore_customer_data_source.dart';
 import '../../features/customer/data/repositories/customer_repository_impl.dart';
@@ -40,6 +47,7 @@ Future<void> initDependencies({
     serviceLocator: sl,
     sharedPreferences: sharedPreferences,
   );
+  registerBarberDependencies(serviceLocator: sl);
 }
 
 void registerCustomerDependencies({
@@ -185,6 +193,64 @@ void registerAuthDependencies({
         authenticateUserUseCase: locator<AuthenticateUserUseCase>(),
         checkAuthSessionUseCase: locator<CheckAuthSessionUseCase>(),
         signOutUseCase: locator<SignOutUseCase>(),
+      ),
+    );
+  }
+}
+
+void registerBarberDependencies({GetIt? serviceLocator}) {
+  final locator = serviceLocator ?? sl;
+
+  if (!locator.isRegistered<CustomerRepository>()) {
+    registerCustomerDependencies(serviceLocator: locator);
+  }
+
+  if (!locator.isRegistered<EnsureBarberProfileUseCase>()) {
+    locator.registerLazySingleton<EnsureBarberProfileUseCase>(
+      () => EnsureBarberProfileUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<GetBarberBookingsUseCase>()) {
+    locator.registerLazySingleton<GetBarberBookingsUseCase>(
+      () => GetBarberBookingsUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<UpdateBarberAvailabilityUseCase>()) {
+    locator.registerLazySingleton<UpdateBarberAvailabilityUseCase>(
+      () => UpdateBarberAvailabilityUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<CompleteBookingUseCase>()) {
+    locator.registerLazySingleton<CompleteBookingUseCase>(
+      () => CompleteBookingUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<RescheduleBookingUseCase>()) {
+    locator.registerLazySingleton<RescheduleBookingUseCase>(
+      () => RescheduleBookingUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<BarberCancelBookingUseCase>()) {
+    locator.registerLazySingleton<BarberCancelBookingUseCase>(
+      () => BarberCancelBookingUseCase(locator<CustomerRepository>()),
+    );
+  }
+
+  if (!locator.isRegistered<BarberDashboardBloc>()) {
+    locator.registerFactory<BarberDashboardBloc>(
+      () => BarberDashboardBloc(
+        ensureBarberProfileUseCase: locator<EnsureBarberProfileUseCase>(),
+        getBarberBookingsUseCase: locator<GetBarberBookingsUseCase>(),
+        updateBarberAvailabilityUseCase:
+            locator<UpdateBarberAvailabilityUseCase>(),
+        completeBookingUseCase: locator<CompleteBookingUseCase>(),
+        rescheduleBookingUseCase: locator<RescheduleBookingUseCase>(),
+        barberCancelBookingUseCase: locator<BarberCancelBookingUseCase>(),
       ),
     );
   }

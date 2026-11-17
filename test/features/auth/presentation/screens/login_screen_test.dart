@@ -360,11 +360,25 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Barber Dashboard'), findsOneWidget);
+      expect(find.text('SAMI ALMUHUR'), findsOneWidget);
+
+      await tester.tap(find.text('Profile'));
+      await tester.pumpAndSettle();
+
       expect(find.text('Sami Almuhur'), findsOneWidget);
       expect(find.text('0791234567'), findsOneWidget);
       expect(find.text('Sign Out'), findsOneWidget);
 
+      await tester.ensureVisible(find.text('Sign Out'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Sign Out'));
+      await tester.pumpAndSettle();
+
+      final confirmSignOut = find.descendant(
+        of: find.byType(LuxuryPrimaryButton),
+        matching: find.text('Sign Out'),
+      );
+      await tester.tap(confirmSignOut);
       await tester.pumpAndSettle();
       expect(repo.signOutCount, 1);
       expect(find.text('Login'), findsOneWidget);
