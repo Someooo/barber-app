@@ -9,6 +9,7 @@ class BarberModel extends BarberEntity {
     required super.rating,
     required super.experienceYears,
     required super.isAvailableToday,
+    super.imageUrl,
   });
 
   factory BarberModel.fromMap(Map<String, dynamic> map, String id) {
@@ -20,6 +21,7 @@ class BarberModel extends BarberEntity {
       rating: (map['rating'] as num?)?.toDouble() ?? 5.0,
       experienceYears: (map['experienceYears'] as num?)?.toInt() ?? 1,
       isAvailableToday: (map['isAvailableToday'] as bool?) ?? true,
+      imageUrl: map['imageUrl'] as String?,
     );
   }
 
@@ -32,6 +34,7 @@ class BarberModel extends BarberEntity {
       rating: entity.rating,
       experienceYears: entity.experienceYears,
       isAvailableToday: entity.isAvailableToday,
+      imageUrl: entity.imageUrl,
     );
   }
 
@@ -43,6 +46,7 @@ class BarberModel extends BarberEntity {
       'rating': rating,
       'experienceYears': experienceYears,
       'isAvailableToday': isAvailableToday,
+      'imageUrl': imageUrl,
     };
   }
 }

@@ -8,7 +8,7 @@ import 'package:barber_app/core/widgets/luxury_loaders.dart';
 import 'package:barber_app/features/customer/domain/entities/barber_entity.dart';
 import '../bloc/customer_home_bloc.dart';
 import '../bloc/customer_home_state.dart';
-import 'barber_card.dart';
+import 'master_barber_card.dart';
 
 class BarbersShowcaseSection extends StatelessWidget {
   const BarbersShowcaseSection({
@@ -55,16 +55,22 @@ class BarbersShowcaseSection extends StatelessWidget {
               prev.isLoading != curr.isLoading,
           builder: (context, state) {
             if (state.isLoading) {
-              return Padding(
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.md,
-                ),
-                child: Column(
-                  children: const [
-                    LuxuryShimmerCard(height: 90.0),
-                    AppSpacing.verticalMd,
-                    LuxuryShimmerCard(height: 90.0),
-                  ],
+              return SizedBox(
+                height: MasterBarberCard.cardHeight,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSpacing.md,
+                  ),
+                  itemCount: 2,
+                  separatorBuilder: (_, __) => AppSpacing.horizontalMd,
+                  itemBuilder: (_, __) => const SizedBox(
+                    width: MasterBarberCard.cardWidth,
+                    child: LuxuryShimmerCard(
+                      height: MasterBarberCard.cardHeight,
+                    ),
+                  ),
                 ),
               );
             }
@@ -74,22 +80,25 @@ class BarbersShowcaseSection extends StatelessWidget {
               return const SizedBox.shrink();
             }
 
-            return ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.md,
+            return SizedBox(
+              height: MasterBarberCard.cardHeight,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: AppSpacing.md,
+                ),
+                itemCount: barbers.length,
+                separatorBuilder: (_, __) => AppSpacing.horizontalMd,
+                itemBuilder: (context, index) {
+                  final barber = barbers[index];
+                  return MasterBarberCard(
+                    barber: barber,
+                    onTap:
+                        onBarberTap != null ? () => onBarberTap!(barber) : null,
+                  );
+                },
               ),
-              itemCount: barbers.length,
-              separatorBuilder: (_, __) => AppSpacing.verticalMd,
-              itemBuilder: (context, index) {
-                final barber = barbers[index];
-                return BarberCard(
-                  barber: barber,
-                  onTap:
-                      onBarberTap != null ? () => onBarberTap!(barber) : null,
-                );
-              },
             );
           },
         ),

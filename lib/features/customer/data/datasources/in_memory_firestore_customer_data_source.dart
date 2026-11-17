@@ -126,6 +126,8 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
         rating: 4.9,
         experienceYears: 12,
         isAvailableToday: true,
+        imageUrl:
+            'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80',
       ),
       BarberModel(
         id: 'barber_2',
@@ -135,6 +137,8 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
         rating: 4.8,
         experienceYears: 8,
         isAvailableToday: true,
+        imageUrl:
+            'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80',
       ),
       BarberModel(
         id: 'barber_3',
@@ -144,6 +148,8 @@ class InMemoryFirestoreCustomerDataSource implements CustomerRemoteDataSource {
         rating: 4.9,
         experienceYears: 10,
         isAvailableToday: true,
+        imageUrl:
+            'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80',
       ),
     ]);
   }

@@ -16,6 +16,7 @@ export 'cancel_booking_confirmation_dialog.dart';
 export 'customer_home_error_banner.dart';
 export 'customer_identity_card.dart';
 export 'customer_preferences_card.dart';
+export 'master_barber_card.dart';
 export 'quick_book_cta_banner.dart';
 export 'service_card.dart';
 export 'services_catalog_section.dart';

@@ -9,6 +9,7 @@ class BarberEntity extends Equatable {
     required this.rating,
     required this.experienceYears,
     required this.isAvailableToday,
+    this.imageUrl,
   });
 
   final String id;
@@ -18,6 +19,7 @@ class BarberEntity extends Equatable {
   final double rating;
   final int experienceYears;
   final bool isAvailableToday;
+  final String? imageUrl;
 
   @override
   List<Object?> get props => [
@@ -28,5 +30,6 @@ class BarberEntity extends Equatable {
         rating,
         experienceYears,
         isAvailableToday,
+        imageUrl,
       ];
 }
