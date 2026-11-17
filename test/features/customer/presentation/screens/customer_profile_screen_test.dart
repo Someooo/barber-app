@@ -145,12 +145,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(settings.themeMode, ThemeMode.light);
-      await tester.tap(find.byType(Switch));
+      await tester.tap(find.byType(Switch).first);
       await tester.pumpAndSettle();
       expect(settings.themeMode, ThemeMode.dark);
 
       expect(settings.languageCode, 'EN');
-      await tester.tap(find.text('EN').first);
+      await tester.tap(find.byType(Switch).last);
       await tester.pumpAndSettle();
       expect(settings.languageCode, 'AR');
       expect(find.text('الملف الشخصي'), findsOneWidget);

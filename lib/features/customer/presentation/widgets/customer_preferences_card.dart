@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:barber_app/core/constants/app_constants.dart';
+import 'package:barber_app/core/constants/app_spacing.dart';
 import 'package:barber_app/core/extensions/context_extensions.dart';
 import 'package:barber_app/core/theme/app_colors.dart';
 import 'package:barber_app/core/theme/app_text_styles.dart';
@@ -63,9 +64,8 @@ class CustomerPreferencesCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              trailing: Switch.adaptive(
+              trailing: _LuxuryPreferenceSwitch(
                 value: context.isDarkMode,
-                activeTrackColor: AppColors.secondary,
                 onChanged: (_) => context.toggleTheme(),
               ),
             ),
@@ -107,19 +107,56 @@ class CustomerPreferencesCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              trailing: TextButton(
-                onPressed: () => context.toggleLocale(),
-                child: Text(
-                  context.languageCode,
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.secondary,
-                    fontWeight: FontWeight.w700,
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    context.languageCode,
+                    style: AppTextStyles.labelMedium.copyWith(
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
+                  AppSpacing.horizontalSm,
+                  _LuxuryPreferenceSwitch(
+                    value: context.languageCode == 'AR',
+                    onChanged: (_) => context.toggleLocale(),
+                  ),
+                ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _LuxuryPreferenceSwitch extends StatelessWidget {
+  const _LuxuryPreferenceSwitch({
+    required this.value,
+    required this.onChanged,
+  });
+
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
+
+    return RepaintBoundary(
+      child: Switch(
+        value: value,
+        onChanged: onChanged,
+        activeThumbColor: AppColors.primary,
+        activeTrackColor: AppColors.secondary,
+        inactiveThumbColor: isDark ? AppColors.neutral : AppColors.primary,
+        inactiveTrackColor: isDark ? AppColors.borderDark : AppColors.cream,
+        trackOutlineColor: WidgetStatePropertyAll(
+          AppColors.secondary.withValues(alpha: 0.5),
+        ),
+        trackOutlineWidth: const WidgetStatePropertyAll(AppSizes.hairline),
       ),
     );
   }
